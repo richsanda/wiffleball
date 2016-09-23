@@ -1,6 +1,8 @@
 package w.whatevera.wiffleball.game;
 
 import com.google.common.collect.Maps;
+import w.whatevera.wiffleball.game.impl.GamePlayImpl;
+import w.whatevera.wiffleball.game.impl.GameStatusImpl;
 
 import java.util.Map;
 
@@ -9,15 +11,13 @@ import java.util.Map;
  */
 public class GameUtils {
 
-    public static GameStatus applyPlayToGame(GamePlay game, GamePlayEvent event) {
-        return applyPlayToGame(game, event, null);
-    }
-
-    public static GameStatus applyPlayToGame(GamePlay game, GamePlayEvent event, Player player1, Player player2) {
+    public static GameStatus applyPlayToGame(Game game, GamePlayEvent event, Player player1, Player player2) {
         return applyPlayToGame(game, event, determinePlayerMap(event, player1, player2));
     }
 
-    public static GameStatus applyPlayToGame(GamePlay game, GamePlayEvent event, Map<PlayerType, Player> players) {
+    public static GameStatus applyPlayToGame(Game game, GamePlayEvent event, Map<PlayerType, Player> players) {
+
+        GamePlay gamePlay = new GamePlayImpl(game.getGameStatus());
 
         Player pitcher = null;
         Player fielder = null;
@@ -34,61 +34,63 @@ public class GameUtils {
                 case START_GAME:
                     break;
                 case SET_PITCHER:
-                    game.setPitcher(pitcher);
+                    gamePlay.setPitcher(pitcher);
                     break;
                 case WALK:
-                    game.walk();
+                    gamePlay.walk();
                     break;
                 case SINGLE:
-                    game.hitSingle();
+                    gamePlay.hitSingle();
                     break;
                 case DOUBLE:
-                    game.hitDouble();
+                    gamePlay.hitDouble();
                     break;
                 case TRIPLE:
-                    game.hitTriple();
+                    gamePlay.hitTriple();
                     break;
                 case HOME_RUN:
-                    game.hitHomeRun();
+                    gamePlay.hitHomeRun();
                     break;
                 case ERROR_1:
-                    game.error1Base(fielder);
+                    gamePlay.error1Base(fielder);
                     break;
                 case ERROR_2:
-                    game.error2Base(fielder);
+                    gamePlay.error2Base(fielder);
                     break;
                 case ERROR_3:
-                    game.error3Base(fielder);
+                    gamePlay.error3Base(fielder);
                     break;
                 case STRIKEOUT_SWINGING:
-                    game.strikeoutSwinging();
+                    gamePlay.strikeoutSwinging();
                     break;
                 case STRIKEOUT_LOOKING:
-                    game.strikeoutLooking();
+                    gamePlay.strikeoutLooking();
                     break;
                 case STRIKEOUT_BOTH:
-                    game.strikeoutSwingingAndLooking();
+                    gamePlay.strikeoutSwingingAndLooking();
                     break;
                 case FLY_OUT:
-                    game.flyOut(fielder);
+                    gamePlay.flyOut(fielder);
                     break;
                 case POP_OUT:
-                    game.flyOut(fielder);
+                    gamePlay.flyOut(fielder);
                     break;
                 case GROUND_OUT:
-                    game.groundOut(fielder);
+                    gamePlay.groundOut(fielder);
                     break;
                 case LINE_OUT:
-                    game.lineOut(fielder);
+                    gamePlay.lineOut(fielder);
                     break;
                 case DOUBLE_PLAY:
-                    game.doublePlay(fielder);
+                    gamePlay.doublePlay(fielder);
                     break;
                 case REPLACE_PLAYER:
-                    game.replacePlayer(fielder, sub);
+                    gamePlay.replacePlayer(fielder, sub);
                     break;
+                case UNDO:
+                    game.undo();
                 //case SKIP:
-                //    game.skipBatter();
+                //    gamePlay.skipBatter();
                 default:
                     break;
             }
@@ -96,7 +98,8 @@ public class GameUtils {
             // pass
         }
 
-        return (GameStatus)game;
+        // TODO: maybe move this special logic to GameImpl ?
+        return GamePlayEvent.UNDO.equals(event) ? game.getGameStatus() : new GameStatusImpl((GameStatus)gamePlay);
     }
 
     private static Map<PlayerType, Player> determinePlayerMap(GamePlayEvent event, Player player1, Player player2) {

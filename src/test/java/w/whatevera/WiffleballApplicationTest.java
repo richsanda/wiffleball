@@ -7,8 +7,8 @@ import junit.framework.TestSuite;
 import w.whatevera.wiffleball.game.GameOverException;
 import w.whatevera.wiffleball.game.GameSettings;
 import w.whatevera.wiffleball.game.Player;
+import w.whatevera.wiffleball.game.impl.GamePlayImpl;
 import w.whatevera.wiffleball.game.impl.GameSettingsImpl;
-import w.whatevera.wiffleball.game.impl.GameStatusImpl;
 import w.whatevera.wiffleball.game.impl.PlayerImpl;
 
 import java.util.List;
@@ -54,22 +54,22 @@ public class WiffleballApplicationTest
         List<Player> homeTeam = Lists.newArrayList(jim, shawn, rich);
 
         GameSettings gameSettings = new GameSettingsImpl(3, 3, 3);
-        GameStatusImpl gameStatus = new GameStatusImpl(gameSettings, awayTeam, homeTeam);
+        GamePlayImpl game = new GamePlayImpl(gameSettings, awayTeam, homeTeam);
 
         try {
 
-            while (!gameStatus.isOver()) {
+            while (!game.isOver()) {
 
-                System.out.println(gameStatus.getPitcher().getName() + " pitching to " + gameStatus.getBatter().getName() + "...");
-                System.out.println("score: " + gameStatus.getAwayScore() + " - " + gameStatus.getHomeScore() + "; outs: " + gameStatus.getOuts() + "; inning: " + (gameStatus.isHomeHalf() ? "bot " : "top ") + gameStatus.getInning());
+                System.out.println(game.getPitcher().getName() + " pitching to " + game.getBatter().getName() + "...");
+                System.out.println("score: " + game.getAwayScore() + " - " + game.getHomeScore() + "; outs: " + game.getOuts() + "; inning: " + (game.isHomeHalf() ? "bot " : "top ") + game.getInning());
 
                 boolean homer = new Random().nextBoolean();
                 if (homer) {
                     System.out.println("HOME RUN !");
-                    gameStatus.hitHomeRun();
+                    game.hitHomeRun();
                 } else {
                     System.out.println("STRIKEOUT !");
-                    gameStatus.strikeoutLooking();
+                    game.strikeoutLooking();
                 }
 
                 System.out.println("**********");
@@ -79,6 +79,6 @@ public class WiffleballApplicationTest
             System.out.println("GAME IS OVER !!");
         }
 
-        System.out.println("final score: " + gameStatus.getAwayScore() + " - " + gameStatus.getHomeScore() + " (away - home)");
+        System.out.println("final score: " + game.getAwayScore() + " - " + game.getHomeScore() + " (away - home)");
     }
 }

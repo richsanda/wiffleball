@@ -36,8 +36,9 @@ function showGameActions(gameId) {
             "<div class='action button out-action flyout'>" + "FO" + "</div>" +
             "<div class='action button doubleplay'>" + "DP" + "</div>" +
             "<div class='action button strikeout strikeout-swinging'>" + "K" + "</div>" +
-            "<div class='action button strikeout strikeout-looking'>" + "kl" + "</div>" +
+            "<div class='action button strikeout strikeout-looking'>" + ">|" + "</div>" +
             "<div class='action button strikeout strikeout-both'>" + "X" + "</div>" +
+            "<div class='action button undo'>" + "u" + "</div>" +
         "</div>"
     );
 
@@ -185,6 +186,7 @@ function actionsClick(e) {
         GROUND_OUT,
         LINE_OUT,
         DOUBLE_PLAY,
+        UNDO
      */
 
     var gameId = $("div.game-actions").attr('id');
@@ -234,6 +236,9 @@ function actionsClick(e) {
         },
         'doubleplay': function ($$) {
             doublePlay(gameId);
+        },
+        'undo': function ($$) {
+            undo(gameId);
         }
     };
 
@@ -308,6 +313,10 @@ function doublePlay(gameId) {
     updateGame(gameId, "DOUBLE_PLAY");
 }
 
+function undo(gameId) {
+    updateGame(gameId, "UNDO");
+}
+
 /*
     WALK,
     SINGLE,
@@ -325,6 +334,7 @@ function doublePlay(gameId) {
     GROUND_OUT,
     LINE_OUT,
     DOUBLE_PLAY,
+    UNDO
  */
 
 function updateGame(gameId, play) {

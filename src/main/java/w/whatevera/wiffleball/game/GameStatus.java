@@ -9,6 +9,8 @@ public interface GameStatus {
 
     // game info
 
+    GameSettings getGameSettings();
+
     List<Player> getAwayTeam();
 
     List<Player> getHomeTeam();
