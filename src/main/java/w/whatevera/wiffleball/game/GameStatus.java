@@ -9,10 +9,6 @@ public interface GameStatus {
 
     // game info
 
-    String getId();
-
-    GamePlayEvent getLastPlay();
-
     List<Player> getAwayTeam();
 
     List<Player> getHomeTeam();

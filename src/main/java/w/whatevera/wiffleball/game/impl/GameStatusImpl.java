@@ -11,11 +11,7 @@ import java.util.UUID;
  */
 public class GameStatusImpl implements GameStatus, GamePlay {
 
-    private String id = UUID.randomUUID().toString();
-
     private GameSettings gameSettings;
-
-    private GamePlayEvent lastPlay;
 
     private List<Player> awayTeam;
     private List<Player> homeTeam;
@@ -57,14 +53,6 @@ public class GameStatusImpl implements GameStatus, GamePlay {
         this.awayPitcher = awayTeam.get(numberOfPlayersPerTeam - 1);
 
         nextHalfInning();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public GamePlayEvent getLastPlay() {
-        return lastPlay;
     }
 
     public List<Player> getAwayTeam() {

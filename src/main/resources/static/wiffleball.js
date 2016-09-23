@@ -11,7 +11,7 @@ function pageBehavior () {
         dataType: "json"
     }).success(function (data) {
         $('#actions').append(showGameActions(data.id));
-        $('#status').append(buildGameStatus(data));
+        $('#status').append(buildGameStatus(data.gameStatus));
     });
 }
 
@@ -335,7 +335,7 @@ function updateGame(gameId, play) {
         url: url,
         dataType: "json"
     }).success(function (data) {
-        $('#status').html(buildGameStatus(data));
+        $('#status').html(buildGameStatus(data.gameStatus));
     });
 }
 

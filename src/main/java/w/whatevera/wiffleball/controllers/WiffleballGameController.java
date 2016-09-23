@@ -4,8 +4,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.web.bind.annotation.*;
 import w.whatevera.wiffleball.game.*;
+import w.whatevera.wiffleball.game.impl.GameImpl;
 import w.whatevera.wiffleball.game.impl.GameSettingsImpl;
-import w.whatevera.wiffleball.game.impl.GameStatusImpl;
 import w.whatevera.wiffleball.game.impl.PlayerImpl;
 
 import java.util.List;
@@ -17,28 +17,29 @@ import java.util.Map;
 @RestController
 public class WiffleballGameController {
 
-    private static Map<String, GameStatus> games = Maps.newHashMap();
+    private static Map<String, Game> games = Maps.newHashMap();
 
     @RequestMapping(value = "/game", method= RequestMethod.GET, produces = "application/json")
-    public GameStatus game() {
+    public Game game() {
 
-        GameStatus game = newGame();
+        Game game = newGame();
         games.put(game.getId(), game);
         return game;
     }
 
     @RequestMapping(value = "/game/{game}/play/{play}", method= RequestMethod.GET, produces = "application/json")
-    public GameStatus gameEvent(@PathVariable("game") String gameId,
-                                @PathVariable("play") GamePlayEvent play,
+    public Game gameEvent(@PathVariable("game") String gameId,
+                                @PathVariable("play") GamePlayEvent event,
                                 @RequestParam(required = false) Player pitcher,
                                 @RequestParam(required = false) Player fielder,
                                 @RequestParam(required = false) Player batter) {
 
-        GameStatus game = games.get(gameId);
-        return GameUtils.applyPlayToGame((GamePlay)game, play, pitcher, fielder, batter);
+        Game game = games.get(gameId);
+        game.apply(event);
+        return game;
     }
 
-    private static GameStatus newGame() {
+    private static Game newGame() {
 
         Player bill = new PlayerImpl("bill");
         Player justin = new PlayerImpl("justin");
@@ -51,8 +52,8 @@ public class WiffleballGameController {
         List<Player> homeTeam = Lists.newArrayList(jim, shawn, rich);
 
         GameSettings gameSettings = new GameSettingsImpl(3, 3, 3);
-        GameStatusImpl gameStatus = new GameStatusImpl(gameSettings, awayTeam, homeTeam);
+        Game game = new GameImpl(gameSettings, awayTeam, homeTeam);
 
-        return gameStatus;
+        return game;
     }
 }
