@@ -1,0 +1,188 @@
+body {
+    vertical-align: top;
+}
+
+#actions {
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    text-align: center;
+}
+
+#status {
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+}
+
+div.block {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: top;
+    padding: 4px;
+}
+
+div.actions {
+    display: inline-block;
+    zoom: 1;
+
+    vertical-align: top;
+    font-size: 2em;
+}
+
+div.action {
+
+    padding: 0.4em 1em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    background-color: darkgray;
+}
+
+div.title:hover, div.button:hover, div.read-club:hover, div.entry:hover, span.search-spotify-link:hover, div.theme-index-title:hover, div.artist-index-title:hover, div.marker-index-title:hover, div.index-link:hover, div.new:hover, div.spotify-dropdown-entry:hover, div.marker-dropdown-entry:hover {
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+    cursor: pointer;
+}
+
+div.game-status {
+
+    display: inline-block;
+    vertical-align:top;
+
+    background-color: lightgray;
+
+    padding: 0.25em 1em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    font-size: 2em;
+}
+
+div.team {
+    display: inline-block;
+    zoom: 1;
+    padding: 0.25em 1em;
+}
+
+div.score {
+
+    text-align: center;
+
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    background-color: peru;
+    font-size: 1.25em;
+}
+
+div.hit-action {
+    background-color: lightgreen;
+}
+
+div.walk {
+    background-color: lightblue;
+}
+
+div.error {
+    background-color: cornflowerblue;
+}
+
+div.out-action {
+    background-color: indianred;
+}
+
+div.doubleplay {
+    background-color: darkred;
+}
+
+div.strikeout {
+    background-color: red;
+}
+
+div.teams {
+    display: inline-block;
+}
+
+div.pitcher {
+
+    background-color: gray;
+
+    padding-bottom: 0.25em;
+}
+
+div.player {
+    -moz-border-radius: 0.2em;
+    -webkit-border-radius: 0.2em;
+    border-radius: 0.2em;
+}
+
+div.situation {
+    overflow: hidden;
+}
+
+div.inning div.outs {
+    text-align: center;
+    width: 100%;
+}
+
+div.inning {
+    float: left;
+}
+
+div.outs {
+    float: right;
+}
+
+div.current {
+    border: 2px solid red;
+}
+
+div.bases {
+    position: relative;
+    top: 100%;
+    padding-bottom: 100%;
+}
+
+div.base {
+
+    position: absolute;
+
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg) translate(-50%, 0);
+
+    background-color: burlywood;
+
+    width: 10%;
+    height: 10%;
+}
+
+div.home-base {
+    left: 50%;
+    top: 80%;
+}
+
+div.first-base {
+    left: 80%;
+    top: 50%;
+}
+
+div.second-base {
+    left: 50%;
+    top: 20%;
+}
+
+div.third-base {
+    left: 20%;
+    top: 50%;
+}
+
+div.occupied {
+    border: 2px solid red;
+}
+
+
