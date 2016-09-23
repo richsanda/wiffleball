@@ -39,16 +39,15 @@ public interface GameStatus {
 
     int getInning();
 
-    Player getOnFirst();
+    BaseRunner getOnFirst();
 
-    Player getOnSecond();
+    BaseRunner getOnSecond();
 
-    Player getOnThird();
+    BaseRunner getOnThird();
 
-    List<Player> getPlatedRuns();
+    List<BaseRunner> getPlatedRuns();
 
     boolean isHomeHalf();
 
     boolean isOver();
-
 }

@@ -21,11 +21,9 @@ public interface GamePlay {
 
     void hitHomeRun() throws GameOverException;
 
-    void error1Base(Player fielder) throws GameOverException;
+    void errorReach(Player fielder) throws GameOverException;
 
-    void error2Base(Player fielder) throws GameOverException;
-
-    void error3Base(Player fielder) throws GameOverException;
+    void errorAdvance(Player fielder) throws GameOverException;
 
     void strikeoutSwinging() throws GameOverException;
 
@@ -40,6 +38,10 @@ public interface GamePlay {
     void lineOut(Player fielder) throws GameOverException;
 
     void doublePlay(Player fielder) throws GameOverException;
+
+    void out() throws GameOverException;
+
+    void clearPitchersOfResponsibility();
 
     void replacePlayer(Player replacing, Player replacement) throws GameOverException;
 }

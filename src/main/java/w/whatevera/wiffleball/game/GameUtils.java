@@ -2,8 +2,10 @@ package w.whatevera.wiffleball.game;
 
 import com.google.common.collect.Maps;
 import w.whatevera.wiffleball.game.impl.GamePlayImpl;
+import w.whatevera.wiffleball.game.impl.GameStatsImpl;
 import w.whatevera.wiffleball.game.impl.GameStatusImpl;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,13 +13,13 @@ import java.util.Map;
  */
 public class GameUtils {
 
-    public static GameStatus applyPlayToGame(Game game, GamePlayEvent event, Player player1, Player player2) {
-        return applyPlayToGame(game, event, determinePlayerMap(event, player1, player2));
+    public static GameStatus applyPlayToGame(GameStatus gameStatus, GamePlayEvent event, Player player1, Player player2) {
+        return applyPlayToGame(gameStatus, event, determinePlayerMap(event, player1, player2));
     }
 
-    public static GameStatus applyPlayToGame(Game game, GamePlayEvent event, Map<PlayerType, Player> players) {
+    public static GameStatus applyPlayToGame(GameStatus gameStatus, GamePlayEvent event, Map<PlayerType, Player> players) {
 
-        GamePlay gamePlay = new GamePlayImpl(game.getGameStatus());
+        GamePlay gamePlay = new GamePlayImpl(gameStatus);
 
         Player pitcher = null;
         Player fielder = null;
@@ -51,14 +53,11 @@ public class GameUtils {
                 case HOME_RUN:
                     gamePlay.hitHomeRun();
                     break;
-                case ERROR_1:
-                    gamePlay.error1Base(fielder);
+                case ERROR_REACH:
+                    gamePlay.errorReach(fielder);
                     break;
-                case ERROR_2:
-                    gamePlay.error2Base(fielder);
-                    break;
-                case ERROR_3:
-                    gamePlay.error3Base(fielder);
+                case ERROR_ADVANCE:
+                    gamePlay.errorAdvance(fielder);
                     break;
                 case STRIKEOUT_SWINGING:
                     gamePlay.strikeoutSwinging();
@@ -84,11 +83,11 @@ public class GameUtils {
                 case DOUBLE_PLAY:
                     gamePlay.doublePlay(fielder);
                     break;
+                case OUT:
+                    gamePlay.out();
                 case REPLACE_PLAYER:
                     gamePlay.replacePlayer(fielder, sub);
                     break;
-                case UNDO:
-                    game.undo();
                 //case SKIP:
                 //    gamePlay.skipBatter();
                 default:
@@ -98,8 +97,7 @@ public class GameUtils {
             // pass
         }
 
-        // TODO: maybe move this special logic to GameImpl ?
-        return GamePlayEvent.UNDO.equals(event) ? game.getGameStatus() : new GameStatusImpl((GameStatus)gamePlay);
+        return new GameStatusImpl((GameStatus)gamePlay);
     }
 
     private static Map<PlayerType, Player> determinePlayerMap(GamePlayEvent event, Player player1, Player player2) {
@@ -122,13 +120,10 @@ public class GameUtils {
                 break;
             case HOME_RUN:
                 break;
-            case ERROR_1:
+            case ERROR_REACH:
                 result.put(PlayerType.FIELDER, player1);
                 break;
-            case ERROR_2:
-                result.put(PlayerType.FIELDER, player1);
-                break;
-            case ERROR_3:
+            case ERROR_ADVANCE:
                 result.put(PlayerType.FIELDER, player1);
                 break;
             case STRIKEOUT_SWINGING:
@@ -163,5 +158,19 @@ public class GameUtils {
         }
 
         return result;
+    }
+
+    public static GameStats calculateStats(List<GameLogEntry> gameLogEntries) {
+
+        for (GameLogEntry gameLogEntry : gameLogEntries) {
+            calculateStats(gameLogEntry);
+        }
+    }
+
+    public static GameStats calculateStats(GameLogEntry gameLogEntry) {
+
+        Player batter = gameLogEntry.getGameStatus().getBatter();
+        Player pitcher = gameLogEntry.getGameStatus().getPitcher();
+        GamePlayEvent event = gameLogEntry.getGamePlayEvent();
     }
 }

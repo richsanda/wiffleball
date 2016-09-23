@@ -19,10 +19,10 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     private Player homePitcher;
 
     private Player batter;
-    private Player onFirst;
-    private Player onSecond;
-    private Player onThird;
-    private List<Player> platedRuns = Lists.newArrayList();
+    private BaseRunner onFirst;
+    private BaseRunner onSecond;
+    private BaseRunner onThird;
+    private List<BaseRunner> platedRuns = Lists.newArrayList();
 
     private int awayBatterIndex = 0;
     private int homeBatterIndex = 0;
@@ -138,22 +138,22 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     }
 
     @Override
-    public Player getOnFirst() {
+    public BaseRunner getOnFirst() {
         return onFirst;
     }
 
     @Override
-    public Player getOnSecond() {
+    public BaseRunner getOnSecond() {
         return onSecond;
     }
 
     @Override
-    public Player getOnThird() {
+    public BaseRunner getOnThird() {
         return onThird;
     }
 
     @Override
-    public List<Player> getPlatedRuns() {
+    public List<BaseRunner> getPlatedRuns() {
         return platedRuns;
     }
 
@@ -252,7 +252,7 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     }
 
     @Override
-    public void error1Base(Player fielder) throws GameOverException {
+    public void errorReach(Player fielder) throws GameOverException {
 
         checkIsGameOver();
         oneEqualBase();
@@ -260,19 +260,10 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     }
 
     @Override
-    public void error2Base(Player fielder) throws GameOverException {
+    public void errorAdvance(Player fielder) throws GameOverException {
 
         checkIsGameOver();
-        twoEqualBases();
-        nextBatter();
-    }
-
-    @Override
-    public void error3Base(Player fielder) throws GameOverException {
-
-        checkIsGameOver();
-        threeEqualBases();
-        nextBatter();
+        oneEqualBaseKeepBatter();
     }
 
     @Override
@@ -385,7 +376,7 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     private void pushToHome() {
 
         if (null != onThird) {
-            // platedRuns.add(onThird);
+            platedRuns.add(onThird);
             onThird = null;
             run();
         }
@@ -422,7 +413,7 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         }
 
         if (null != batter) {
-            onFirst = batter;
+            onFirst = new BaseRunnerImpl(batter, getPitcher());
             batter = null;
         }
     }
@@ -437,6 +428,13 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         pushToThird();
         pushToSecond();
         pushToFirst();
+    }
+
+    private void oneEqualBaseKeepBatter() {
+
+        pushToHome();
+        pushToThird();
+        pushToSecond();
     }
 
     private void twoEqualBases() {
@@ -457,7 +455,7 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         oneEqualBase();
     }
 
-    private void out() {
+    public void out() {
 
         outs++;
 
@@ -511,5 +509,19 @@ public class GamePlayImpl implements GamePlay, GameStatus {
 
     private boolean isBasesLoaded() {
         return isFirstAndSecondOccupied() && isThirdOccupied();
+    }
+
+    // for use in calculating earned run average
+    public void clearPitchersOfResponsibility() {
+        if (null != onFirst) {
+            onFirst = new BaseRunnerImpl(onFirst.getRunner(), null);
+        }
+        if (null != onSecond) {
+            onSecond = new BaseRunnerImpl(onSecond.getRunner(), null);
+        }
+        if (null != onThird) {
+            onThird = new BaseRunnerImpl(onThird.getRunner(), null);
+        }
+        platedRuns.clear();
     }
 }

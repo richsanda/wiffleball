@@ -40,6 +40,10 @@ div.action {
     background-color: darkgray;
 }
 
+div.undo {
+    font-size: 1em;
+}
+
 div.title:hover, div.button:hover, div.read-club:hover, div.entry:hover, span.search-spotify-link:hover, div.theme-index-title:hover, div.artist-index-title:hover, div.marker-index-title:hover, div.index-link:hover, div.new:hover, div.spotify-dropdown-entry:hover, div.marker-dropdown-entry:hover {
     opacity: 0.6;
     filter: alpha(opacity = 60);

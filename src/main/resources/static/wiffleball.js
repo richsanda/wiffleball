@@ -26,9 +26,8 @@ function showGameActions(gameId) {
             "<div class='action button hit-action triple'>" + "3B" + "</div>" +
             "<div class='action button hit-action homerun'>" + "HR" + "</div>" +
             "<div class='action button walk'>" + "BB" + "</div>" +
-            "<div class='action button error error1'>" + "E1" + "</div>" +
-            "<div class='action button error error2'>" + "E2" + "</div>" +
-            "<div class='action button error error3'>" + "E3" + "</div>" +
+            "<div class='action button error error-reach'>" + "E" + "</div>" +
+            "<div class='action button error error-advance'>" + "E+" + "</div>" +
         "</div>" +
         "<div class='actions'>" +
             "<div class='action button out-action groundout'>" + "GO" + "</div>" +
@@ -36,9 +35,9 @@ function showGameActions(gameId) {
             "<div class='action button out-action flyout'>" + "FO" + "</div>" +
             "<div class='action button doubleplay'>" + "DP" + "</div>" +
             "<div class='action button strikeout strikeout-swinging'>" + "K" + "</div>" +
-            "<div class='action button strikeout strikeout-looking'>" + ">|" + "</div>" +
+            "<div class='action button strikeout strikeout-looking'>" + ">l" + "</div>" +
             "<div class='action button strikeout strikeout-both'>" + "X" + "</div>" +
-            "<div class='action button undo'>" + "u" + "</div>" +
+            "<div class='action button undo'>" + "&#x21ba;" + "</div>" +
         "</div>"
     );
 
@@ -175,9 +174,8 @@ function actionsClick(e) {
         DOUBLE,
         TRIPLE,
         HOME_RUN,
-        ERROR_1,
-        ERROR_2,
-        ERROR_3,
+        ERROR_REACH,
+        ERROR_ADVANCE,
         STRIKEOUT_SWINGING,
         STRIKEOUT_LOOKING,
         STRIKEOUT_BOTH,
@@ -207,14 +205,11 @@ function actionsClick(e) {
         'homerun': function ($$) {
             homerun(gameId);
         },
-        'error1': function ($$) {
-            error1(gameId);
+        'error-reach': function ($$) {
+            errorReach(gameId);
         },
-        'error2': function ($$) {
-            error2(gameId);
-        },
-        'error3': function ($$) {
-            error3(gameId);
+        'error-advance': function ($$) {
+            errorAdvance(gameId);
         },
         'strikeout-swinging': function ($$) {
             strikeoutSwinging(gameId);
@@ -273,16 +268,12 @@ function homerun(gameId) {
     updateGame(gameId, "HOME_RUN");
 }
 
-function error1(gameId) {
-    updateGame(gameId, "ERROR_1");
+function errorReach(gameId) {
+    updateGame(gameId, "ERROR_REACH");
 }
 
-function error2(gameId) {
-    updateGame(gameId, "ERROR_2");
-}
-
-function error3(gameId) {
-    updateGame(gameId, "ERROR_3");
+function errorAdvance(gameId) {
+    updateGame(gameId, "ERROR_ADVANCE");
 }
 
 function strikeoutSwinging(gameId) {
@@ -323,9 +314,8 @@ function undo(gameId) {
     DOUBLE,
     TRIPLE,
     HOME_RUN,
-    ERROR_1,
-    ERROR_2,
-    ERROR_3,
+    ERROR_REACH,
+    ERROR_ADVANCE,
     STRIKEOUT_SWINGING,
     STRIKEOUT_LOOKING,
     STRIKEOUT_BOTH,

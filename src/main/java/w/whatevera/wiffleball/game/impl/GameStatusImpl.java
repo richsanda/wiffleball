@@ -17,10 +17,10 @@ public class GameStatusImpl implements GameStatus {
     final private Player awayPitcher;
     final private Player homePitcher;
 
-    final private Player onFirst;
-    final private Player onSecond;
-    final private Player onThird;
-    final private List<Player> platedRuns;
+    final private BaseRunner onFirst;
+    final private BaseRunner onSecond;
+    final private BaseRunner onThird;
+    final private List<BaseRunner> platedRuns;
 
     final private int awayBatterIndex;
     final private int homeBatterIndex;
@@ -104,19 +104,19 @@ public class GameStatusImpl implements GameStatus {
         return homePitcher;
     }
 
-    public Player getOnFirst() {
+    public BaseRunner getOnFirst() {
         return onFirst;
     }
 
-    public Player getOnSecond() {
+    public BaseRunner getOnSecond() {
         return onSecond;
     }
 
-    public Player getOnThird() {
+    public BaseRunner getOnThird() {
         return onThird;
     }
 
-    public List<Player> getPlatedRuns() {
+    public List<BaseRunner> getPlatedRuns() {
         return platedRuns;
     }
 

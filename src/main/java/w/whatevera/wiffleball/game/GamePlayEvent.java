@@ -12,9 +12,8 @@ public enum GamePlayEvent {
     DOUBLE,
     TRIPLE,
     HOME_RUN,
-    ERROR_1,
-    ERROR_2,
-    ERROR_3,
+    ERROR_REACH,
+    ERROR_ADVANCE,
     STRIKEOUT_SWINGING,
     STRIKEOUT_LOOKING,
     STRIKEOUT_BOTH,
@@ -23,6 +22,7 @@ public enum GamePlayEvent {
     GROUND_OUT,
     LINE_OUT,
     DOUBLE_PLAY,
+    OUT,
     UNDO,
     REPLACE_PLAYER;
 }
