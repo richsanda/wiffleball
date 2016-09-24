@@ -1,5 +1,22 @@
 body {
-    vertical-align: top;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+div.console {
+
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+
+    min-height: 10em;
+    width: 80%;
+    text-align: center;
+}
+
+div.left {
+    display: inline-block;
 }
 
 #actions {
@@ -10,7 +27,6 @@ body {
 }
 
 #status {
-    display: inline-block;
     vertical-align: top;
     zoom: 1;
 }
@@ -189,4 +205,31 @@ div.occupied {
     border: 2px solid red;
 }
 
+div.summary {
 
+    text-align: left;
+
+    padding: 0.25em 1em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+}
+
+div.summary-entry {
+    padding: 0.25em;
+}
+
+span.summary-entry-play {
+
+    color: darkblue;
+    font-style: italic;
+    font-weight: bold;
+}
+
+div.home-summary-entry {
+    background-color: aliceblue;
+}
+
+div.away-summary-entry {
+    background-color: antiquewhite;
+}

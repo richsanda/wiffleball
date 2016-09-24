@@ -12,6 +12,7 @@ function pageBehavior () {
     }).success(function (data) {
         $('#actions').append(showGameActions(data.id));
         $('#status').append(buildGameStatus(data.gameStatus));
+        $('#summary').append(buildGameSummary(data.gameSummary))
     });
 }
 
@@ -150,6 +151,28 @@ function buildHomeTeam(game) {
     });
 
     return teamDiv;
+}
+
+function buildGameSummary(summary) {
+
+    var summaryDiv = $("<div class='summary'></div>");
+
+    jQuery.each(summary, function() {
+
+        var entry = $(
+            "<div class='summary-entry'>" +
+            this.pitcher.name + " pitching to " + this.batter.name + ": " +
+            "<span class='summary-entry-play'>" +
+            mapEventText(this.gamePlayEvent) +
+            "</span>" +
+            "</div>");
+
+        entry.addClass(this.homeHalf ? "home-summary-entry" : "away-summary-entry");
+
+        summaryDiv.append(entry);
+    });
+
+    return summaryDiv;
 }
 
 function regionClick (e, behaviorMap) {
@@ -336,6 +359,7 @@ function updateGame(gameId, play) {
         dataType: "json"
     }).success(function (data) {
         $('#status').html(buildGameStatus(data.gameStatus));
+        $('#summary').html(buildGameSummary(data.gameSummary));
     });
 }
 
@@ -347,4 +371,27 @@ function showSlowly (selector, bodyFunction, args) {
 	bodyFunction.apply(null, args);
   	$$.animate({'opacity': 1.0}, openSpeed);
     })
+}
+
+function mapEventText(text) {
+
+    var m = {};
+
+    m.WALK = "walk";
+    m.SINGLE = "single";
+    m.DOUBLE = "double";
+    m.TRIPLE = "triple";
+    m.HOME_RUN = "home run";
+    m.ERROR_REACH = "reached on error";
+    m.ERROR_ADVANCE = "advanced on error";
+    m.STRIKEOUT_SWINGING = "K";
+    m.STRIKEOUT_LOOKING = "K (backwards)";
+    m.STRIKEOUT_BOTH = "XXX";
+    m.FLY_OUT = "fly out";
+    m.POP_OUT = "pop out";
+    m.GROUND_OUT = "ground out";
+    m.LINE_OUT = "line out";
+    m.DOUBLE_PLAY = "double play !";
+
+    return text in m ? m[text] : text;
 }

@@ -1,6 +1,7 @@
 package w.whatevera.wiffleball.game;
 
 import java.util.Deque;
+import java.util.List;
 
 /**
  * Created by rich on 9/23/16.
@@ -12,6 +13,8 @@ public interface Game {
     GameStatus getGameStatus();
 
     Deque<GameLogEntry> getGameLog();
+
+    List<GameLogSummaryEntry> getGameSummary();
 
     GameStatus apply(GamePlayEvent event);
 

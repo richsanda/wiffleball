@@ -1,11 +1,10 @@
 package w.whatevera.wiffleball.game.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.collect.Lists;
 import w.whatevera.wiffleball.game.*;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by rich on 9/23/16.
@@ -29,9 +28,21 @@ public class GameImpl implements Game {
         return currentGameStatus;
     }
 
+    @JsonIgnore
     @Override
     public Deque<GameLogEntry> getGameLog() {
         return gameLog;
+    }
+
+    @Override
+    public List<GameLogSummaryEntry> getGameSummary() {
+
+        List<GameLogSummaryEntry> result = Lists.newArrayList();
+        Iterator<GameLogEntry> gameLogIterator = gameLog.descendingIterator();
+        while (gameLogIterator.hasNext()) {
+            result.add(new GameLogSummaryEntryImpl(gameLogIterator.next()));
+        }
+        return result;
     }
 
     @Override
