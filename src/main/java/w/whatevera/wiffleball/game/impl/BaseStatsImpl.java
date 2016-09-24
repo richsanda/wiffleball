@@ -1,6 +1,5 @@
 package w.whatevera.wiffleball.game.impl;
 
-import com.sun.org.glassfish.external.statistics.Stats;
 import w.whatevera.wiffleball.game.BaseStats;
 
 import java.math.BigDecimal;
