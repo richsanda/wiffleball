@@ -30,6 +30,11 @@ public class GameImpl implements Game {
     }
 
     @Override
+    public Deque<GameLogEntry> getGameLog() {
+        return gameLog;
+    }
+
+    @Override
     public GameStatus apply(GamePlayEvent event) {
         return apply(event, null);
     }

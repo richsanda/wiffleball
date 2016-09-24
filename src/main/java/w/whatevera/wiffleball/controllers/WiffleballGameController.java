@@ -27,6 +27,13 @@ public class WiffleballGameController {
         return game;
     }
 
+    @RequestMapping(value = "/game/{game}/stats", method= RequestMethod.GET, produces = "application/json")
+    public GameStats gameStats(@PathVariable("game") String gameId) {
+
+        Game game = games.get(gameId);
+        return GameUtils.calculateStats(game.getGameLog().iterator());
+    }
+
     @RequestMapping(value = "/game/{game}/play/{play}", method= RequestMethod.GET, produces = "application/json")
     public Game gameEvent(@PathVariable("game") String gameId,
                                 @PathVariable("play") GamePlayEvent event,

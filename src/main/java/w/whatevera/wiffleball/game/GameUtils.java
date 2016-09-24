@@ -5,6 +5,7 @@ import w.whatevera.wiffleball.game.impl.GamePlayImpl;
 import w.whatevera.wiffleball.game.impl.GameStatsImpl;
 import w.whatevera.wiffleball.game.impl.GameStatusImpl;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -160,17 +161,102 @@ public class GameUtils {
         return result;
     }
 
-    public static GameStats calculateStats(List<GameLogEntry> gameLogEntries) {
+    public static GameStats calculateStats(Iterator<GameLogEntry> gameLog) {
 
-        for (GameLogEntry gameLogEntry : gameLogEntries) {
-            calculateStats(gameLogEntry);
+        GameStats result = new GameStatsImpl();
+
+        while (gameLog.hasNext()) {
+            result = result.add(calculateStats(gameLog.next()));
         }
+
+        return result;
     }
 
     public static GameStats calculateStats(GameLogEntry gameLogEntry) {
 
-        Player batter = gameLogEntry.getGameStatus().getBatter();
-        Player pitcher = gameLogEntry.getGameStatus().getPitcher();
+        GameStats result = new GameStatsImpl();
+
+        GameStatus gameStatus = gameLogEntry.getGameStatus();
         GamePlayEvent event = gameLogEntry.getGamePlayEvent();
+        Player player1 = gameLogEntry.getPlayer1();
+        Player player2 = gameLogEntry.getPlayer2();
+
+        Player batter = gameStatus.getBatter();
+        Player pitcher = gameStatus.getPitcher();
+
+        GameStatus nextGameStatus = applyPlayToGame(gameStatus, event, player1, player2);
+
+        int runs = gameStatus.isHomeHalf() ?
+                nextGameStatus.getHomeScore() - gameStatus.getHomeScore() :
+                nextGameStatus.getAwayScore() - gameStatus.getAwayScore();
+
+        switch (event) {
+            case START_GAME:
+                break;
+            case SET_PITCHER:
+                break;
+            case WALK:
+                result.getBattingStats(batter).addWalk().addRunsBattedIn(runs);
+                result.getPitchingStats(pitcher).addWalk();
+                break;
+            case SINGLE:
+                result.getBattingStats(batter).addHit().addRunsBattedIn(runs);
+                result.getPitchingStats(pitcher).addHit();
+                break;
+            case DOUBLE:
+                result.getBattingStats(batter).addDouble().addRunsBattedIn(runs);
+                result.getPitchingStats(pitcher).addDouble();
+                break;
+            case TRIPLE:
+                result.getBattingStats(batter).addTriple().addRunsBattedIn(runs);
+                result.getPitchingStats(pitcher).addTriple();
+                break;
+            case HOME_RUN:
+                result.getBattingStats(batter).addHomeRun().addRunsBattedIn(runs);
+                result.getPitchingStats(pitcher).addHomeRun();
+                break;
+            case ERROR_REACH:
+                result.getBattingStats(batter).addAtBat();
+                result.getPitchingStats(pitcher).addAtBat();
+                break;
+            case ERROR_ADVANCE:
+                break;
+            case STRIKEOUT_SWINGING:
+                result.getBattingStats(batter).addStrikeout();
+                result.getPitchingStats(pitcher).addStrikeout().addOneThirdInning();
+                break;
+            case STRIKEOUT_LOOKING:
+                result.getBattingStats(batter).addStrikeout();
+                result.getPitchingStats(pitcher).addStrikeout().addOneThirdInning();
+                break;
+            case STRIKEOUT_BOTH:
+                result.getBattingStats(batter).addStrikeout();
+                result.getPitchingStats(pitcher).addStrikeout().addOneThirdInning();
+                break;
+            case FLY_OUT:
+                result.getBattingStats(batter).addAtBat();
+                result.getPitchingStats(pitcher).addAtBat().addOneThirdInning();
+                break;
+            case POP_OUT:
+                result.getBattingStats(batter).addAtBat();
+                result.getPitchingStats(pitcher).addAtBat().addOneThirdInning();
+                break;
+            case GROUND_OUT:
+                result.getBattingStats(batter).addAtBat();
+                result.getPitchingStats(pitcher).addAtBat().addOneThirdInning();
+                break;
+            case LINE_OUT:
+                result.getBattingStats(batter).addAtBat();
+                result.getPitchingStats(pitcher).addAtBat().addOneThirdInning();
+                break;
+            case DOUBLE_PLAY:
+                result.getBattingStats(batter).addAtBat();
+                result.getPitchingStats(pitcher).addAtBat().addOneThirdInning().addOneThirdInning();
+                break;
+            case REPLACE_PLAYER:
+                break;
+        }
+
+        return result;
     }
 }
