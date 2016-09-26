@@ -20,4 +20,6 @@ public interface GameLogSummaryEntry {
     int getHomeScore();
 
     boolean isHomeHalf();
+
+    boolean isScoreChange();
 }

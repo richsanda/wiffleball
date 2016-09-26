@@ -17,6 +17,7 @@ public class GameLogSummaryEntryImpl implements GameLogSummaryEntry {
     private int awayScore;
     private int homeScore;
     private boolean isHomeHalf;
+    private boolean isScoreChange;
 
     public GameLogSummaryEntryImpl(GameLogEntry gameLogEntry) {
 
@@ -25,12 +26,16 @@ public class GameLogSummaryEntryImpl implements GameLogSummaryEntry {
         this.player2 = gameLogEntry.getPlayer2();
 
         GameStatus gameStatus = gameLogEntry.getGameStatus();
+        GameStatus nextGameStatus = gameLogEntry.getNextGameStatus();
 
         this.pitcher = gameStatus.getPitcher();
         this.batter = gameStatus.getBatter();
-        this.awayScore = gameStatus.getAwayScore();
-        this.homeScore = gameStatus.getHomeScore();
+        this.awayScore = nextGameStatus.getAwayScore();
+        this.homeScore = nextGameStatus.getHomeScore();
         this.isHomeHalf = gameStatus.isHomeHalf();
+        this.isScoreChange =
+                gameStatus.getAwayScore() != nextGameStatus.getAwayScore() ||
+                gameStatus.getHomeScore() != nextGameStatus.getHomeScore();
     }
 
     @Override
@@ -71,5 +76,10 @@ public class GameLogSummaryEntryImpl implements GameLogSummaryEntry {
     @Override
     public boolean isHomeHalf() {
         return isHomeHalf;
+    }
+
+    @Override
+    public boolean isScoreChange() {
+        return isScoreChange;
     }
 }

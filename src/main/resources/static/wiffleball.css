@@ -11,7 +11,7 @@ div.console {
     margin-left: auto;
 
     min-height: 10em;
-    width: 80%;
+    width: 100%;
     text-align: center;
 }
 
@@ -130,14 +130,21 @@ div.teams {
 div.pitcher {
 
     background-color: gray;
-
-    padding-bottom: 0.25em;
 }
 
 div.player {
+
+    margin: 0.1em;
+
     -moz-border-radius: 0.2em;
     -webkit-border-radius: 0.2em;
     border-radius: 0.2em;
+
+    border: 2px solid lightgray;
+}
+
+div.lineup {
+    width: 100%;
 }
 
 div.situation {
@@ -232,4 +239,22 @@ div.home-summary-entry {
 
 div.away-summary-entry {
     background-color: antiquewhite;
+}
+
+div.batting {
+
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+}
+
+div.set-pitcher {
+    background-color: lightslategray;
+}
+
+span.score-change {
+
+    color: peru;
+    font-style: italic;
+    font-weight: bold;
 }

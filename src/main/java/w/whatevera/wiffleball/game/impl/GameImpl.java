@@ -62,11 +62,12 @@ public class GameImpl implements Game {
 
             undo();
 
-        } else {
+        } else if (!currentGameStatus.isOver()) {
 
-            GameLogEntry entry = new GameLogEntryImpl(currentGameStatus, event, player1, player2);
-            gameLog.add(entry);
+            GameStatus gameStatus = currentGameStatus;
             currentGameStatus = GameUtils.applyPlayToGame(currentGameStatus, event, player1, player2);
+            GameLogEntry entry = new GameLogEntryImpl(gameStatus, currentGameStatus, event, player1, player2);
+            gameLog.add(entry);
         }
 
         return currentGameStatus;
@@ -77,5 +78,28 @@ public class GameImpl implements Game {
         if (!gameLog.isEmpty()) {
             currentGameStatus = gameLog.removeLast().getGameStatus();
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+
+        for (Player player : currentGameStatus.getAwayTeam()) {
+            builder.append(player.getName());
+        }
+        builder.append(" vs ");
+        for (Player player : currentGameStatus.getHomeTeam()) {
+            builder.append(player.getName());
+        }
+        builder.append(currentGameStatus.isHomeHalf() ? " bot " : " top ");
+        builder.append(currentGameStatus.getInning());
+        builder.append(", ");
+        builder.append(currentGameStatus.getOuts());
+        builder.append(" outs, ");
+        builder.append(currentGameStatus.getAwayScore());
+        builder.append("-");
+        builder.append(currentGameStatus.getHomeScore());
+
+        return builder.toString();
     }
 }

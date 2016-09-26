@@ -4,7 +4,7 @@ function pageBehavior () {
 
     actionsBehavior($(this));
 
-    var url = "/game";
+    var url = "/w/game";
 
     $.ajax({
         url: url,
@@ -36,7 +36,7 @@ function showGameActions(gameId) {
             "<div class='action button out-action flyout'>" + "FO" + "</div>" +
             "<div class='action button doubleplay'>" + "DP" + "</div>" +
             "<div class='action button strikeout strikeout-swinging'>" + "K" + "</div>" +
-            "<div class='action button strikeout strikeout-looking'>" + ">l" + "</div>" +
+            "<div class='action button strikeout strikeout-looking'>" + "kl" + "</div>" +
             "<div class='action button strikeout strikeout-both'>" + "X" + "</div>" +
             "<div class='action button undo'>" + "&#x21ba;" + "</div>" +
         "</div>"
@@ -105,17 +105,21 @@ function buildAwayTeam(game) {
 
     teamDiv.append("<div class='score'>" + game.awayScore + "</div>");
 
-    var pitcher = $("<div class='player pitcher'>" + game.awayPitcher.name + "</div>");
+    var pitcher = $("<div class='player pitcher' id='" + game.awayPitcher.name + "'>" + game.awayPitcher.name + "</div>");
 
     if (game.homeHalf) { pitcher.addClass("current"); }
 
     teamDiv.append(pitcher);
     teamDiv.append(lineup);
 
-    jQuery.each(game.awayTeam, function() {
-        var player = $("<div class='player batter'>" + this.name + "</div>");
-        if (!game.homeHalf && game.batter.name == this.name) {
-            player.addClass("current");
+    $.each(game.awayTeam, function() {
+        var player = $("<div class='player batter' id='" + this.name + "'>" + this.name + "</div>");
+        if (!game.homeHalf) {
+          if (game.batter.name == this.name) {
+              player.addClass("current");
+          }
+        } else if (pitcher.attr('id') != this.name) {
+            player.addClass("button set-pitcher");
         }
 
         lineup.append(player);
@@ -134,17 +138,23 @@ function buildHomeTeam(game) {
 
     teamDiv.append("<div class='score'>" + game.homeScore + "</div>");
 
-    var pitcher = $("<div class='player pitcher'>" + game.homePitcher.name + "</div>");
+    var pitcher = $("<div class='player pitcher' id='" + game.homePitcher.name + "'>" + game.homePitcher.name + "</div>");
 
-    if (!game.homeHalf) { pitcher.addClass("current"); }
+    if (!game.homeHalf) {
+        pitcher.addClass("current");
+    }
 
     teamDiv.append(pitcher);
     teamDiv.append(lineup);
 
-    jQuery.each(game.homeTeam, function() {
-        var player = $("<div class='player batter'>" + this.name + "</div>");
-        if (game.homeHalf && game.batter.name == this.name) {
-            player.addClass("current");
+    $.each(game.homeTeam, function() {
+        var player = $("<div class='player batter' id='" + this.name + "'>" + this.name + "</div>");
+        if (game.homeHalf) {
+          if (game.batter.name == this.name) {
+              player.addClass("current");
+          }
+        } else if (pitcher.attr('id') != this.name) {
+            player.addClass("button set-pitcher");
         }
 
         lineup.append(player);
@@ -157,7 +167,12 @@ function buildGameSummary(summary) {
 
     var summaryDiv = $("<div class='summary'></div>");
 
-    jQuery.each(summary, function() {
+    var awayScore = summary.awayScore;
+    var homeScore = summary.homeScore;
+
+    $.each(summary, function() {
+
+
 
         var entry = $(
             "<div class='summary-entry'>" +
@@ -165,6 +180,7 @@ function buildGameSummary(summary) {
             "<span class='summary-entry-play'>" +
             mapEventText(this.gamePlayEvent) +
             "</span>" +
+            (this.scoreChange ? " <span class='score-change'>(" + this.awayScore + "-" + this.homeScore + ")</span>" : "") +
             "</div>");
 
         entry.addClass(this.homeHalf ? "home-summary-entry" : "away-summary-entry");
@@ -257,6 +273,12 @@ function actionsClick(e) {
         },
         'undo': function ($$) {
             undo(gameId);
+        },
+        'pitcher' : function ($$) {
+            changePitcher($$);
+        },
+        'set-pitcher' : function ($$) {
+            setPitcher(gameId, $$);
         }
     };
 
@@ -331,6 +353,19 @@ function undo(gameId) {
     updateGame(gameId, "UNDO");
 }
 
+function changePitcher(pitcher) {
+    $(pitcher).closest("div.team").find("div.player").addClass("set-pitcher button");
+}
+
+function setPitcher(gameId, newPitcher) {
+
+    var teamDiv = $(newPitcher).closest("div.team");
+    teamDiv.find('div.set-pitcher').removeClass("set-pitcher");
+    teamDiv.find('div.batter').removeClass("button");
+
+    updateGame(gameId, "SET_PITCHER", newPitcher.attr("id"));
+}
+
 /*
     WALK,
     SINGLE,
@@ -350,9 +385,11 @@ function undo(gameId) {
     UNDO
  */
 
-function updateGame(gameId, play) {
+function updateGame(gameId, play, player1) {
     
-    var url = "/game/" + gameId + "/play/" + play;
+    var url = "/w/game/" + gameId + "/play/" + play;
+
+    if (player1 != null) url += "?player1=" + player1
 
     $.ajax({
         url: url,
@@ -386,12 +423,13 @@ function mapEventText(text) {
     m.ERROR_ADVANCE = "advanced on error";
     m.STRIKEOUT_SWINGING = "K";
     m.STRIKEOUT_LOOKING = "K (backwards)";
-    m.STRIKEOUT_BOTH = "XXX";
+    m.STRIKEOUT_BOTH = "X !";
     m.FLY_OUT = "fly out";
     m.POP_OUT = "pop out";
     m.GROUND_OUT = "ground out";
     m.LINE_OUT = "line out";
     m.DOUBLE_PLAY = "double play !";
+    m.SET_PITCHER = "pitcher relieved..."
 
     return text in m ? m[text] : text;
 }

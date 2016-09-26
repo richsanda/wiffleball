@@ -8,12 +8,14 @@ import w.whatevera.wiffleball.game.*;
 class GameLogEntryImpl implements GameLogEntry {
 
     private GameStatus gameStatus;
+    private GameStatus nextGameStatus;
     private GamePlayEvent event;
     private Player player1;
     private Player player2;
 
-    GameLogEntryImpl(GameStatus gameStatus, GamePlayEvent event, Player player1, Player player2) {
+    GameLogEntryImpl(GameStatus gameStatus, GameStatus nextGameStatus, GamePlayEvent event, Player player1, Player player2) {
         this.gameStatus = gameStatus;
+        this.nextGameStatus = nextGameStatus;
         this.event = event;
         this.player1 = player1;
         this.player2 = player2;
@@ -22,6 +24,11 @@ class GameLogEntryImpl implements GameLogEntry {
     @Override
     public GameStatus getGameStatus() {
         return gameStatus;
+    }
+
+    @Override
+    public GameStatus getNextGameStatus() {
+        return nextGameStatus;
     }
 
     @Override

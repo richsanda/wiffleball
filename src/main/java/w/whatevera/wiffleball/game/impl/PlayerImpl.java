@@ -16,4 +16,14 @@ public class PlayerImpl implements Player {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return name.equals(((Player)o).getName());
+    }
 }

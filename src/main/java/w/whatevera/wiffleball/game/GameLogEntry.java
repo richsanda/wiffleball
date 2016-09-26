@@ -9,6 +9,8 @@ public interface GameLogEntry {
 
     GameStatus getGameStatus();
 
+    GameStatus getNextGameStatus();
+
     GamePlayEvent getGamePlayEvent();
 
     Player getPlayer1();

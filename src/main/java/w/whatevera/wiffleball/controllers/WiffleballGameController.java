@@ -19,7 +19,7 @@ public class WiffleballGameController {
 
     private static Map<String, Game> games = Maps.newHashMap();
 
-    @RequestMapping(value = "/game", method= RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/w/game", method= RequestMethod.GET, produces = "application/json")
     public Game game() {
 
         Game game = newGame();
@@ -27,22 +27,57 @@ public class WiffleballGameController {
         return game;
     }
 
-    @RequestMapping(value = "/game/{game}/stats", method= RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/w/game/new/{awayTeam}/{homeTeam}", method= RequestMethod.GET, produces = "application/json")
+    public Game newGame(@PathVariable("awayTeam")List<String> awayTeamPlayerNames,
+                        @PathVariable("homeTeam")List<String> homeTeamPlayerNames) {
+
+        List<Player> awayTeam = Lists.newArrayList();
+        List<Player> homeTeam = Lists.newArrayList();
+
+        for (String playerName : awayTeamPlayerNames) {
+            Player player = new PlayerImpl(playerName);
+            awayTeam.add(player);
+        }
+
+        for (String playerName : homeTeamPlayerNames) {
+            Player player = new PlayerImpl(playerName);
+            homeTeam.add(player);
+        }
+
+        GameSettings gameSettings = new GameSettingsImpl(awayTeam.size(), 3, 3);
+        Game game = new GameImpl(gameSettings, awayTeam, homeTeam);
+        games.put(game.getId(), game);
+        return game;
+    }
+
+    @RequestMapping(value = "/w/games", method= RequestMethod.GET, produces = "application/json")
+    public List<String> allGames() {
+
+        List<String> result = Lists.newArrayList();
+
+        for (Map.Entry<String, Game> entry : games.entrySet()) {
+            result.add(String.format("%s: %s", entry.getKey(), entry.getValue()));
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/w/game/{game}/stats", method= RequestMethod.GET, produces = "application/json")
     public GameStats gameStats(@PathVariable("game") String gameId) {
 
         Game game = games.get(gameId);
         return GameUtils.calculateStats(game.getGameLog().iterator());
     }
 
-    @RequestMapping(value = "/game/{game}/play/{play}", method= RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/w/game/{game}/play/{play}", method= RequestMethod.GET, produces = "application/json")
     public Game gameEvent(@PathVariable("game") String gameId,
                                 @PathVariable("play") GamePlayEvent event,
-                                @RequestParam(required = false) Player pitcher,
-                                @RequestParam(required = false) Player fielder,
-                                @RequestParam(required = false) Player batter) {
+                                @RequestParam(required = false) String player1,
+                                @RequestParam(required = false) String player2) {
 
         Game game = games.get(gameId);
-        game.apply(event);
+        Player player1Player = GameUtils.findPlayer(game, player1);
+        game.apply(event, player1Player);
         return game;
     }
 

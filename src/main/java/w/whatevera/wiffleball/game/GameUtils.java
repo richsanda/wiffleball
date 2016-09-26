@@ -259,4 +259,14 @@ public class GameUtils {
 
         return result;
     }
+
+    public static Player findPlayer(Game game, String playerName) {
+        for (Player player : game.getGameStatus().getAwayTeam()) {
+            if (player.getName().equals(playerName)) return player;
+        }
+        for (Player player : game.getGameStatus().getHomeTeam()) {
+            if (player.getName().equals(playerName)) return player;
+        }
+        return null;
+    }
 }

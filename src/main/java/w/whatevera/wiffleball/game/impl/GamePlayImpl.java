@@ -204,7 +204,7 @@ public class GamePlayImpl implements GamePlay, GameStatus {
 
         checkIsGameOver();
 
-        if (isHomeHalf) {
+        if (!isHomeHalf) {
             homePitcher = pitcher;
         } else {
             awayPitcher = pitcher;
