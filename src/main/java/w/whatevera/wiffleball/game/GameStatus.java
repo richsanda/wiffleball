@@ -39,6 +39,8 @@ public interface GameStatus {
 
     int getInning();
 
+    int getNumberOfInnings();
+
     BaseRunner getOnFirst();
 
     BaseRunner getOnSecond();

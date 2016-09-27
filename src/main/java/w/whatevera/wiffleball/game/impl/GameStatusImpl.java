@@ -33,6 +33,8 @@ public class GameStatusImpl implements GameStatus {
     final private int outs;
     final private int inning;
 
+    final private int numberOfInnings;
+
     public GameStatusImpl(GameStatus status) {
 
         gameSettings = status.getGameSettings();
@@ -58,6 +60,8 @@ public class GameStatusImpl implements GameStatus {
 
         outs = status.getOuts();
         inning = status.getInning();
+
+        numberOfInnings = status.getNumberOfInnings();
     }
 
     public GameSettings getGameSettings() {
@@ -136,13 +140,16 @@ public class GameStatusImpl implements GameStatus {
         return inning;
     }
 
+    public int getNumberOfInnings() {
+        return numberOfInnings;
+    }
+
     public boolean isHomeHalf() {
         return isHomeHalf;
     }
 
     public boolean isOver() {
 
-        int numberOfInnings = gameSettings.getNumberOfInnings();
         boolean homeTeamWins = inning >= numberOfInnings && isHomeHalf && homeScore > awayScore;
         boolean awayTeamWins = inning > numberOfInnings && !isHomeHalf && awayScore > homeScore;
 

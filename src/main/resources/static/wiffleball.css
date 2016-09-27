@@ -149,6 +149,7 @@ div.lineup {
 
 div.situation {
     overflow: hidden;
+    text-align: center;
 }
 
 div.inning div.outs {

@@ -57,8 +57,12 @@ function buildGameStatus(game) {
     var teamsDiv = $("<div class='teams'></div>");
     var basesDiv = $("<div class='bases'></div>");
 
-    situationDiv.append(inningsDiv);
-    situationDiv.append(outsDiv);
+    if (game.over) {
+        situationDiv.text("final");
+    } else {
+        situationDiv.append(inningsDiv);
+        situationDiv.append(outsDiv);
+    }
 
     gameStatusDiv.append(situationDiv);
     gameStatusDiv.append(teamsDiv);

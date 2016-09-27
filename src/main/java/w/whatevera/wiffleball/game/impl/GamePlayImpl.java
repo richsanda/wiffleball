@@ -30,6 +30,8 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     private int awayScore = 0;
     private int homeScore = 0;
 
+    private int numberOfInnings = 0;
+
     private boolean isHomeHalf = true;
 
     private int outs = 0;
@@ -50,6 +52,8 @@ public class GamePlayImpl implements GamePlay, GameStatus {
 
         this.homePitcher = homeTeam.get(numberOfPlayersPerTeam - 1);
         this.awayPitcher = awayTeam.get(numberOfPlayersPerTeam - 1);
+
+        this.numberOfInnings = gameSettings.getNumberOfInnings();
 
         nextHalfInning();
     }
@@ -80,6 +84,8 @@ public class GamePlayImpl implements GamePlay, GameStatus {
 
         outs = status.getOuts();
         inning = status.getInning();
+
+        numberOfInnings = status.getNumberOfInnings();
     }
 
     @Override
@@ -178,6 +184,11 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     }
 
     @Override
+    public int getNumberOfInnings() {
+        return numberOfInnings;
+    }
+
+    @Override
     public boolean isHomeHalf() {
         return isHomeHalf;
     }
@@ -185,7 +196,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     @Override
     public boolean isOver() {
 
-        int numberOfInnings = gameSettings.getNumberOfInnings();
         boolean homeTeamWins = inning >= numberOfInnings && isHomeHalf && homeScore > awayScore;
         boolean awayTeamWins = inning > numberOfInnings && !isHomeHalf && awayScore > homeScore;
 
@@ -475,7 +485,9 @@ public class GamePlayImpl implements GamePlay, GameStatus {
 
     private void nextHalfInning() {
 
-        if (isHomeHalf) inning++;
+        if (isHomeHalf) {
+            inning++;
+        }
         isHomeHalf = !isHomeHalf;
         batter = getBatter();
         onFirst = null;
@@ -483,6 +495,11 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         onThird = null;
         platedRuns = Lists.newArrayList();
         outs = 0;
+
+         // account for extra innings
+        if (!isHomeHalf && !isOver() && inning > numberOfInnings) {
+            numberOfInnings++;
+        }
     }
 
     private int nextBatterIndex(int currentBatterIndex) {
