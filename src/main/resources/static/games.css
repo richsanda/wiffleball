@@ -1,0 +1,261 @@
+body {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+div.console {
+
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+
+    min-height: 10em;
+    width: 100%;
+    text-align: center;
+}
+
+div.left {
+    display: inline-block;
+}
+
+#actions {
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    text-align: center;
+}
+
+#status {
+    vertical-align: top;
+    zoom: 1;
+}
+
+div.block {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: top;
+    padding: 4px;
+}
+
+div.actions {
+    display: inline-block;
+    zoom: 1;
+
+    vertical-align: top;
+    font-size: 2em;
+}
+
+div.action {
+
+    padding: 0.4em 1em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    background-color: darkgray;
+}
+
+div.undo {
+    font-size: 1em;
+}
+
+div.title:hover, div.button:hover, div.read-club:hover, div.entry:hover, span.search-spotify-link:hover, div.theme-index-title:hover, div.artist-index-title:hover, div.marker-index-title:hover, div.index-link:hover, div.new:hover, div.spotify-dropdown-entry:hover, div.marker-dropdown-entry:hover {
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+    cursor: pointer;
+}
+
+div.game-status {
+
+    display: inline-block;
+    vertical-align:top;
+
+    background-color: lightgray;
+
+    padding: 0.25em 1em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    font-size: 2em;
+}
+
+div.team {
+    display: inline-block;
+    zoom: 1;
+    padding: 0.25em 1em;
+}
+
+div.score {
+
+    text-align: center;
+
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    background-color: peru;
+    font-size: 1.25em;
+}
+
+div.hit-action {
+    background-color: lightgreen;
+}
+
+div.walk {
+    background-color: lightblue;
+}
+
+div.error {
+    background-color: cornflowerblue;
+}
+
+div.out-action {
+    background-color: indianred;
+}
+
+div.doubleplay {
+    background-color: darkred;
+}
+
+div.strikeout {
+    background-color: red;
+}
+
+div.teams {
+    display: inline-block;
+}
+
+div.pitcher {
+
+    background-color: gray;
+}
+
+div.player {
+
+    margin: 0.1em;
+
+    -moz-border-radius: 0.2em;
+    -webkit-border-radius: 0.2em;
+    border-radius: 0.2em;
+
+    border: 2px solid lightgray;
+}
+
+div.lineup {
+    width: 100%;
+}
+
+div.situation {
+    overflow: hidden;
+    text-align: center;
+}
+
+div.inning div.outs {
+    text-align: center;
+    width: 100%;
+}
+
+div.inning {
+    float: left;
+}
+
+div.outs {
+    float: right;
+}
+
+div.current {
+    border: 2px solid red;
+}
+
+div.bases {
+    position: relative;
+    top: 100%;
+    padding-bottom: 100%;
+}
+
+div.base {
+
+    position: absolute;
+
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg) translate(-50%, 0);
+
+    background-color: burlywood;
+
+    width: 10%;
+    height: 10%;
+}
+
+div.home-base {
+    left: 50%;
+    top: 80%;
+}
+
+div.first-base {
+    left: 80%;
+    top: 50%;
+}
+
+div.second-base {
+    left: 50%;
+    top: 20%;
+}
+
+div.third-base {
+    left: 20%;
+    top: 50%;
+}
+
+div.occupied {
+    border: 2px solid red;
+}
+
+div.summary {
+
+    text-align: left;
+
+    padding: 0.25em 1em;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+}
+
+div.summary-entry {
+    padding: 0.25em;
+}
+
+span.summary-entry-play {
+
+    color: darkblue;
+    font-style: italic;
+    font-weight: bold;
+}
+
+div.home-summary-entry {
+    background-color: aliceblue;
+}
+
+div.away-summary-entry {
+    background-color: antiquewhite;
+}
+
+div.batting {
+
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+}
+
+div.set-pitcher {
+    background-color: lightslategray;
+}
+
+span.score-change {
+
+    color: peru;
+    font-style: italic;
+    font-weight: bold;
+}

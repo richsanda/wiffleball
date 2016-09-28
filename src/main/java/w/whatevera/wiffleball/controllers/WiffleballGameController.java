@@ -19,10 +19,10 @@ public class WiffleballGameController {
 
     private static Map<String, Game> games = Maps.newHashMap();
 
-    @RequestMapping(value = "/w/game", method= RequestMethod.GET, produces = "application/json")
-    public Game game() {
+    @RequestMapping(value = "/w/game/demo", method= RequestMethod.GET, produces = "application/json")
+    public Game gameDemo() {
 
-        Game game = newGame();
+        Game game = newDemoGame();
         games.put(game.getId(), game);
         return game;
     }
@@ -50,6 +50,13 @@ public class WiffleballGameController {
         return game;
     }
 
+    @RequestMapping(value = "/w/game/{game}", method= RequestMethod.GET, produces = "application/json")
+    public Game game(@PathVariable("game") String gameId) {
+
+        Game game = games.get(gameId);
+        return game;
+    }
+
     @RequestMapping(value = "/w/games", method= RequestMethod.GET, produces = "application/json")
     public List<String> allGames() {
 
@@ -60,13 +67,6 @@ public class WiffleballGameController {
         }
 
         return result;
-    }
-
-    @RequestMapping(value = "/w/game/{game}/stats", method= RequestMethod.GET, produces = "application/json")
-    public GameStats gameStats(@PathVariable("game") String gameId) {
-
-        Game game = games.get(gameId);
-        return GameUtils.calculateStats(game.getGameLog().iterator());
     }
 
     @RequestMapping(value = "/w/game/{game}/play/{play}", method= RequestMethod.GET, produces = "application/json")
@@ -81,7 +81,14 @@ public class WiffleballGameController {
         return game;
     }
 
-    private static Game newGame() {
+    @RequestMapping(value = "/w/game/{game}/stats", method= RequestMethod.GET, produces = "application/json")
+    public GameStats gameStats(@PathVariable("game") String gameId) {
+
+        Game game = games.get(gameId);
+        return GameUtils.calculateStats(game.getGameLog().iterator());
+    }
+
+    private static Game newDemoGame() {
 
         Player bill = new PlayerImpl("bill");
         Player justin = new PlayerImpl("justin");

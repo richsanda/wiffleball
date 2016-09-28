@@ -8,12 +8,17 @@
     <link rel="Stylesheet" type="text/css" href="wiffleball.css"/>
 </head>
 <body>
-<div class="console">
-    <div class="left">
-        <div id="status"></div>
-        <div id="summary"><div>&#160</div></div>
+<div>
+    <div class="panel" id="new-game">
+        <div class="panel-header">start a new game</div>
+        <div>away team: <input type="text" name="away"/></div>
+        <div>home team: <input type="text" name="home"/></div>
+        <div class="start-game button">start !</div>
     </div>
-    <div id="actions"></div>
+    <div class="panel">
+        <div class="panel-header">find a game</div>
+        <div id="games"/>
+    </div>
 </div>
 </body>
 </html>
