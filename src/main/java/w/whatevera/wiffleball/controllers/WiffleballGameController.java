@@ -85,7 +85,7 @@ public class WiffleballGameController {
     public GameStats gameStats(@PathVariable("game") String gameId) {
 
         Game game = games.get(gameId);
-        return GameUtils.calculateStats(game.getGameLog().iterator());
+        return GameUtils.calculateStats(game);
     }
 
     private static Game newDemoGame() {

@@ -1,62 +1,35 @@
 package w.whatevera.wiffleball.game.impl;
 
-import com.google.common.collect.Maps;
 import w.whatevera.wiffleball.game.*;
-
-import java.util.Map;
 
 /**
  * Created by rich on 9/23/16.
  */
 public class GameStatsImpl implements GameStats {
 
-    private Map<Player, BattingStats> battingStats = Maps.newHashMap();
-    private Map<Player, PitchingStats> pitchingStats = Maps.newHashMap();
+    private TeamStats awayTeamStats;
+    private TeamStats homeTeamStats;
 
-    @Override
-    public Map<Player, BattingStats> getBattingStats() {
-        return battingStats;
+    public GameStatsImpl(TeamStats awayTeamStats, TeamStats homeTeamStats) {
+        this.awayTeamStats = awayTeamStats;
+        this.homeTeamStats = homeTeamStats;
     }
 
     @Override
-    public Map<Player, PitchingStats> getPitchingStats() {
-        return pitchingStats;
+    public TeamStats getAwayTeamStats() {
+        return awayTeamStats;
     }
 
     @Override
-    public BattingStats getBattingStats(Player player) {
-
-        if (battingStats.containsKey(player)) {
-            return battingStats.get(player);
-        }
-
-        BattingStats result = new BattingStatsImpl();
-        battingStats.put(player, result);
-        return result;
-    }
-
-    @Override
-    public PitchingStats getPitchingStats(Player player) {
-
-        if (pitchingStats.containsKey(player)) {
-            return pitchingStats.get(player);
-        }
-
-        PitchingStats result = new PitchingStatsImpl();
-        pitchingStats.put(player, result);
-        return result;
+    public TeamStats getHomeTeamStats() {
+        return homeTeamStats;
     }
 
     @Override
     public GameStats add(GameStats gameStats) {
 
-        for (Player batter : battingStats.keySet()) {
-            gameStats.getBattingStats(batter).add(battingStats.get(batter));
-        }
-        for (Player pitcher : pitchingStats.keySet()) {
-            gameStats.getPitchingStats(pitcher).add(pitchingStats.get(pitcher));
-        }
-
-        return gameStats;
+        return new GameStatsImpl(
+                awayTeamStats.add(gameStats.getAwayTeamStats()),
+                homeTeamStats.add(gameStats.getHomeTeamStats()));
     }
 }

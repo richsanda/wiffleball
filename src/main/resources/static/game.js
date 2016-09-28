@@ -42,6 +42,7 @@ function showGameActions(gameId) {
             "<div class='action button walk'>" + "BB" + "</div>" +
             "<div class='action button error error-reach'>" + "E" + "</div>" +
             "<div class='action button error error-advance'>" + "E+" + "</div>" +
+            "<div class='action button get-stats'>" + "?" + "</div>" +
         "</div>" +
         "<div class='actions'>" +
             "<div class='action button out-action groundout'>" + "GO" + "</div>" +
@@ -180,6 +181,22 @@ function buildHomeTeam(game) {
     return teamDiv;
 }
 
+function buildGameStats(stats) {
+
+    var statsDiv = $("<div class='stats'></div>");
+
+    $.each(stats.awayTeamStats.playerBattingStats, function(k, v) {
+
+        var player = this.player;
+        var battingStats = this.battingStats;
+        var entry = $("<div>" + player.name + ": " + battingStats.hits + "-" + battingStats.atBats + "</div>");
+
+        statsDiv.append(entry);
+    });
+
+    return statsDiv;
+}
+
 function buildGameSummary(summary) {
 
     var summaryDiv = $("<div class='summary'></div>");
@@ -188,8 +205,6 @@ function buildGameSummary(summary) {
     var homeScore = summary.homeScore;
 
     $.each(summary, function() {
-
-
 
         var entry = $(
             "<div class='summary-entry'>" +
@@ -296,6 +311,9 @@ function actionsClick(e) {
         },
         'set-pitcher' : function ($$) {
             setPitcher(gameId, $$);
+        },
+        'get-stats' : function ($$) {
+            getStats(gameId);
         }
     };
 
@@ -414,6 +432,18 @@ function updateGame(gameId, play, player1) {
     }).success(function (data) {
         $('#status').html(buildGameStatus(data.gameStatus));
         $('#summary').html(buildGameSummary(data.gameSummary));
+    });
+}
+
+function getStats(gameId) {
+
+    var url = "/w/game/" + gameId + "/stats";
+
+    $.ajax({
+        url: url,
+        dataType: "json"
+    }).success(function (data) {
+        $('#summary').html(buildGameStats(data));
     });
 }
 

@@ -99,11 +99,17 @@ public abstract class BaseStatsImpl<StatsType> implements BaseStats<StatsType> {
 
     @Override
     public BigDecimal getBattingAverage() {
+        if (atBats == 0) {
+            return BigDecimal.ZERO;
+        }
         return new BigDecimal(hits).divide(new BigDecimal(atBats), BigDecimal.ROUND_DOWN);
     }
 
     @Override
     public BigDecimal getSluggingPercentage() {
+        if (atBats == 0) {
+            return BigDecimal.ZERO;
+        }
         return new BigDecimal(getTotalBases()).divide(new BigDecimal(atBats), BigDecimal.ROUND_DOWN);
     }
 
