@@ -35,6 +35,10 @@ public interface BaseStats<StatsType> {
 
     BigDecimal getSluggingPercentage();
 
+    BigDecimal getOnBasePercentage();
+
+    BigDecimal getOnBasePlusSlugging();
+
     int getRuns();
 
     int getRunsBattedIn();

@@ -10,8 +10,7 @@ function pageBehavior () {
         url: url,
         dataType: "json"
     }).success(function (data) {
-        console.log(data);
-        $('#games').append(showGames(data));
+        //$('#games').append(showGames(data));
     });
 }
 

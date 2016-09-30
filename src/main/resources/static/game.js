@@ -35,24 +35,24 @@ function showGameActions(gameId) {
 
     gameActionsDiv.append(
         "<div class='actions'>" +
-            "<div class='action button hit-action single'>" + "1B" + "</div>" +
-            "<div class='action button hit-action double'>" + "2B" + "</div>" +
-            "<div class='action button hit-action triple'>" + "3B" + "</div>" +
-            "<div class='action button hit-action homerun'>" + "HR" + "</div>" +
-            "<div class='action button walk'>" + "BB" + "</div>" +
-            "<div class='action button error error-reach'>" + "E" + "</div>" +
-            "<div class='action button error error-advance'>" + "E+" + "</div>" +
-            "<div class='action button get-stats'>" + "?" + "</div>" +
+            "<div class='action button hit-action single' title='single'>" + "1B" + "</div>" +
+            "<div class='action button hit-action double' title='double'>" + "2B" + "</div>" +
+            "<div class='action button hit-action triple' title='triple'>" + "3B" + "</div>" +
+            "<div class='action button hit-action homerun' title='home run'>" + "HR" + "</div>" +
+            "<div class='action button walk' title='walk'>" + "BB" + "</div>" +
+            "<div class='action button error error-reach' title='reach on error'>" + "E" + "</div>" +
+            "<div class='action button error error-advance' title='advance on error'>" + "E+" + "</div>" +
+            "<div class='action button get-stats' title='stats'>" + "s" + "</div>" +
         "</div>" +
         "<div class='actions'>" +
-            "<div class='action button out-action groundout'>" + "GO" + "</div>" +
-            "<div class='action button out-action lineout'>" + "LO" + "</div>" +
-            "<div class='action button out-action flyout'>" + "FO" + "</div>" +
-            "<div class='action button doubleplay'>" + "DP" + "</div>" +
-            "<div class='action button strikeout strikeout-swinging'>" + "K" + "</div>" +
-            "<div class='action button strikeout strikeout-looking'>" + "kl" + "</div>" +
-            "<div class='action button strikeout strikeout-both'>" + "X" + "</div>" +
-            "<div class='action button undo'>" + "&#x21ba;" + "</div>" +
+            "<div class='action button out-action groundout' title='ground out'>" + "GO" + "</div>" +
+            "<div class='action button out-action lineout' title='line out'>" + "LO" + "</div>" +
+            "<div class='action button out-action flyout' title='fly out'>" + "FO" + "</div>" +
+            "<div class='action button doubleplay' title='double play'>" + "DP" + "</div>" +
+            "<div class='action button strikeout strikeout-swinging' title='strikeout swinging'>" + "K" + "</div>" +
+            "<div class='action button strikeout strikeout-looking' title='strikeout looking'>" + "z" + "</div>" +
+            "<div class='action button strikeout strikeout-both' title='strikeout swinging and looking'>" + "X" + "</div>" +
+            "<div class='action button undo' title='undo'>" + "u" + "</div>" +
         "</div>"
     );
 
@@ -185,16 +185,52 @@ function buildGameStats(stats) {
 
     var statsDiv = $("<div class='stats'></div>");
 
+    statsDiv.append(
+        "<div class='batting-stats'>" +
+            "<div class='batting-stat'>&#160;</div>" +
+            "<div class='batting-stat-header'>hits</div>" +
+            "<div class='batting-stat-header'>avg</div>" +
+            "<div class='batting-stat-header'>2b</div>" +
+            "<div class='batting-stat-header'>3b</div>" +
+            "<div class='batting-stat-header'>hr</div>" +
+            "<div class='batting-stat-header'>rbi</div>" +
+            "<div class='batting-stat-header'>ops</div>" +
+        "</div>");
+
     $.each(stats.awayTeamStats.playerBattingStats, function(k, v) {
 
-        var player = this.player;
-        var battingStats = this.battingStats;
-        var entry = $("<div>" + player.name + ": " + battingStats.hits + "-" + battingStats.atBats + "</div>");
+        statsDiv.append(buildPlayerBattingStats(this));
+    });
 
-        statsDiv.append(entry);
+    $.each(stats.homeTeamStats.playerBattingStats, function(k, v) {
+
+        statsDiv.append(buildPlayerBattingStats(this));
     });
 
     return statsDiv;
+}
+
+function buildPlayerBattingStats(stats) {
+
+    var player = stats.player;
+    var battingStats = stats.battingStats;
+
+    var entry = $("<div class='batting-stats'></div>");
+
+    entry.append("<div class='batting-stat stats-player'>" + player.name + "</div>");
+    entry.append("<div class='batting-stat'>" + battingStats.hits + "-" + battingStats.atBats +"</div>");
+    entry.append("<div class='batting-stat'>" + threePlaces(battingStats.battingAverage) + "</div>");
+    entry.append("<div class='batting-stat'>" + battingStats.doubles + "</div>");
+    entry.append("<div class='batting-stat'>" + battingStats.triples + "</div>");
+    entry.append("<div class='batting-stat'>" + battingStats.homeRuns + "</div>");
+    entry.append("<div class='batting-stat'>" + battingStats.runsBattedIn + "</div>");
+    entry.append("<div class='batting-stat'>" + threePlaces(battingStats.onBasePlusSlugging) + "</div>");
+
+    return entry;
+}
+
+function threePlaces(number) {
+    return (String((Number(number)).toFixed(3))).replace(/^0+/, '');
 }
 
 function buildGameSummary(summary) {

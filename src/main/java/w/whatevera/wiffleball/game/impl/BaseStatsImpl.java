@@ -3,6 +3,7 @@ package w.whatevera.wiffleball.game.impl;
 import w.whatevera.wiffleball.game.BaseStats;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by rich on 9/23/16.
@@ -102,7 +103,7 @@ public abstract class BaseStatsImpl<StatsType> implements BaseStats<StatsType> {
         if (atBats == 0) {
             return BigDecimal.ZERO;
         }
-        return new BigDecimal(hits).divide(new BigDecimal(atBats), BigDecimal.ROUND_DOWN);
+        return threePlaces(hits).divide(threePlaces(atBats), RoundingMode.HALF_UP);
     }
 
     @Override
@@ -110,7 +111,20 @@ public abstract class BaseStatsImpl<StatsType> implements BaseStats<StatsType> {
         if (atBats == 0) {
             return BigDecimal.ZERO;
         }
-        return new BigDecimal(getTotalBases()).divide(new BigDecimal(atBats), BigDecimal.ROUND_DOWN);
+        return threePlaces(getTotalBases()).divide(threePlaces(atBats), RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public BigDecimal getOnBasePercentage() {
+        if (plateAppearances == 0) {
+            return BigDecimal.ZERO;
+        }
+        return threePlaces(hits + walks).divide(threePlaces(plateAppearances), RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public BigDecimal getOnBasePlusSlugging() {
+        return getOnBasePercentage().add(getSluggingPercentage());
     }
 
     @Override
@@ -194,5 +208,9 @@ public abstract class BaseStatsImpl<StatsType> implements BaseStats<StatsType> {
     public StatsType addRunsBattedIn(int runsBattedIn) {
         this.runsBattedIn += runsBattedIn;
         return (StatsType)this;
+    }
+
+    private BigDecimal threePlaces(int number) {
+        return new BigDecimal(number).setScale(3, RoundingMode.HALF_UP);
     }
 }

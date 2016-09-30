@@ -56,10 +56,6 @@ div.action {
     background-color: darkgray;
 }
 
-div.undo {
-    font-size: 1em;
-}
-
 div.title:hover, div.button:hover, div.read-club:hover, div.entry:hover, span.search-spotify-link:hover, div.theme-index-title:hover, div.artist-index-title:hover, div.marker-index-title:hover, div.index-link:hover, div.new:hover, div.spotify-dropdown-entry:hover, div.marker-dropdown-entry:hover {
     opacity: 0.6;
     filter: alpha(opacity = 60);
@@ -258,4 +254,43 @@ span.score-change {
     color: peru;
     font-style: italic;
     font-weight: bold;
+}
+
+div.stats {
+    display: table;
+    width: 100%;
+    table-layout: inherit;
+}
+
+div.batting-stats {
+    display: table-row;
+}
+
+div.batting-stat, div.batting-stat-header {
+    display: table-cell;
+    text-align: center;
+}
+
+div.batting-stat-header {
+
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    border-radius: 0.25em;
+
+    font-weight: bold;
+    color: blanchedalmond;
+    background-color: darkolivegreen;
+}
+
+div.stats-player {
+
+    -moz-border-radius: 0.25em;
+    -webkit-border-radius: 0.25em;
+    border-radius: 0.25em;
+
+    background-color: beige;
+}
+
+div.left, #status, #summary, div.summary, div.stats {
+    vertical-align: top;
 }
