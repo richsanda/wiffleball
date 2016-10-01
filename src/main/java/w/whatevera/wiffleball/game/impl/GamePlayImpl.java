@@ -210,7 +210,8 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     @Override
     public void setPitcher(Player pitcher) throws GameOverException {
 
-        if (null == pitcher) return;
+        // allow null to aid in calculating era
+        //if (null == pitcher) return;
 
         checkIsGameOver();
 

@@ -14,6 +14,8 @@ public class PitchingStatsImpl extends BaseStatsImpl<PitchingStats> implements P
     private static final int OUTS_PER_INNING = 3;
     private static final int INNINGS_PER_GAME = 3;
 
+    private static final BigDecimal MAX_ERA = new BigDecimal(99.99).setScale(2, RoundingMode.HALF_UP);
+
     private int oneThirdInningsPitched = 0;
     private int appearances = 0;
     private int wins = 0;
@@ -27,14 +29,27 @@ public class PitchingStatsImpl extends BaseStatsImpl<PitchingStats> implements P
 
     @Override
     public BigDecimal getEarnedRunAverage() {
-        if (0 == oneThirdInningsPitched) return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
-        return new BigDecimal(earnedRuns * OUTS_PER_INNING * INNINGS_PER_GAME).setScale(2, RoundingMode.HALF_UP).divide(new BigDecimal(oneThirdInningsPitched), RoundingMode.HALF_UP);
+        if (earnedRuns == 0) {
+            return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+        } else if (0 == oneThirdInningsPitched) {
+            return MAX_ERA;
+        }
+        return new BigDecimal(earnedRuns * OUTS_PER_INNING * INNINGS_PER_GAME)
+                .setScale(2, RoundingMode.HALF_UP)
+                .divide(new BigDecimal(oneThirdInningsPitched), RoundingMode.HALF_UP)
+                .min(MAX_ERA);
     }
 
     @Override
     public int getInningsPitched() {
 
         return oneThirdInningsPitched / OUTS_PER_INNING;
+    }
+
+    @Override
+    public int getInningsPitchedRemainder() {
+
+        return oneThirdInningsPitched % OUTS_PER_INNING;
     }
 
     @Override

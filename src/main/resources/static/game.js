@@ -42,7 +42,7 @@ function showGameActions(gameId) {
             "<div class='action button walk' title='walk'>" + "BB" + "</div>" +
             "<div class='action button error error-reach' title='reach on error'>" + "E" + "</div>" +
             "<div class='action button error error-advance' title='advance on error'>" + "E+" + "</div>" +
-            "<div class='action button get-stats' title='stats'>" + "s" + "</div>" +
+            "<div class='action button get-stats' title='stats / summary'>" + "s/s" + "</div>" +
         "</div>" +
         "<div class='actions'>" +
             "<div class='action button out-action groundout' title='ground out'>" + "GO" + "</div>" +
@@ -266,7 +266,7 @@ function buildPlayerPitchingStats(stats) {
     var entry = $("<div class='pitching-stats'></div>");
 
     entry.append("<div class='pitching-stat stats-player'>" + player.name + "</div>");
-    entry.append("<div class='pitching-stat'>" + pitchingStats.inningsPitched + "</div>");
+    entry.append("<div class='pitching-stat'>" + formatInningsPitched(pitchingStats.inningsPitched, pitchingStats.inningsPitchedRemainder) + "</div>");
     entry.append("<div class='pitching-stat'>" + twoPlaces(pitchingStats.earnedRunAverage) + "</div>");
     entry.append("<div class='pitching-stat'>" + pitchingStats.earnedRuns + "</div>");
     entry.append("<div class='pitching-stat'>" + pitchingStats.runs + "</div>");
@@ -284,6 +284,10 @@ function threePlaces(number) {
 
 function twoPlaces(number) {
     return (Number(number)).toFixed(2);
+}
+
+function formatInningsPitched(innings, remainder) {
+    return "" + innings + (remainder == 0 ? "" : "." + remainder);
 }
 
 function buildGameSummary(summary) {
@@ -347,6 +351,8 @@ function actionsClick(e) {
         UNDO
      */
 
+    var $$ = $(e.target);
+
     var gameId = $("div.game-actions").attr('id');
 
     var actions = {
@@ -401,8 +407,11 @@ function actionsClick(e) {
         'set-pitcher' : function ($$) {
             setPitcher(gameId, $$);
         },
+        'get-summary' : function ($$) {
+            getSummary(gameId, $$);
+        },
         'get-stats' : function ($$) {
-            getStats(gameId);
+            getStats(gameId, $$);
         }
     };
 
@@ -521,10 +530,13 @@ function updateGame(gameId, play, player1) {
     }).success(function (data) {
         $('#status').html(buildGameStatus(data.gameStatus));
         $('#summary').html(buildGameSummary(data.gameSummary));
+        $('#actions').find('div.get-summary').removeClass('get-summary').addClass('get-stats');
     });
 }
 
-function getStats(gameId) {
+function getStats(gameId, $$) {
+
+    $$.removeClass('get-stats').addClass('get-summary');
 
     var url = "/w/game/" + gameId + "/stats";
 
@@ -533,6 +545,20 @@ function getStats(gameId) {
         dataType: "json"
     }).success(function (data) {
         $('#summary').html(buildGameStats(data));
+    });
+}
+
+function getSummary(gameId, $$) {
+
+    $$.removeClass('get-summary').addClass('get-stats');
+
+    var url = "/w/game/" + gameId;
+
+    $.ajax({
+        url: url,
+        dataType: "json"
+    }).success(function (data) {
+        $('#summary').html(buildGameSummary(data.gameSummary));
     });
 }
 

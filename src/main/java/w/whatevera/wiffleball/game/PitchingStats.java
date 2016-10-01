@@ -15,6 +15,8 @@ public interface PitchingStats extends BaseStats<PitchingStats> {
 
     int getInningsPitched();
 
+    int getInningsPitchedRemainder();
+
     int getWins();
 
     int getLosses();
