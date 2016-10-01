@@ -11,11 +11,15 @@ public interface PitchingStats extends BaseStats<PitchingStats> {
 
     BigDecimal getEarnedRunAverage();
 
+    int getOneThirdInningsPitched();
+
     int getInningsPitched();
 
     int getWins();
 
     int getLosses();
+
+    int getAppearances();
 
     PitchingStats addEarnedRuns(int runs);
 
@@ -24,4 +28,6 @@ public interface PitchingStats extends BaseStats<PitchingStats> {
     PitchingStats addWin();
 
     PitchingStats addLoss();
+
+    PitchingStats addAppearance();
 }

@@ -194,6 +194,7 @@ function buildGameStats(stats) {
             "<div class='batting-stat-header'>3b</div>" +
             "<div class='batting-stat-header'>hr</div>" +
             "<div class='batting-stat-header'>rbi</div>" +
+            "<div class='batting-stat-header'>k</div>" +
             "<div class='batting-stat-header'>ops</div>" +
         "</div>");
 
@@ -202,9 +203,36 @@ function buildGameStats(stats) {
         statsDiv.append(buildPlayerBattingStats(this));
     });
 
+    statsDiv.append("<div><hr/></div>");
+
     $.each(stats.homeTeamStats.playerBattingStats, function(k, v) {
 
         statsDiv.append(buildPlayerBattingStats(this));
+    });
+
+    statsDiv.append(
+        "<div class='pitching-stats'>" +
+            "<div class='pitching-stat'>&#160;</div>" +
+            "<div class='pitching-stat-header'>ip</div>" +
+            "<div class='pitching-stat-header'>era</div>" +
+            "<div class='pitching-stat-header'>er</div>" +
+            "<div class='pitching-stat-header'>r</div>" +
+            "<div class='pitching-stat-header'>k</div>" +
+            "<div class='pitching-stat-header'>hits</div>" +
+            "<div class='pitching-stat-header'>hr</div>" +
+            "<div class='pitching-stat-header'>baa</div>" +
+        "</div>");
+
+    $.each(stats.awayTeamStats.playerPitchingStats, function(k, v) {
+
+        statsDiv.append(buildPlayerPitchingStats(this));
+    });
+
+    statsDiv.append("<div><hr/></div>");
+
+    $.each(stats.homeTeamStats.playerPitchingStats, function(k, v) {
+
+        statsDiv.append(buildPlayerPitchingStats(this));
     });
 
     return statsDiv;
@@ -224,13 +252,38 @@ function buildPlayerBattingStats(stats) {
     entry.append("<div class='batting-stat'>" + battingStats.triples + "</div>");
     entry.append("<div class='batting-stat'>" + battingStats.homeRuns + "</div>");
     entry.append("<div class='batting-stat'>" + battingStats.runsBattedIn + "</div>");
+    entry.append("<div class='batting-stat'>" + battingStats.strikeouts + "</div>");
     entry.append("<div class='batting-stat'>" + threePlaces(battingStats.onBasePlusSlugging) + "</div>");
+
+    return entry;
+}
+
+function buildPlayerPitchingStats(stats) {
+
+    var player = stats.player;
+    var pitchingStats = stats.pitchingStats;
+
+    var entry = $("<div class='pitching-stats'></div>");
+
+    entry.append("<div class='pitching-stat stats-player'>" + player.name + "</div>");
+    entry.append("<div class='pitching-stat'>" + pitchingStats.inningsPitched + "</div>");
+    entry.append("<div class='pitching-stat'>" + twoPlaces(pitchingStats.earnedRunAverage) + "</div>");
+    entry.append("<div class='pitching-stat'>" + pitchingStats.earnedRuns + "</div>");
+    entry.append("<div class='pitching-stat'>" + pitchingStats.runs + "</div>");
+    entry.append("<div class='pitching-stat'>" + pitchingStats.strikeouts + "</div>");
+    entry.append("<div class='pitching-stat'>" + pitchingStats.hits + "-" + pitchingStats.atBats +"</div>");
+    entry.append("<div class='pitching-stat'>" + pitchingStats.homeRuns +"</div>");
+    entry.append("<div class='pitching-stat'>" + threePlaces(pitchingStats.battingAverage) + "</div>");
 
     return entry;
 }
 
 function threePlaces(number) {
     return (String((Number(number)).toFixed(3))).replace(/^0+/, '');
+}
+
+function twoPlaces(number) {
+    return (Number(number)).toFixed(2);
 }
 
 function buildGameSummary(summary) {

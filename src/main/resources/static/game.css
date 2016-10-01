@@ -262,16 +262,16 @@ div.stats {
     table-layout: inherit;
 }
 
-div.batting-stats {
+div.batting-stats, div.pitching-stats {
     display: table-row;
 }
 
-div.batting-stat, div.batting-stat-header {
+div.batting-stat, div.batting-stat-header, div.pitching-stat, div.pitching-stat-header {
     display: table-cell;
     text-align: center;
 }
 
-div.batting-stat-header {
+div.batting-stat-header, div.pitching-stat-header {
 
     -moz-border-radius: 0.25em;
     -webkit-border-radius: 0.25em;
