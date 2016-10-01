@@ -5,7 +5,7 @@ import w.whatevera.wiffleball.game.*;
 /**
  * Created by rich on 9/23/16.
  */
-public class EarnedRunInningImpl implements EarnedRunInning {
+public class PitchedInningImpl implements PitchedInning {
 
     private GameStatus initialGameStatus;
     private GameStatus currentGameStatus;
@@ -13,7 +13,7 @@ public class EarnedRunInningImpl implements EarnedRunInning {
     private boolean isClosed = false;
     private int earnedRuns = 0;
 
-    public EarnedRunInningImpl(GameStatus gameStatus) {
+    public PitchedInningImpl(GameStatus gameStatus) {
 
         GamePlayImpl gamePlay = new GamePlayImpl(gameStatus);
         gamePlay.clearPitchersOfResponsibility();
@@ -45,21 +45,25 @@ public class EarnedRunInningImpl implements EarnedRunInning {
                 break;
             case ERROR_ADVANCE:
                 errorFree = null;
+                break;
             case SET_PITCHER:
                 if (isPitcherDone || getPitcher() != player1) {
                     player1 = null; // pass null from now on once the pitcher is done
                     isPitcherDone = true;
                 }
-
         }
 
-        if (null != errorFree) currentGameStatus = GameUtils.applyPlayToGame(currentGameStatus, event, player1, player2);
+        if (null != errorFree) currentGameStatus = GameUtils.applyPlayToGame(currentGameStatus, errorFree, player1, player2);
 
         for (BaseRunner baseRunner : currentGameStatus.getPlatedRuns()) {
-            if (baseRunner.getPitcher().equals(getPitcher())) {
+            Player pitcher = baseRunner.getPitcher();
+            if (null != pitcher && pitcher.equals(getPitcher())) {
                 earnedRuns++;
             }
         }
+
+        // is this the best place to do this ?
+        currentGameStatus.getPlatedRuns().clear();
 
         if (initialGameStatus.isHomeHalf() != currentGameStatus.isHomeHalf()) isClosed = true;
     }

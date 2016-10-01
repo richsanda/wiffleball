@@ -4,6 +4,7 @@ import w.whatevera.wiffleball.game.BaseStats;
 import w.whatevera.wiffleball.game.PitchingStats;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by rich on 9/23/16.
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 public class PitchingStatsImpl extends BaseStatsImpl<PitchingStats> implements PitchingStats {
 
     private static final int OUTS_PER_INNING = 3;
+    private static final int INNINGS_PER_GAME = 3;
 
     private int oneThirdInningsPitched = 0;
     private int appearances = 0;
@@ -25,7 +27,8 @@ public class PitchingStatsImpl extends BaseStatsImpl<PitchingStats> implements P
 
     @Override
     public BigDecimal getEarnedRunAverage() {
-        return null;
+        if (0 == oneThirdInningsPitched) return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+        return new BigDecimal(earnedRuns * OUTS_PER_INNING * INNINGS_PER_GAME).setScale(2, RoundingMode.HALF_UP).divide(new BigDecimal(oneThirdInningsPitched), RoundingMode.HALF_UP);
     }
 
     @Override
@@ -56,7 +59,7 @@ public class PitchingStatsImpl extends BaseStatsImpl<PitchingStats> implements P
 
     @Override
     public PitchingStats addEarnedRuns(int earnedRuns) {
-        earnedRuns += earnedRuns;
+        this.earnedRuns += earnedRuns;
         return this;
     }
 

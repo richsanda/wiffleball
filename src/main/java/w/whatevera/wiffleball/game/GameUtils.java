@@ -1,14 +1,14 @@
 package w.whatevera.wiffleball.game;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import w.whatevera.wiffleball.game.impl.GamePlayImpl;
-import w.whatevera.wiffleball.game.impl.GameStatsImpl;
-import w.whatevera.wiffleball.game.impl.GameStatusImpl;
-import w.whatevera.wiffleball.game.impl.TeamStatsImpl;
+import com.google.common.collect.Sets;
+import w.whatevera.wiffleball.game.impl.*;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by rich on 9/21/16.
@@ -20,6 +20,9 @@ public class GameUtils {
     }
 
     public static GameStatus applyPlayToGame(GameStatus gameStatus, GamePlayEvent event, Map<PlayerType, Player> players) {
+
+        // is this the best way to do this ?
+        gameStatus.getPlatedRuns().clear();
 
         GamePlay gamePlay = new GamePlayImpl(gameStatus);
 
@@ -164,14 +167,72 @@ public class GameUtils {
 
     public static GameStats calculateStats(Game game) {
 
-        Iterator<GameLogEntry> gameLog = game.getGameLog().iterator();
-
         TeamStats awayTeamStats = new TeamStatsImpl(game.getGameStatus().getAwayTeam());
         TeamStats homeTeamStats = new TeamStatsImpl(game.getGameStatus().getHomeTeam());
         GameStats result = new GameStatsImpl(awayTeamStats, homeTeamStats);
 
+        // iterate over the whole game for batting stats and most pitching stats
+        Iterator<GameLogEntry> gameLog = game.getGameLog().iterator();
         while (gameLog.hasNext()) {
             result = result.add(calculateStats(gameLog.next()));
+        }
+
+        List<PitchedInning> openPitchedInnings = Lists.newArrayList();
+        List<PitchedInning> closedPitchedInnings = Lists.newArrayList();
+
+        Player lastPitcher = null;
+        gameLog = game.getGameLog().iterator(); // reset gameLog for earned run calc
+
+        // iterate over the whole game again for earned run calculations
+        while (gameLog.hasNext()) {
+
+            GameLogEntry gameLogEntry = gameLog.next();
+            GamePlayEvent event = gameLogEntry.getGamePlayEvent();
+            Player player1 = gameLogEntry.getPlayer1();
+            Player player2 = gameLogEntry.getPlayer2();
+            GameStatus gameStatus = gameLogEntry.getGameStatus();
+            Player pitcher = gameStatus.getPitcher();
+
+            if (lastPitcher != pitcher) {
+                PitchedInning pitchedInning = new PitchedInningImpl(gameStatus);
+                openPitchedInnings.add(pitchedInning);
+            }
+
+            Set<PitchedInning> pitchedInningsToClose = Sets.newHashSet();
+            for (PitchedInning openPitchedInning : openPitchedInnings) {
+                openPitchedInning.apply(event, player1, player2);
+                if (openPitchedInning.isClosed()) {
+                    pitchedInningsToClose.add(openPitchedInning);
+                }
+            }
+
+            openPitchedInnings.removeAll(pitchedInningsToClose);
+            closedPitchedInnings.addAll(pitchedInningsToClose);
+
+            lastPitcher = pitcher;
+        }
+
+        Set<PitchedInning> allPitchedInnings = Sets.newHashSet();
+        allPitchedInnings.addAll(openPitchedInnings);
+        allPitchedInnings.addAll(closedPitchedInnings);
+
+        Map<Player, Integer> pitchersToEarnedRuns = Maps.newHashMap();
+
+        for (PitchedInning pitchedInning : allPitchedInnings) {
+            Player pitcher = pitchedInning.getPitcher();
+            int runs = pitchedInning.getRuns();
+            Integer previous = pitchersToEarnedRuns.get(pitcher);
+            pitchersToEarnedRuns.put(pitcher, null == previous ? runs : previous + runs);
+        }
+
+        Set<PlayerPitchingStats> allPlayerPitchingStats = Sets.newHashSet();
+        allPlayerPitchingStats.addAll(awayTeamStats.getPlayerPitchingStats());
+        allPlayerPitchingStats.addAll(homeTeamStats.getPlayerPitchingStats());
+
+        for (PlayerPitchingStats playerPitchingStats : allPlayerPitchingStats) {
+            Player pitcher = playerPitchingStats.getPlayer();
+            Integer earnedRuns = pitchersToEarnedRuns.get(pitcher);
+            if (null != earnedRuns) playerPitchingStats.getPitchingStats().addEarnedRuns(earnedRuns);
         }
 
         return result;
@@ -270,6 +331,13 @@ public class GameUtils {
                 break;
             case REPLACE_PLAYER:
                 break;
+        }
+
+        for (BaseRunner baseRunner : nextGameStatus.getPlatedRuns()) {
+            Player platedPitcher = baseRunner.getPitcher();
+            Player platedBatter = baseRunner.getRunner();
+            pitchingTeamStats.getPitchingStats(platedPitcher).addRuns(1);
+            battingTeamStats.getBattingStats(platedBatter).addRuns(1);
         }
 
         return result;
