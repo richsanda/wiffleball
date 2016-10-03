@@ -13,7 +13,7 @@ public interface GameSettings {
 
     //void removePlayer(Player player);
 
-    int getNumberOfPlayersPerTeam();
+    int getNumberOfFieldersPerTeam();
 
     int getNumberOfOutsPerInning();
 

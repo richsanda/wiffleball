@@ -39,19 +39,15 @@ public class GamePlayImpl implements GamePlay, GameStatus {
 
     public GamePlayImpl(GameSettings gameSettings, List<Player> awayTeam, List<Player> homeTeam) {
 
-        int numberOfPlayersPerTeam = gameSettings.getNumberOfPlayersPerTeam();
-
         assert null != awayTeam;
         assert null != homeTeam;
-        assert awayTeam.size() == numberOfPlayersPerTeam;
-        assert homeTeam.size() == numberOfPlayersPerTeam;
 
         this.gameSettings = gameSettings;
         this.awayTeam = awayTeam;
         this.homeTeam = homeTeam;
 
-        this.homePitcher = homeTeam.get(numberOfPlayersPerTeam - 1);
-        this.awayPitcher = awayTeam.get(numberOfPlayersPerTeam - 1);
+        this.homePitcher = homeTeam.get(homeTeam.size() - 1);
+        this.awayPitcher = awayTeam.get(awayTeam.size() - 1);
 
         this.numberOfInnings = gameSettings.getNumberOfInnings();
 
@@ -368,11 +364,11 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     }
 
     private void nextHomeBatter() {
-        homeBatterIndex = nextBatterIndex(homeBatterIndex);
+        homeBatterIndex = nextBatterIndex(homeBatterIndex, homeTeam.size());
     }
 
     private void nextAwayBatter() {
-        awayBatterIndex = nextBatterIndex(awayBatterIndex);
+        awayBatterIndex = nextBatterIndex(awayBatterIndex, awayTeam.size());
     }
 
     private void run() {
@@ -503,10 +499,10 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         }
     }
 
-    private int nextBatterIndex(int currentBatterIndex) {
+    private int nextBatterIndex(int currentBatterIndex, int numberOfPlayersPerTeam) {
 
         int nextBatterIndex = currentBatterIndex + 1;
-        return nextBatterIndex == gameSettings.getNumberOfPlayersPerTeam() ? 0 : nextBatterIndex;
+        return nextBatterIndex == numberOfPlayersPerTeam ? 0 : nextBatterIndex;
     }
 
     private boolean isFirstOccupied() {

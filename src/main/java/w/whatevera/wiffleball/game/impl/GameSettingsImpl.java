@@ -7,18 +7,18 @@ import w.whatevera.wiffleball.game.GameSettings;
  */
 public class GameSettingsImpl implements GameSettings {
 
-    private final int numberOfPlayersPerTeam;
+    private final int numberOfFieldersPerTeam;
     private final int numberOfOutsPerInning;
     private final int numberOfInnings;
 
-    public GameSettingsImpl(int numberOfPlayersPerTeam, int numberOfOutsPerInning, int numberOfInnings) {
-        this.numberOfPlayersPerTeam = numberOfPlayersPerTeam;
+    public GameSettingsImpl(int numberOfFieldersPerTeam, int numberOfOutsPerInning, int numberOfInnings) {
+        this.numberOfFieldersPerTeam = numberOfFieldersPerTeam;
         this.numberOfOutsPerInning = numberOfOutsPerInning;
         this.numberOfInnings = numberOfInnings;
     }
 
-    public int getNumberOfPlayersPerTeam() {
-        return numberOfPlayersPerTeam;
+    public int getNumberOfFieldersPerTeam() {
+        return numberOfFieldersPerTeam;
     }
 
     public int getNumberOfOutsPerInning() {
