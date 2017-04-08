@@ -42,8 +42,7 @@ function actionsClick(e) {
 
 function actionsBehavior(root) {
 
-    $(root).unbind('click');
-    $(root).click(actionsClick);
+    $(root).on('click touchstart', actionsClick);
 
     return root
 }
