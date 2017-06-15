@@ -93,8 +93,8 @@ public class GameUtils {
                 case REPLACE_PLAYER:
                     gamePlay.replacePlayer(fielder, sub);
                     break;
-                //case SKIP:
-                //    gamePlay.skipBatter();
+                case SKIP:
+                    gamePlay.skipBatter();
                 default:
                     break;
             }

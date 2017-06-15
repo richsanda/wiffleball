@@ -332,6 +332,16 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         out();
     }
 
+    public void skipBatter() throws GameOverException {
+
+        checkIsGameOver();
+        nextBatter();
+    }
+
+    public void finalizeGame() {
+
+    }
+
     @Override
     public void replacePlayer(Player replacing, Player replacement) throws GameOverException {
 

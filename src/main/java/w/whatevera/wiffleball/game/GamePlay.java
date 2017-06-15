@@ -41,6 +41,10 @@ public interface GamePlay {
 
     void out() throws GameOverException;
 
+    void skipBatter() throws GameOverException;
+
+    void finalizeGame() throws GameOverException;
+
     void clearPitchersOfResponsibility();
 
     void replacePlayer(Player replacing, Player replacement) throws GameOverException;

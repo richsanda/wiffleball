@@ -24,5 +24,7 @@ public enum GamePlayEvent {
     DOUBLE_PLAY,
     OUT,
     UNDO,
+    SKIP,
+    FINALIZE,
     REPLACE_PLAYER;
 }

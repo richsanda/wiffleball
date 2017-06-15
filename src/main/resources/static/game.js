@@ -42,6 +42,7 @@ function showGameActions(gameId) {
             "<div class='action button walk' title='walk'>" + "BB" + "</div>" +
             "<div class='action button error error-reach' title='reach on error'>" + "E" + "</div>" +
             "<div class='action button error error-advance' title='advance on error'>" + "E+" + "</div>" +
+            "<div class='action button skip-batter' title='skip batter'>" + "s" + "</div>" +
             "<div class='action button get-stats' title='stats / summary'>" + "s/s" + "</div>" +
         "</div>" +
         "<div class='actions'>" +
@@ -52,6 +53,7 @@ function showGameActions(gameId) {
             "<div class='action button strikeout strikeout-swinging' title='strikeout swinging'>" + "K" + "</div>" +
             "<div class='action button strikeout strikeout-looking' title='strikeout looking'>" + "z" + "</div>" +
             "<div class='action button strikeout strikeout-both' title='strikeout swinging and looking'>" + "X" + "</div>" +
+            "<div class='action button finalize-game' title='confirm final'>" + "f" + "</div>" +
             "<div class='action button undo' title='undo'>" + "u" + "</div>" +
         "</div>"
     );
@@ -398,6 +400,9 @@ function actionsClick(e) {
         'doubleplay': function ($$) {
             doublePlay(gameId);
         },
+        'skip-batter': function ($$) {
+            skipBatter(gameId);
+        },
         'undo': function ($$) {
             undo(gameId);
         },
@@ -485,6 +490,10 @@ function undo(gameId) {
     updateGame(gameId, "UNDO");
 }
 
+function skipBatter(gameId) {
+    updateGame(gameId, "SKIP");
+}
+
 function changePitcher(pitcher) {
     $(pitcher).closest("div.team").find("div.player").addClass("set-pitcher button");
 }
@@ -514,6 +523,7 @@ function setPitcher(gameId, newPitcher) {
     GROUND_OUT,
     LINE_OUT,
     DOUBLE_PLAY,
+    SKIP,
     UNDO
  */
 
@@ -590,7 +600,8 @@ function mapEventText(text) {
     m.GROUND_OUT = "ground out";
     m.LINE_OUT = "line out";
     m.DOUBLE_PLAY = "double play !";
-    m.SET_PITCHER = "pitcher relieved..."
+    m.SET_PITCHER = "pitcher relieved...";
+    m.SKIP = "skipped";
 
     return text in m ? m[text] : text;
 }
