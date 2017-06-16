@@ -1,35 +1,41 @@
 package w.whatevera.wiffleball.domain;
 
-import w.whatevera.wiffleball.game.*;
-import w.whatevera.wiffleball.game.PitchingStats;
-import w.whatevera.wiffleball.game.Player;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * Created by rich on 6/16/17.
+ * Created by rich on 9/27/16.
  */
 @Entity
-public class PlayerPitchingStats implements w.whatevera.wiffleball.game.PlayerPitchingStats {
+public class PlayerPitchingStats {
 
     @Id
-    @GeneratedValue
-    private Long id;
+   	@GeneratedValue
+   	private Long id;
 
-    @Override
+    @ManyToOne
+    private final Player player;
+    @OneToOne
+    private final PitchingStats pitchingStats;
+
+    public PlayerPitchingStats(Player player, PitchingStats pitchingStats) {
+        this.player = player;
+        this.pitchingStats = pitchingStats;
+    }
+
     public Player getPlayer() {
-        return null;
+        return player;
     }
 
-    @Override
     public PitchingStats getPitchingStats() {
-        return null;
+        return pitchingStats;
     }
 
-    @Override
-    public w.whatevera.wiffleball.game.PlayerPitchingStats add(w.whatevera.wiffleball.game.PlayerPitchingStats pitchingStats) {
-        return null;
+    private PlayerPitchingStats add(PitchingStats pitchingStats) {
+        return new PlayerPitchingStats(player, this.pitchingStats.add(pitchingStats));
+    }
+
+    public PlayerPitchingStats add(PlayerPitchingStats playerPitchingStats) {
+        // TODO: check that playerPitchingStats.getPlayer().equals(player)
+        return add(playerPitchingStats.getPitchingStats());
     }
 }

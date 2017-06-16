@@ -3,7 +3,10 @@ package w.whatevera.wiffleball.game;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import w.whatevera.wiffleball.game.impl.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import w.whatevera.wiffleball.domain.*;
+import w.whatevera.wiffleball.domain.repository.*;
 
 import java.util.Iterator;
 import java.util.List;
@@ -13,18 +16,36 @@ import java.util.Set;
 /**
  * Created by rich on 9/21/16.
  */
+@Component
 public class GameUtils {
 
-    public static GameStatus applyPlayToGame(GameStatus gameStatus, GamePlayEvent event, Player player1, Player player2) {
+    private final PlayerRepository playerRepository;
+    private final GameRepository gameRepository;
+    private final GamePlayRepository gamePlayRepository;
+    private final GameSettingsRepository gameSettingsRepository;
+    private final GameStatusRepository gameStatusRepository;
+    private final BaseRunnerRepository baseRunnerRepository;
+
+    @Autowired
+    public GameUtils(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayRepository gamePlayRepository, GameSettingsRepository gameSettingsRepository, GameStatusRepository gameStatusRepository, BaseRunnerRepository baseRunnerRepository) {
+        this.playerRepository = playerRepository;
+        this.gameRepository = gameRepository;
+        this.gamePlayRepository = gamePlayRepository;
+        this.gameSettingsRepository = gameSettingsRepository;
+        this.gameStatusRepository = gameStatusRepository;
+        this.baseRunnerRepository = baseRunnerRepository;
+    }
+
+    public static GameStatus applyPlayToGame(IGameStatus gameStatus, GamePlayEvent event, Player player1, Player player2) {
         return applyPlayToGame(gameStatus, event, determinePlayerMap(event, player1, player2));
     }
 
-    public static GameStatus applyPlayToGame(GameStatus gameStatus, GamePlayEvent event, Map<PlayerType, Player> players) {
+    public static GameStatus applyPlayToGame(IGameStatus gameStatus, GamePlayEvent event, Map<PlayerType, Player> players) {
 
         // is this the best way to do this ?
         gameStatus.getPlatedRuns().clear();
 
-        GamePlay gamePlay = new GamePlayImpl(gameStatus);
+        GamePlay gamePlay = new GamePlay(gameStatus);
 
         Player pitcher = null;
         Player fielder = null;
@@ -102,7 +123,7 @@ public class GameUtils {
             // pass
         }
 
-        return new GameStatusImpl((GameStatus)gamePlay);
+        return new GameStatus(gamePlay);
     }
 
     private static Map<PlayerType, Player> determinePlayerMap(GamePlayEvent event, Player player1, Player player2) {
@@ -165,11 +186,11 @@ public class GameUtils {
         return result;
     }
 
-    public static GameStats calculateStats(Game game) {
+    public GameStats calculateStats(Game game) {
 
-        TeamStats awayTeamStats = new TeamStatsImpl(game.getGameStatus().getAwayTeam());
-        TeamStats homeTeamStats = new TeamStatsImpl(game.getGameStatus().getHomeTeam());
-        GameStats result = new GameStatsImpl(awayTeamStats, homeTeamStats);
+        TeamStats awayTeamStats = new TeamStats(game.getGameStatus().getAwayTeam());
+        TeamStats homeTeamStats = new TeamStats(game.getGameStatus().getHomeTeam());
+        GameStats result = new GameStats(awayTeamStats, homeTeamStats);
 
         // iterate over the whole game for batting stats and most pitching stats
         Iterator<GameLogEntry> gameLog = game.getGameLog().iterator();
@@ -190,11 +211,11 @@ public class GameUtils {
             GamePlayEvent event = gameLogEntry.getGamePlayEvent();
             Player player1 = gameLogEntry.getPlayer1();
             Player player2 = gameLogEntry.getPlayer2();
-            GameStatus gameStatus = gameLogEntry.getGameStatus();
+            IGameStatus gameStatus = gameLogEntry.getGameStatus();
             Player pitcher = gameStatus.getPitcher();
 
             if (lastPitcher != pitcher) {
-                PitchedInning pitchedInning = new PitchedInningImpl(gameStatus);
+                PitchedInning pitchedInning = new PitchedInning(gameStatus);
                 openPitchedInnings.add(pitchedInning);
             }
 
@@ -238,13 +259,13 @@ public class GameUtils {
         return result;
     }
 
-    public static GameStats calculateStats(GameLogEntry gameLogEntry) {
+    public GameStats calculateStats(GameLogEntry gameLogEntry) {
 
-        TeamStats awayTeamStats = new TeamStatsImpl(gameLogEntry.getGameStatus().getAwayTeam());
-        TeamStats homeTeamStats = new TeamStatsImpl(gameLogEntry.getGameStatus().getHomeTeam());
-        GameStats result = new GameStatsImpl(awayTeamStats, homeTeamStats);
+        TeamStats awayTeamStats = new TeamStats(gameLogEntry.getGameStatus().getAwayTeam());
+        TeamStats homeTeamStats = new TeamStats(gameLogEntry.getGameStatus().getHomeTeam());
+        GameStats result = new GameStats(awayTeamStats, homeTeamStats);
 
-        GameStatus gameStatus = gameLogEntry.getGameStatus();
+        IGameStatus gameStatus = gameLogEntry.getGameStatus();
         GamePlayEvent event = gameLogEntry.getGamePlayEvent();
         Player player1 = gameLogEntry.getPlayer1();
         Player player2 = gameLogEntry.getPlayer2();
@@ -254,7 +275,7 @@ public class GameUtils {
         Player batter = gameStatus.getBatter();
         Player pitcher = gameStatus.getPitcher();
 
-        GameStatus nextGameStatus = applyPlayToGame(gameStatus, event, player1, player2);
+        IGameStatus nextGameStatus = applyPlayToGame(gameStatus, event, player1, player2);
         
         int runs = isHomeHalf ? 
                 nextGameStatus.getHomeScore() - gameStatus.getHomeScore() :

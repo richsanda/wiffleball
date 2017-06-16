@@ -1,38 +1,47 @@
-package w.whatevera.wiffleball.game.impl;
+package w.whatevera.wiffleball.domain;
 
 import w.whatevera.wiffleball.game.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by rich on 9/23/16.
  */
-public class PitchedInningImpl implements PitchedInning {
+@Entity
+public class PitchedInning {
 
+    @Id
+   	@GeneratedValue
+   	private Long id;
+
+    @ManyToOne
     private GameStatus initialGameStatus;
+    @ManyToOne
     private GameStatus currentGameStatus;
     private boolean isPitcherDone = false;
     private boolean isClosed = false;
     private int earnedRuns = 0;
 
-    public PitchedInningImpl(GameStatus gameStatus) {
+    public PitchedInning(IGameStatus gameStatus) {
 
-        GamePlayImpl gamePlay = new GamePlayImpl(gameStatus);
+        GamePlay gamePlay = new GamePlay(gameStatus);
         gamePlay.clearPitchersOfResponsibility();
 
-        initialGameStatus = new GameStatusImpl(gamePlay);
-        currentGameStatus = new GameStatusImpl(gamePlay);
+        initialGameStatus = new GameStatus(gamePlay);
+        currentGameStatus = new GameStatus(gamePlay);
     }
 
-    @Override
-    public GameStatus getGameStatus() {
+    public IGameStatus getGameStatus() {
         return currentGameStatus;
     }
 
-    @Override
     public Player getPitcher() {
         return initialGameStatus.getPitcher();
     }
 
-    @Override
     public void apply(GamePlayEvent event, Player player1, Player player2) {
 
         if (isClosed) return;
@@ -68,12 +77,10 @@ public class PitchedInningImpl implements PitchedInning {
         if (initialGameStatus.isHomeHalf() != currentGameStatus.isHomeHalf()) isClosed = true;
     }
 
-    @Override
     public boolean isClosed() {
         return isClosed;
     }
 
-    @Override
     public int getRuns() {
         return earnedRuns;
     }

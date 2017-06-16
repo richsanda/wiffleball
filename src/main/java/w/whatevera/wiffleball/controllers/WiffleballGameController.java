@@ -5,14 +5,11 @@ import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import w.whatevera.wiffleball.domain.*;
-import w.whatevera.wiffleball.domain.repository.PlayerRepository;
+import w.whatevera.wiffleball.domain.GameSettings;
+import w.whatevera.wiffleball.domain.Player;
+import w.whatevera.wiffleball.domain.repository.*;
 import w.whatevera.wiffleball.game.*;
-import w.whatevera.wiffleball.game.Game;
 import w.whatevera.wiffleball.game.GamePlayEvent;
-import w.whatevera.wiffleball.game.Player;
-import w.whatevera.wiffleball.game.impl.GameImpl;
-import w.whatevera.wiffleball.game.impl.GameSettingsImpl;
-import w.whatevera.wiffleball.game.impl.PlayerImpl;
 
 import java.util.List;
 import java.util.Map;
@@ -24,23 +21,28 @@ import java.util.Map;
 public class WiffleballGameController {
 
     private final PlayerRepository playerRepository;
+    private final GameRepository gameRepository;
+    private final GamePlayRepository gamePlayRepository;
+    private final GameSettingsRepository gameSettingsRepository;
+    private final GameStatusRepository gameStatusRepository;
+    private final BaseRunnerRepository baseRunnerRepository;
+
+    private final GameUtils gameUtils;
 
     private static Map<String, Game> games = Maps.newHashMap();
 
     @Autowired
-    public WiffleballGameController(PlayerRepository playerRepository) {
+    public WiffleballGameController(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayRepository gamePlayRepository, GameSettingsRepository gameSettingsRepository, GameStatusRepository gameStatusRepository, BaseRunnerRepository baseRunnerRepository, GameUtils gameUtils) {
         this.playerRepository = playerRepository;
+        this.gameRepository = gameRepository;
+        this.gamePlayRepository = gamePlayRepository;
+        this.gameSettingsRepository = gameSettingsRepository;
+        this.gameStatusRepository = gameStatusRepository;
+        this.baseRunnerRepository = baseRunnerRepository;
+        this.gameUtils = gameUtils;
     }
 
-    @RequestMapping(value = "/w/game/demo", method= RequestMethod.GET, produces = "application/json")
-    public Game gameDemo() {
-
-        Game game = newDemoGame();
-        games.put(game.getId(), game);
-        return game;
-    }
-
-    @RequestMapping(value = "/w/game/new/{awayTeam}/{homeTeam}", method= RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/w/game/{awayTeam}/{homeTeam}", method= RequestMethod.POST, produces = "application/json")
     public Game newGame(@PathVariable("awayTeam")List<String> awayTeamPlayerNames,
                         @PathVariable("homeTeam")List<String> homeTeamPlayerNames) {
 
@@ -48,26 +50,58 @@ public class WiffleballGameController {
         List<Player> homeTeam = Lists.newArrayList();
 
         for (String playerName : awayTeamPlayerNames) {
-            Player player = new PlayerImpl(playerName);
+            Player player = findOrCreatePlayer(playerName);
             awayTeam.add(player);
         }
 
         for (String playerName : homeTeamPlayerNames) {
-            Player player = new PlayerImpl(playerName);
+            Player player = findOrCreatePlayer(playerName);
             homeTeam.add(player);
         }
 
-        GameSettings gameSettings = new GameSettingsImpl(awayTeam.size(), 3, 3);
-        Game game = new GameImpl(gameSettings, awayTeam, homeTeam);
-        games.put(game.getId(), game);
+        Player awayPitcher = awayTeam.get(awayTeam.size() - 1);
+        Player homePitcher = homeTeam.get(homeTeam.size() - 1);
+
+        GameSettings gameSettings = new GameSettings(awayTeam.size(), 3, 3);
+        gameSettingsRepository.save(gameSettings);
+//
+//        GamePlayImpl gamePlay = new GamePlayImpl(gameSettings, awayTeam, homeTeam);
+////        gamePlay.setGameSettings(gameSettings);
+////        gamePlay.setHomeTeam(homeTeam);
+////        gamePlay.setAwayTeam(awayTeam);
+////        gamePlay.setHomePitcher(homePitcher);
+////        gamePlay.setAwayPitcher(awayPitcher);
+////        gamePlay.setNumberOfInnings(gameSettings.numberOfInnings());
+//        gamePlayRepository.save(gamePlay);
+//
+//        GameStatusImpl gameStatus = new GameStatusImpl(game);
+//        gameStatus.setGameSettings(gameSettings);
+//        gameStatus.setAwayTeam(awayTeam);
+//        gameStatus.setHomeTeam(homeTeam);
+//        gameStatus.setHomePitch(homePitcher);
+//        gameStatus.setAwayPitch(awayPitcher);
+//        gameStatus.setNumberOfInnings(gameSettings.numberOfInnings());
+//        gameStatusRepository.save(gameStatus);
+
+        Game game = new Game(gameSettings, awayTeam, homeTeam);
+        gameStatusRepository.save(game.getGameStatus());
+        gameRepository.save(game);
+
         return game;
+    }
+
+    private Player findOrCreatePlayer(String name) {
+        Player player = playerRepository.findByName(name);
+        if (null == player) {
+            player = createAndSavePlayer(name);
+        }
+        return player;
     }
 
     @RequestMapping(value = "/w/game/{game}", method= RequestMethod.GET, produces = "application/json")
     public Game game(@PathVariable("game") String gameId) {
 
-        Game game = games.get(gameId);
-        return game;
+        return gameRepository.findOne(Long.valueOf(gameId));
     }
 
     @RequestMapping(value = "/w/games", method= RequestMethod.GET, produces = "application/json")
@@ -84,13 +118,17 @@ public class WiffleballGameController {
 
     @RequestMapping(value = "/w/game/{game}/play/{play}", method= RequestMethod.GET, produces = "application/json")
     public Game gameEvent(@PathVariable("game") String gameId,
-                                @PathVariable("play") GamePlayEvent event,
-                                @RequestParam(required = false) String player1,
-                                @RequestParam(required = false) String player2) {
+                          @PathVariable("play") GamePlayEvent event,
+                          @RequestParam(required = false) String player1,
+                          @RequestParam(required = false) String player2) {
 
-        Game game = games.get(gameId);
+        Game game = gameRepository.findOne(Long.valueOf(gameId));
         Player player1Player = GameUtils.findPlayer(game, player1);
-        game.apply(event, player1Player);
+        apply(game, event, player1Player);
+        gameStatusRepository.save(game.getGameStatus());
+        baseRunnerRepository.save(game.getGameStatus().allBaseRunners());
+        gameRepository.save(game);
+
         return game;
     }
 
@@ -98,14 +136,16 @@ public class WiffleballGameController {
     public GameStats gameStats(@PathVariable("game") String gameId) {
 
         Game game = games.get(gameId);
-        return GameUtils.calculateStats(game);
+        return gameUtils.calculateStats(game);
     }
 
     @RequestMapping(value = "/w/player", method= RequestMethod.POST, produces = "application/json")
-    public Player addPlayer(@RequestParam("name") String name) {
+    public Player createPlayer(@RequestParam("name") String name) {
+        return createAndSavePlayer(name);
+    }
 
-        w.whatevera.wiffleball.domain.Player player = new w.whatevera.wiffleball.domain.Player();
-        player.setName(name);
+    private Player createAndSavePlayer(String name) {
+        Player player = new Player(name);
         playerRepository.save(player);
         return player;
     }
@@ -116,21 +156,25 @@ public class WiffleballGameController {
         return playerRepository.findByName(name);
     }
 
-    private static Game newDemoGame() {
+    public IGameStatus apply(Game game, GamePlayEvent event, Player player) {
+        return apply(game, event, player, null);
+    }
 
-        Player bill = new PlayerImpl("bill");
-        Player justin = new PlayerImpl("justin");
-        Player john = new PlayerImpl("john");
-        Player jim = new PlayerImpl("jim");
-        Player shawn = new PlayerImpl("shawn");
-        Player rich = new PlayerImpl("rich");
+    public IGameStatus apply(Game game, GamePlayEvent event, Player player1, Player player2) {
 
-        List<Player> awayTeam = Lists.newArrayList(bill, justin, john);
-        List<Player> homeTeam = Lists.newArrayList(jim, shawn, rich);
+        if (GamePlayEvent.UNDO.equals(event)) {
 
-        GameSettings gameSettings = new GameSettingsImpl(3, 3, 3);
-        Game game = new GameImpl(gameSettings, awayTeam, homeTeam);
+            game.undo();
 
-        return game;
+        } else if (!game.getGameStatus().isOver()) {
+
+            GameStatus gameStatus = game.getGameStatus();
+            GameStatus nextGameStatus = GameUtils.applyPlayToGame(gameStatus, event, player1, player2);
+            game.setGameStatus(nextGameStatus);
+            GameLogEntry entry = new GameLogEntry(gameStatus, nextGameStatus, event, player1, player2);
+            game.getGameLog().add(entry);
+        }
+
+        return game.getGameStatus();
     }
 }

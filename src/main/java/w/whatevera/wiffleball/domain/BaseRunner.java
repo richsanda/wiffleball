@@ -1,28 +1,35 @@
 package w.whatevera.wiffleball.domain;
 
-import w.whatevera.wiffleball.game.Player;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
- * Created by rich on 6/16/17.
+ * Created by rich on 9/23/16.
  */
 @Entity
-public class BaseRunner implements w.whatevera.wiffleball.game.BaseRunner {
+public class BaseRunner {
 
     @Id
-    @GeneratedValue
-    private Long id;
+   	@GeneratedValue
+   	private Long id;
 
-    @Override
-    public Player getRunner() {
-        return null;
+    @ManyToOne
+    private Player runner;
+    @ManyToOne
+    private Player pitcher;
+
+    public BaseRunner(Player runner, Player pitcher) {
+        this.runner = runner;
+        this.pitcher = pitcher;
     }
 
-    @Override
+    public Player getRunner() {
+        return runner;
+    }
+
     public Player getPitcher() {
-        return null;
+        return pitcher;
     }
 }

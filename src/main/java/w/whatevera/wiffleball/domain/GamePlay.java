@@ -1,27 +1,44 @@
-package w.whatevera.wiffleball.game.impl;
+package w.whatevera.wiffleball.domain;
 
 import com.google.common.collect.Lists;
 import w.whatevera.wiffleball.game.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by rich on 9/1/16.
  */
-public class GamePlayImpl implements GamePlay, GameStatus {
+@Entity
+public class GamePlay implements IGameStatus {
 
+    @Id
+   	@GeneratedValue
+   	private Long id;
+
+    @OneToOne
     private GameSettings gameSettings;
 
+    @ManyToMany
     private List<Player> awayTeam;
+    @ManyToMany
     private List<Player> homeTeam;
 
+    @ManyToOne
     private Player awayPitcher;
+    @ManyToOne
     private Player homePitcher;
 
+    @ManyToOne
     private Player batter;
+
+    @OneToOne
     private BaseRunner onFirst;
+    @OneToOne
     private BaseRunner onSecond;
+    @OneToOne
     private BaseRunner onThird;
+    @OneToMany
     private List<BaseRunner> platedRuns = Lists.newArrayList();
 
     private int awayBatterIndex = 0;
@@ -37,7 +54,9 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     private int outs = 0;
     private int inning = 0;
 
-    public GamePlayImpl(GameSettings gameSettings, List<Player> awayTeam, List<Player> homeTeam) {
+    public GamePlay() {}
+
+    public GamePlay(GameSettings gameSettings, List<Player> awayTeam, List<Player> homeTeam) {
 
         assert null != awayTeam;
         assert null != homeTeam;
@@ -54,7 +73,7 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         nextHalfInning();
     }
 
-    public GamePlayImpl(GameStatus status) {
+    public GamePlay(IGameStatus status) {
 
         gameSettings = status.getGameSettings();
 
@@ -198,12 +217,10 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         return homeTeamWins || awayTeamWins;
     }
 
-    @Override
-    public GameStatus status() {
+    public IGameStatus status() {
         return this;
     }
 
-    @Override
     public void setPitcher(Player pitcher) throws GameOverException {
 
         // allow null to aid in calculating era
@@ -218,7 +235,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         }
     }
 
-    @Override
     public void walk() throws GameOverException {
 
         checkIsGameOver();
@@ -226,7 +242,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         nextBatter();
     }
 
-    @Override
     public void hitSingle() throws GameOverException {
 
         checkIsGameOver();
@@ -234,7 +249,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         nextBatter();
     }
 
-    @Override
     public void hitDouble() throws GameOverException {
 
         checkIsGameOver();
@@ -242,7 +256,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         nextBatter();
     }
 
-    @Override
     public void hitTriple() throws GameOverException {
 
         checkIsGameOver();
@@ -250,7 +263,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         nextBatter();
     }
 
-    @Override
     public void hitHomeRun() throws GameOverException {
 
         checkIsGameOver();
@@ -258,7 +270,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         nextBatter();
     }
 
-    @Override
     public void errorReach(Player fielder) throws GameOverException {
 
         checkIsGameOver();
@@ -266,14 +277,12 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         nextBatter();
     }
 
-    @Override
     public void errorAdvance(Player fielder) throws GameOverException {
 
         checkIsGameOver();
         oneEqualBaseKeepBatter();
     }
 
-    @Override
     public void strikeoutSwinging() throws GameOverException {
 
         checkIsGameOver();
@@ -281,7 +290,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         out();
     }
 
-    @Override
     public void strikeoutLooking() throws GameOverException {
 
         checkIsGameOver();
@@ -289,7 +297,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         out();
     }
 
-    @Override
     public void strikeoutSwingingAndLooking() throws GameOverException {
 
         checkIsGameOver();
@@ -297,7 +304,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         out();
     }
 
-    @Override
     public void flyOut(Player fielder) throws GameOverException {
 
         checkIsGameOver();
@@ -305,7 +311,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         out();
     }
 
-    @Override
     public void groundOut(Player fielder) throws GameOverException {
 
         checkIsGameOver();
@@ -313,7 +318,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         out();
     }
 
-    @Override
     public void lineOut(Player fielder) throws GameOverException {
 
         checkIsGameOver();
@@ -321,7 +325,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         out();
     }
 
-    @Override
     public void doublePlay(Player fielder) throws GameOverException {
 
         checkIsGameOver();
@@ -342,7 +345,6 @@ public class GamePlayImpl implements GamePlay, GameStatus {
 
     }
 
-    @Override
     public void replacePlayer(Player replacing, Player replacement) throws GameOverException {
 
         checkIsGameOver();
@@ -430,7 +432,7 @@ public class GamePlayImpl implements GamePlay, GameStatus {
         }
 
         if (null != batter) {
-            onFirst = new BaseRunnerImpl(batter, getPitcher());
+            onFirst = new BaseRunner(batter, getPitcher());
             batter = null;
         }
     }
@@ -538,13 +540,13 @@ public class GamePlayImpl implements GamePlay, GameStatus {
     // for use in calculating earned run average
     public void clearPitchersOfResponsibility() {
         if (null != onFirst) {
-            onFirst = new BaseRunnerImpl(onFirst.getRunner(), null);
+            onFirst = new BaseRunner(onFirst.getRunner(), null);
         }
         if (null != onSecond) {
-            onSecond = new BaseRunnerImpl(onSecond.getRunner(), null);
+            onSecond = new BaseRunner(onSecond.getRunner(), null);
         }
         if (null != onThird) {
-            onThird = new BaseRunnerImpl(onThird.getRunner(), null);
+            onThird = new BaseRunner(onThird.getRunner(), null);
         }
         platedRuns.clear();
     }

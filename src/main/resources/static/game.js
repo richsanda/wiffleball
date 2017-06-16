@@ -13,19 +13,20 @@ function pageBehavior () {
     if (gameid) {
         url += gameid
     } else if (awayteam && hometeam) {
-        url += "new/" + awayteam + "/" + hometeam;
+        url += awayteam + "/" + hometeam;
     }
 
     $.ajax({
         url: url,
+        type: "post",
         dataType: "json"
     }).success(function (data) {
 
-        $('#actions').append(showGameActions(data.id));
+        $('#actions').append(showGameActions(data.key));
         $('#status').append(buildGameStatus(data.gameStatus));
         $('#summary').append(buildGameSummary(data.gameSummary))
 
-        window.history.pushState("", "", "/game.html?gameid=" + data.id);
+        window.history.pushState("", "", "/game.html?gameid=" + data.key);
     });
 }
 

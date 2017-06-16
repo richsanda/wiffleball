@@ -1,45 +1,56 @@
 package w.whatevera.wiffleball.domain;
 
-import w.whatevera.wiffleball.game.GamePlayEvent;
-import w.whatevera.wiffleball.game.GameStatus;
-import w.whatevera.wiffleball.game.Player;
+import w.whatevera.wiffleball.game.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * Created by rich on 6/16/17.
+ * Created by rich on 9/23/16.
  */
 @Entity
-public class GameLogEntry implements w.whatevera.wiffleball.game.GameLogEntry {
+public class GameLogEntry {
 
     @Id
-    @GeneratedValue
-    private Long id;
+   	@GeneratedValue
+   	private Long id;
 
-    @Override
+    @OneToOne
+    private GameStatus gameStatus;
+    @OneToOne
+    private GameStatus nextGameStatus;
+    private GamePlayEvent event;
+    @ManyToOne
+    private Player player1;
+    @ManyToOne
+    private Player player2;
+
+    public GameLogEntry() {}
+
+    public GameLogEntry(GameStatus gameStatus, GameStatus nextGameStatus, GamePlayEvent event, Player player1, Player player2) {
+        this.gameStatus = gameStatus;
+        this.nextGameStatus = nextGameStatus;
+        this.event = event;
+        this.player1 = player1;
+        this.player2 = player2;
+    }
+
     public GameStatus getGameStatus() {
-        return null;
+        return gameStatus;
     }
 
-    @Override
-    public GameStatus getNextGameStatus() {
-        return null;
+    public IGameStatus getNextGameStatus() {
+        return nextGameStatus;
     }
 
-    @Override
     public GamePlayEvent getGamePlayEvent() {
-        return null;
+        return event;
     }
 
-    @Override
     public Player getPlayer1() {
-        return null;
+        return player1;
     }
 
-    @Override
     public Player getPlayer2() {
-        return null;
+        return player2;
     }
 }

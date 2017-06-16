@@ -1,49 +1,67 @@
-package w.whatevera.wiffleball.game.impl;
+package w.whatevera.wiffleball.domain;
 
+import com.google.common.collect.Lists;
 import w.whatevera.wiffleball.game.*;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by rich on 9/4/16.
  */
-public class GameStatusImpl implements GameStatus {
+@Entity
+public class GameStatus implements IGameStatus {
 
-    final private GameSettings gameSettings;
+    @Id
+   	@GeneratedValue
+   	private Long id;
 
-    final private List<Player> awayTeam;
-    final private List<Player> homeTeam;
+    @ManyToOne
+    private GameSettings gameSettings;
 
-    final private Player awayPitcher;
-    final private Player homePitcher;
+    @ManyToMany
+    private List<Player> away;
+    @ManyToMany
+    private List<Player> home;
 
-    final private BaseRunner onFirst;
-    final private BaseRunner onSecond;
-    final private BaseRunner onThird;
-    final private List<BaseRunner> platedRuns;
+    @ManyToOne
+    private Player awayPitch;
+    @ManyToOne
+    private Player homePitch;
 
-    final private int awayBatterIndex;
-    final private int homeBatterIndex;
+    @OneToOne
+    private BaseRunner onFirst;
+    @OneToOne
+    private BaseRunner onSecond;
+    @OneToOne
+    private BaseRunner onThird;
+    @OneToMany
+    private List<BaseRunner> platedRuns;
 
-    final private int awayScore;
-    final private int homeScore;
+    private int awayBatterIndex;
+    private int homeBatterIndex;
 
-    final private boolean isHomeHalf;
+    private int awayScore;
+    private int homeScore;
 
-    final private int outs;
-    final private int inning;
+    private boolean isHomeHalf;
 
-    final private int numberOfInnings;
+    private int outs;
+    private int inning;
 
-    public GameStatusImpl(GameStatus status) {
+    private int numberOfInnings;
+    
+    public GameStatus() {}
+
+    public GameStatus(IGameStatus status) {
 
         gameSettings = status.getGameSettings();
 
-        awayTeam = status.getAwayTeam();
-        homeTeam = status.getHomeTeam();
+        away = status.getAwayTeam();
+        home = status.getHomeTeam();
 
-        awayPitcher = status.getAwayPitcher();
-        homePitcher = status.getHomePitcher();
+        awayPitch = status.getAwayPitcher();
+        homePitch = status.getHomePitcher();
 
         onFirst = status.getOnFirst();
         onSecond = status.getOnSecond();
@@ -69,11 +87,11 @@ public class GameStatusImpl implements GameStatus {
     }
 
     public List<Player> getAwayTeam() {
-        return awayTeam;
+        return away;
     }
 
     public List<Player> getHomeTeam() {
-        return homeTeam;
+        return home;
     }
 
     public Player getBatter() {
@@ -81,11 +99,11 @@ public class GameStatusImpl implements GameStatus {
     }
 
     public Player getAwayBatter() {
-        return awayTeam.get(awayBatterIndex);
+        return away.get(awayBatterIndex);
     }
 
     public Player getHomeBatter() {
-        return homeTeam.get(homeBatterIndex);
+        return home.get(homeBatterIndex);
     }
 
     public int getAwayBatterIndex() {
@@ -97,15 +115,15 @@ public class GameStatusImpl implements GameStatus {
     }
 
     public Player getPitcher() {
-        return isHomeHalf ? awayPitcher : homePitcher;
+        return isHomeHalf ? awayPitch : homePitch;
     }
 
     public Player getAwayPitcher() {
-        return awayPitcher;
+        return awayPitch;
     }
 
     public Player getHomePitcher() {
-        return homePitcher;
+        return homePitch;
     }
 
     public BaseRunner getOnFirst() {
@@ -154,5 +172,15 @@ public class GameStatusImpl implements GameStatus {
         boolean awayTeamWins = inning > numberOfInnings && !isHomeHalf && awayScore > homeScore;
 
         return homeTeamWins || awayTeamWins;
+    }
+
+    @Transient
+    public List<BaseRunner> allBaseRunners() {
+        List<BaseRunner> result = Lists.newArrayList();
+        if (null != onFirst) result.add(onFirst);
+        if (null != onSecond) result.add(onSecond);
+        if (null != onThird) result.add(onThird);
+        if (null != platedRuns) result.addAll(platedRuns);
+        return result;
     }
 }

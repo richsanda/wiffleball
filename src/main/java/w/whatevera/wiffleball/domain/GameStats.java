@@ -1,34 +1,43 @@
-package w.whatevera.wiffleball.game.impl;
+package w.whatevera.wiffleball.domain;
 
 import w.whatevera.wiffleball.game.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * Created by rich on 9/23/16.
  */
-public class GameStatsImpl implements GameStats {
+@Entity
+public class GameStats {
 
+    @Id
+   	@GeneratedValue
+   	private Long id;
+
+    @OneToOne
     private TeamStats awayTeamStats;
+    @OneToOne
     private TeamStats homeTeamStats;
 
-    public GameStatsImpl(TeamStats awayTeamStats, TeamStats homeTeamStats) {
+    public GameStats(TeamStats awayTeamStats, TeamStats homeTeamStats) {
         this.awayTeamStats = awayTeamStats;
         this.homeTeamStats = homeTeamStats;
     }
 
-    @Override
     public TeamStats getAwayTeamStats() {
         return awayTeamStats;
     }
 
-    @Override
     public TeamStats getHomeTeamStats() {
         return homeTeamStats;
     }
 
-    @Override
     public GameStats add(GameStats gameStats) {
 
-        return new GameStatsImpl(
+        return new GameStats(
                 awayTeamStats.add(gameStats.getAwayTeamStats()),
                 homeTeamStats.add(gameStats.getHomeTeamStats()));
     }

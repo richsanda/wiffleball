@@ -1,17 +1,26 @@
-package w.whatevera.wiffleball.game.impl;
+package w.whatevera.wiffleball.domain;
 
-import w.whatevera.wiffleball.game.GameSettings;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by rich on 9/4/16.
  */
-public class GameSettingsImpl implements GameSettings {
+@Entity
+public class GameSettings {
 
-    private final int numberOfFieldersPerTeam;
-    private final int numberOfOutsPerInning;
-    private final int numberOfInnings;
+    @Id
+   	@GeneratedValue
+   	private Long id;
 
-    public GameSettingsImpl(int numberOfFieldersPerTeam, int numberOfOutsPerInning, int numberOfInnings) {
+    private int numberOfFieldersPerTeam;
+    private int numberOfOutsPerInning;
+    private int numberOfInnings;
+
+    public GameSettings() {}
+
+    public GameSettings(int numberOfFieldersPerTeam, int numberOfOutsPerInning, int numberOfInnings) {
         this.numberOfFieldersPerTeam = numberOfFieldersPerTeam;
         this.numberOfOutsPerInning = numberOfOutsPerInning;
         this.numberOfInnings = numberOfInnings;

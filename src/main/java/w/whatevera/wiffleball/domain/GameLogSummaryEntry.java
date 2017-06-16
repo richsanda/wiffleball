@@ -1,17 +1,32 @@
-package w.whatevera.wiffleball.game.impl;
+package w.whatevera.wiffleball.domain;
 
 import w.whatevera.wiffleball.game.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by rich on 9/24/16.
  */
-public class GameLogSummaryEntryImpl implements GameLogSummaryEntry {
+@Entity
+public class GameLogSummaryEntry {
+
+    @Id
+   	@GeneratedValue
+   	private Long id;
 
     private GamePlayEvent gamePlayEvent;
+
+    @ManyToOne
     private Player player1;
+    @ManyToOne
     private Player player2;
 
+    @ManyToOne
     private Player pitcher;
+    @ManyToOne
     private Player batter;
 
     private int awayScore;
@@ -19,14 +34,14 @@ public class GameLogSummaryEntryImpl implements GameLogSummaryEntry {
     private boolean isHomeHalf;
     private boolean isScoreChange;
 
-    public GameLogSummaryEntryImpl(GameLogEntry gameLogEntry) {
+    public GameLogSummaryEntry(GameLogEntry gameLogEntry) {
 
         this.gamePlayEvent = gameLogEntry.getGamePlayEvent();
         this.player1 = gameLogEntry.getPlayer1();
         this.player2 = gameLogEntry.getPlayer2();
 
-        GameStatus gameStatus = gameLogEntry.getGameStatus();
-        GameStatus nextGameStatus = gameLogEntry.getNextGameStatus();
+        IGameStatus gameStatus = gameLogEntry.getGameStatus();
+        IGameStatus nextGameStatus = gameLogEntry.getNextGameStatus();
 
         this.pitcher = gameStatus.getPitcher();
         this.batter = gameStatus.getBatter();
@@ -38,47 +53,47 @@ public class GameLogSummaryEntryImpl implements GameLogSummaryEntry {
                 gameStatus.getHomeScore() != nextGameStatus.getHomeScore();
     }
 
-    @Override
+    
     public GamePlayEvent getGamePlayEvent() {
         return gamePlayEvent;
     }
 
-    @Override
+    
     public Player getPlayer1() {
         return player1;
     }
 
-    @Override
+    
     public Player getPlayer2() {
         return player2;
     }
 
-    @Override
+    
     public Player getPitcher() {
         return pitcher;
     }
 
-    @Override
+    
     public Player getBatter() {
         return batter;
     }
 
-    @Override
+    
     public int getAwayScore() {
         return awayScore;
     }
 
-    @Override
+    
     public int getHomeScore() {
         return homeScore;
     }
 
-    @Override
+    
     public boolean isHomeHalf() {
         return isHomeHalf;
     }
 
-    @Override
+    
     public boolean isScoreChange() {
         return isScoreChange;
     }

@@ -1,11 +1,16 @@
 package w.whatevera.wiffleball.game;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import w.whatevera.wiffleball.domain.BaseRunner;
+import w.whatevera.wiffleball.domain.GameSettings;
+import w.whatevera.wiffleball.domain.Player;
+
 import java.util.List;
 
 /**
  * Created by rich on 9/4/16.
  */
-public interface GameStatus {
+public interface IGameStatus {
 
     // game info
 

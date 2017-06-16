@@ -4,12 +4,10 @@ import com.google.common.collect.Lists;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import w.whatevera.wiffleball.domain.GamePlay;
+import w.whatevera.wiffleball.domain.GameSettings;
+import w.whatevera.wiffleball.domain.Player;
 import w.whatevera.wiffleball.game.GameOverException;
-import w.whatevera.wiffleball.game.GameSettings;
-import w.whatevera.wiffleball.game.Player;
-import w.whatevera.wiffleball.game.impl.GamePlayImpl;
-import w.whatevera.wiffleball.game.impl.GameSettingsImpl;
-import w.whatevera.wiffleball.game.impl.PlayerImpl;
 
 import java.util.List;
 import java.util.Random;
@@ -43,18 +41,18 @@ public class WiffleballApplicationTest
      */
     public void testApp() {
 
-        Player bill = new PlayerImpl("bill");
-        Player justin = new PlayerImpl("justin");
-        Player john = new PlayerImpl("john");
-        Player jim = new PlayerImpl("jim");
-        Player shawn = new PlayerImpl("shawn");
-        Player rich = new PlayerImpl("rich");
+        Player bill = new Player("bill");
+        Player justin = new Player("justin");
+        Player john = new Player("john");
+        Player jim = new Player("jim");
+        Player shawn = new Player("shawn");
+        Player rich = new Player("rich");
 
         List<Player> awayTeam = Lists.newArrayList(bill, justin, john);
         List<Player> homeTeam = Lists.newArrayList(jim, shawn, rich);
 
-        GameSettings gameSettings = new GameSettingsImpl(3, 3, 3);
-        GamePlayImpl game = new GamePlayImpl(gameSettings, awayTeam, homeTeam);
+        GameSettings gameSettings = new GameSettings(3, 3, 3);
+        GamePlay game = new GamePlay(gameSettings, awayTeam, homeTeam);
 
         try {
 

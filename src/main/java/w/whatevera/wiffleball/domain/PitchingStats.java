@@ -4,229 +4,106 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
- * Created by rich on 6/16/17.
+ * Created by rich on 9/23/16.
  */
 @Entity
-public class PitchingStats implements w.whatevera.wiffleball.game.PitchingStats {
+public class PitchingStats extends BaseStats<PitchingStats> {
 
     @Id
-    @GeneratedValue
-    private Long id;
+   	@GeneratedValue
+   	private Long id;
 
-    @Override
-    public int getGames() {
-        return 0;
-    }
+    private static final int OUTS_PER_INNING = 3;
+    private static final int INNINGS_PER_GAME = 3;
 
-    @Override
-    public int getPlateAppearances() {
-        return 0;
-    }
+    private static final BigDecimal MAX_ERA = new BigDecimal(99.99).setScale(2, RoundingMode.HALF_UP);
 
-    @Override
-    public int getAtBats() {
-        return 0;
-    }
+    private int oneThirdInningsPitched = 0;
+    private int appearances = 0;
+    private int wins = 0;
+    private int losses = 0;
+    private int earnedRuns = 0;
 
-    @Override
-    public int getWalks() {
-        return 0;
-    }
-
-    @Override
-    public int getHits() {
-        return 0;
-    }
-
-    @Override
-    public int getSingles() {
-        return 0;
-    }
-
-    @Override
-    public int getDoubles() {
-        return 0;
-    }
-
-    @Override
-    public int getTriples() {
-        return 0;
-    }
-
-    @Override
-    public int getHomeRuns() {
-        return 0;
-    }
-
-    @Override
-    public int getExtraBaseHits() {
-        return 0;
-    }
-
-    @Override
-    public int getTotalBases() {
-        return 0;
-    }
-
-    @Override
-    public int getStrikeouts() {
-        return 0;
-    }
-
-    @Override
-    public BigDecimal getBattingAverage() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getSluggingPercentage() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getOnBasePercentage() {
-        return null;
-    }
-
-    @Override
-    public BigDecimal getOnBasePlusSlugging() {
-        return null;
-    }
-
-    @Override
-    public int getRuns() {
-        return 0;
-    }
-
-    @Override
-    public int getRunsBattedIn() {
-        return 0;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addGame() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addPlateAppearance() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addAtBat() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addWalk() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addHit() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addDouble() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addTriple() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addHomeRun() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addStrikeout() {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addRuns(int runs) {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addRunsBattedIn(int runsBattedIn) {
-        return null;
-    }
-
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats add(w.whatevera.wiffleball.game.PitchingStats addition) {
-        return null;
-    }
-
-    @Override
     public int getEarnedRuns() {
-        return 0;
+        return earnedRuns;
     }
 
-    @Override
     public BigDecimal getEarnedRunAverage() {
-        return null;
+        if (earnedRuns == 0) {
+            return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+        } else if (0 == oneThirdInningsPitched) {
+            return MAX_ERA;
+        }
+        return new BigDecimal(earnedRuns * OUTS_PER_INNING * INNINGS_PER_GAME)
+                .setScale(2, RoundingMode.HALF_UP)
+                .divide(new BigDecimal(oneThirdInningsPitched), RoundingMode.HALF_UP)
+                .min(MAX_ERA);
     }
 
-    @Override
-    public int getOneThirdInningsPitched() {
-        return 0;
-    }
-
-    @Override
     public int getInningsPitched() {
-        return 0;
+
+        return oneThirdInningsPitched / OUTS_PER_INNING;
     }
 
-    @Override
     public int getInningsPitchedRemainder() {
-        return 0;
+
+        return oneThirdInningsPitched % OUTS_PER_INNING;
     }
 
-    @Override
+    public int getOneThirdInningsPitched() {
+        return oneThirdInningsPitched;
+    }
+
     public int getWins() {
-        return 0;
+        return wins;
     }
 
-    @Override
     public int getLosses() {
-        return 0;
+        return losses;
     }
 
-    @Override
     public int getAppearances() {
-        return 0;
+        return appearances;
     }
 
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addEarnedRuns(int runs) {
+    public PitchingStats addEarnedRuns(int earnedRuns) {
+        this.earnedRuns += earnedRuns;
+        return this;
+    }
+
+    public PitchingStats addOneThirdInning() {
+        oneThirdInningsPitched++;
+        return this;
+    }
+
+    public PitchingStats addWin() {
+        wins++;
+        return this;
+    }
+
+    public PitchingStats addLoss() {
+        losses++;
+        return this;
+    }
+
+    public PitchingStats addAppearance() {
+        appearances++;
         return null;
     }
 
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addOneThirdInning() {
-        return null;
-    }
+    public PitchingStats add(PitchingStats stats) {
 
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addWin() {
-        return null;
-    }
+        super.add((BaseStats)stats);
 
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addLoss() {
-        return null;
-    }
+        oneThirdInningsPitched += stats.getOneThirdInningsPitched();
+        appearances += stats.getAppearances();
+        wins += stats.getWins();
+        losses += stats.getLosses();
+        earnedRuns += stats.getEarnedRuns();
 
-    @Override
-    public w.whatevera.wiffleball.game.PitchingStats addAppearance() {
-        return null;
+        return this;
     }
 }

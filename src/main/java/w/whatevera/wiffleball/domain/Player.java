@@ -5,23 +5,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * Created by rich on 6/16/17.
+ * Created by rich on 9/9/16.
  */
 @Entity
-public class Player implements w.whatevera.wiffleball.game.Player {
+public class Player {
 
     @Id
-    @GeneratedValue
-    private Long id;
+   	@GeneratedValue
+   	private Long id;
 
     private String name;
 
-    @Override
+    public Player() {}
+
+    public Player(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return name.equals(((Player)o).getName());
     }
 }
