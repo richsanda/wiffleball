@@ -2,8 +2,14 @@ package w.whatevera.wiffleball.controllers;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import w.whatevera.wiffleball.domain.*;
+import w.whatevera.wiffleball.domain.repository.PlayerRepository;
 import w.whatevera.wiffleball.game.*;
+import w.whatevera.wiffleball.game.Game;
+import w.whatevera.wiffleball.game.GamePlayEvent;
+import w.whatevera.wiffleball.game.Player;
 import w.whatevera.wiffleball.game.impl.GameImpl;
 import w.whatevera.wiffleball.game.impl.GameSettingsImpl;
 import w.whatevera.wiffleball.game.impl.PlayerImpl;
@@ -17,7 +23,14 @@ import java.util.Map;
 @RestController
 public class WiffleballGameController {
 
+    private final PlayerRepository playerRepository;
+
     private static Map<String, Game> games = Maps.newHashMap();
+
+    @Autowired
+    public WiffleballGameController(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
 
     @RequestMapping(value = "/w/game/demo", method= RequestMethod.GET, produces = "application/json")
     public Game gameDemo() {
@@ -86,6 +99,21 @@ public class WiffleballGameController {
 
         Game game = games.get(gameId);
         return GameUtils.calculateStats(game);
+    }
+
+    @RequestMapping(value = "/w/player", method= RequestMethod.POST, produces = "application/json")
+    public Player addPlayer(@RequestParam("name") String name) {
+
+        w.whatevera.wiffleball.domain.Player player = new w.whatevera.wiffleball.domain.Player();
+        player.setName(name);
+        playerRepository.save(player);
+        return player;
+    }
+
+    @RequestMapping(value = "/w/player/{name}", method= RequestMethod.GET, produces = "application/json")
+    public Player readPlayer(@PathVariable("name") String name) {
+
+        return playerRepository.findByName(name);
     }
 
     private static Game newDemoGame() {
