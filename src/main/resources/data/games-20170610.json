@@ -1,0 +1,3513 @@
+[ {
+  "key" : "11",
+  "gameStatus" : {
+    "awayBatterIndex" : 1,
+    "homeBatterIndex" : 1,
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "outs" : 0,
+    "inning" : 3,
+    "numberOfInnings" : 3,
+    "over" : true,
+    "homeHalf" : true,
+    "platedRuns" : [ ],
+    "awayTeam" : {
+      "players" : [ {
+        "name" : "jenny"
+      }, {
+        "name" : "jim"
+      }, {
+        "name" : "bill"
+      } ]
+    },
+    "homeTeam" : {
+      "players" : [ {
+        "name" : "shawn"
+      }, {
+        "name" : "rich"
+      }, {
+        "name" : "john"
+      } ]
+    },
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayBatter" : {
+      "name" : "jim"
+    },
+    "homeBatter" : {
+      "name" : "rich"
+    },
+    "awayPitcher" : {
+      "name" : "bill"
+    },
+    "homePitcher" : {
+      "name" : "john"
+    },
+    "onFirst" : null,
+    "onSecond" : null,
+    "onThird" : null
+  },
+  "gameSummary" : [ {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jenny"
+    },
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jenny"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SKIP",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SKIP",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jenny"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "john"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 3,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 2,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 2,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 2,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "jenny"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "shawn"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE_PLAY",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jenny"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jenny"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  } ]
+}, {
+  "key" : "122",
+  "gameStatus" : {
+    "awayBatterIndex" : 1,
+    "homeBatterIndex" : 1,
+    "awayScore" : 1,
+    "homeScore" : 2,
+    "outs" : 0,
+    "inning" : 3,
+    "numberOfInnings" : 3,
+    "over" : true,
+    "homeHalf" : true,
+    "platedRuns" : [ { } ],
+    "awayTeam" : {
+      "players" : [ {
+        "name" : "jim"
+      }, {
+        "name" : "shawn"
+      }, {
+        "name" : "rich"
+      } ]
+    },
+    "homeTeam" : {
+      "players" : [ {
+        "name" : "bill"
+      }, {
+        "name" : "john"
+      }, {
+        "name" : "paul"
+      } ]
+    },
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayBatter" : {
+      "name" : "shawn"
+    },
+    "homeBatter" : {
+      "name" : "john"
+    },
+    "awayPitcher" : {
+      "name" : "shawn"
+    },
+    "homePitcher" : {
+      "name" : "john"
+    },
+    "onFirst" : { },
+    "onSecond" : { },
+    "onThird" : { }
+  },
+  "gameSummary" : [ {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 1,
+    "homeScore" : 2,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "shawn"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "shawn"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "LINE_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "john"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  } ]
+}, {
+  "key" : "207",
+  "gameStatus" : {
+    "awayBatterIndex" : 0,
+    "homeBatterIndex" : 1,
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "outs" : 0,
+    "inning" : 4,
+    "numberOfInnings" : 3,
+    "over" : true,
+    "homeHalf" : false,
+    "platedRuns" : [ ],
+    "awayTeam" : {
+      "players" : [ {
+        "name" : "bill"
+      }, {
+        "name" : "rich"
+      }, {
+        "name" : "jim"
+      } ]
+    },
+    "homeTeam" : {
+      "players" : [ {
+        "name" : "john"
+      }, {
+        "name" : "paul"
+      }, {
+        "name" : "craig"
+      } ]
+    },
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayBatter" : {
+      "name" : "bill"
+    },
+    "homeBatter" : {
+      "name" : "paul"
+    },
+    "awayPitcher" : {
+      "name" : "jim"
+    },
+    "homePitcher" : {
+      "name" : "craig"
+    },
+    "onFirst" : null,
+    "onSecond" : null,
+    "onThird" : null
+  },
+  "gameSummary" : [ {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "craig"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SKIP",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SKIP",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "LINE_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "john"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  } ]
+}, {
+  "key" : "494",
+  "gameStatus" : {
+    "awayBatterIndex" : 1,
+    "homeBatterIndex" : 0,
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "outs" : 0,
+    "inning" : 4,
+    "numberOfInnings" : 3,
+    "over" : true,
+    "homeHalf" : false,
+    "platedRuns" : [ ],
+    "awayTeam" : {
+      "players" : [ {
+        "name" : "shawn"
+      }, {
+        "name" : "jim"
+      }, {
+        "name" : "paul"
+      } ]
+    },
+    "homeTeam" : {
+      "players" : [ {
+        "name" : "john"
+      }, {
+        "name" : "bill"
+      }, {
+        "name" : "rich"
+      } ]
+    },
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayBatter" : {
+      "name" : "jim"
+    },
+    "homeBatter" : {
+      "name" : "john"
+    },
+    "awayPitcher" : {
+      "name" : "paul"
+    },
+    "homePitcher" : {
+      "name" : "rich"
+    },
+    "onFirst" : null,
+    "onSecond" : null,
+    "onThird" : null
+  },
+  "gameSummary" : [ {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "rich"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 7,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 3,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 3,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 3,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "john"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "john"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  } ]
+}, {
+  "key" : "588",
+  "gameStatus" : {
+    "awayBatterIndex" : 1,
+    "homeBatterIndex" : 1,
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "outs" : 0,
+    "inning" : 4,
+    "numberOfInnings" : 3,
+    "over" : true,
+    "homeHalf" : false,
+    "platedRuns" : [ ],
+    "awayTeam" : {
+      "players" : [ {
+        "name" : "john"
+      }, {
+        "name" : "shawn"
+      }, {
+        "name" : "rich"
+      }, {
+        "name" : "jim"
+      } ]
+    },
+    "homeTeam" : {
+      "players" : [ {
+        "name" : "eric"
+      }, {
+        "name" : "craig"
+      }, {
+        "name" : "paul"
+      }, {
+        "name" : "bill"
+      } ]
+    },
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayBatter" : {
+      "name" : "shawn"
+    },
+    "homeBatter" : {
+      "name" : "craig"
+    },
+    "awayPitcher" : {
+      "name" : "jim"
+    },
+    "homePitcher" : {
+      "name" : "bill"
+    },
+    "onFirst" : null,
+    "onSecond" : null,
+    "onThird" : null
+  },
+  "gameSummary" : [ {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 12,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "bill"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 10,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 7,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 7,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 7,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 6,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 6,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 6,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "TRIPLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "bill"
+    },
+    "awayScore" : 6,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 6,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 6,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "jim"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 6,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 6,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 6,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 5,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "DOUBLE_PLAY",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 2,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "jim"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "ERROR_REACH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "eric"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "eric"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "bill"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  } ]
+}, {
+  "key" : "682",
+  "gameStatus" : {
+    "awayBatterIndex" : 1,
+    "homeBatterIndex" : 1,
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "outs" : 0,
+    "inning" : 3,
+    "numberOfInnings" : 3,
+    "over" : true,
+    "homeHalf" : true,
+    "platedRuns" : [ ],
+    "awayTeam" : {
+      "players" : [ {
+        "name" : "shawn"
+      }, {
+        "name" : "rich"
+      }, {
+        "name" : "paul"
+      } ]
+    },
+    "homeTeam" : {
+      "players" : [ {
+        "name" : "john"
+      }, {
+        "name" : "eric"
+      }, {
+        "name" : "craig"
+      } ]
+    },
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayBatter" : {
+      "name" : "rich"
+    },
+    "homeBatter" : {
+      "name" : "eric"
+    },
+    "awayPitcher" : {
+      "name" : "paul"
+    },
+    "homePitcher" : {
+      "name" : "craig"
+    },
+    "onFirst" : null,
+    "onSecond" : null,
+    "onThird" : null
+  },
+  "gameSummary" : [ {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 1,
+    "homeScore" : 3,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 1,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  } ]
+}, {
+  "key" : "741",
+  "gameStatus" : {
+    "awayBatterIndex" : 1,
+    "homeBatterIndex" : 0,
+    "awayScore" : 1,
+    "homeScore" : 2,
+    "outs" : 0,
+    "inning" : 3,
+    "numberOfInnings" : 3,
+    "over" : true,
+    "homeHalf" : true,
+    "platedRuns" : [ { } ],
+    "awayTeam" : {
+      "players" : [ {
+        "name" : "shawn"
+      }, {
+        "name" : "john"
+      }, {
+        "name" : "craig"
+      } ]
+    },
+    "homeTeam" : {
+      "players" : [ {
+        "name" : "eric"
+      }, {
+        "name" : "paul"
+      }, {
+        "name" : "rich"
+      } ]
+    },
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayBatter" : {
+      "name" : "john"
+    },
+    "homeBatter" : {
+      "name" : "eric"
+    },
+    "awayPitcher" : {
+      "name" : "craig"
+    },
+    "homePitcher" : {
+      "name" : "paul"
+    },
+    "onFirst" : null,
+    "onSecond" : null,
+    "onThird" : null
+  },
+  "gameSummary" : [ {
+    "gamePlayEvent" : "HOME_RUN",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 1,
+    "homeScore" : 2,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_SWINGING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "ERROR_REACH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "paul"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SET_PITCHER",
+    "player1" : {
+      "name" : "paul"
+    },
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_LOOKING",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "STRIKEOUT_BOTH",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 1,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "SINGLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "DOUBLE",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 1,
+    "homeHalf" : true,
+    "scoreChange" : true
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "rich"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "paul"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "craig"
+    },
+    "batter" : {
+      "name" : "eric"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : true,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "FLY_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "craig"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "GROUND_OUT",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "john"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  }, {
+    "gamePlayEvent" : "WALK",
+    "player1" : null,
+    "player2" : null,
+    "pitcher" : {
+      "name" : "rich"
+    },
+    "batter" : {
+      "name" : "shawn"
+    },
+    "awayScore" : 0,
+    "homeScore" : 0,
+    "homeHalf" : false,
+    "scoreChange" : false
+  } ]
+} ]
