@@ -1,36 +1,4 @@
-$(pageBehavior);
-
-function pageBehavior () {
-
-    actionsBehavior($(this));
-
-    var url = "/w/game/";
-
-    var gameid = getUrlParameter("gameid");
-    var awayteam = getUrlParameter("awayteam");
-    var hometeam = getUrlParameter("hometeam");
-
-    var method = (gameid) ? "get" : "post";
-
-    if (gameid) {
-        url += gameid
-    } else if (awayteam && hometeam) {
-        url += awayteam + "/" + hometeam;
-    }
-
-    $.ajax({
-        url: url,
-        type: method,
-        dataType: "json"
-    }).success(function (data) {
-
-        $('body').html(buildConsole(data));
-
-        window.history.pushState("", "", "/game.html?gameid=" + data.key);
-    });
-}
-
-function buildConsole(game) {
+function buildConsole(game, hideActions) {
 
     var console = $(
         "<div class=\"console\"> \
@@ -42,8 +10,10 @@ function buildConsole(game) {
          </div>"
     );
 
-    console.find('div.actions-pane').append(showGameActions(game.key));
-    console.find('div.actions-pane').find('div.get-summary').removeClass('get-summary').addClass('get-stats');
+    if (!hideActions) {
+        console.find('div.actions-pane').append(showGameActions(game.key));
+        console.find('div.actions-pane').find('div.get-summary').removeClass('get-summary').addClass('get-stats');
+    }
     console.find('div.status-pane').append(buildGameStatus(game.gameStatus));
     console.find('div.summary-pane').append(buildGameSummary(game.gameSummary));
 
@@ -208,18 +178,7 @@ function buildGameStats(stats) {
 
     var statsDiv = $("<div class='stats'></div>");
 
-    statsDiv.append(
-        "<div class='batting-stats'>" +
-        "<div class='batting-stat'>&#160;</div>" +
-        "<div class='batting-stat-header'>hits</div>" +
-        "<div class='batting-stat-header'>avg</div>" +
-        "<div class='batting-stat-header'>2b</div>" +
-        "<div class='batting-stat-header'>3b</div>" +
-        "<div class='batting-stat-header'>hr</div>" +
-        "<div class='batting-stat-header'>rbi</div>" +
-        "<div class='batting-stat-header'>k</div>" +
-        "<div class='batting-stat-header'>ops</div>" +
-        "</div>");
+    statsDiv.append(buildBattingStatsHeader());
 
     $.each(stats.awayTeamStats.playerBattingStats, function(k, v) {
 
@@ -233,18 +192,7 @@ function buildGameStats(stats) {
         statsDiv.append(buildPlayerBattingStats(this));
     });
 
-    statsDiv.append(
-        "<div class='pitching-stats'>" +
-        "<div class='pitching-stat'>&#160;</div>" +
-        "<div class='pitching-stat-header'>ip</div>" +
-        "<div class='pitching-stat-header'>era</div>" +
-        "<div class='pitching-stat-header'>er</div>" +
-        "<div class='pitching-stat-header'>r</div>" +
-        "<div class='pitching-stat-header'>k</div>" +
-        "<div class='pitching-stat-header'>hits</div>" +
-        "<div class='pitching-stat-header'>hr</div>" +
-        "<div class='pitching-stat-header'>baa</div>" +
-        "</div>");
+    statsDiv.append(buildPitchingStatsHeader());
 
     $.each(stats.awayTeamStats.playerPitchingStats, function(k, v) {
 
@@ -260,6 +208,53 @@ function buildGameStats(stats) {
 
     return statsDiv;
 }
+
+function buildBattingStatsHeader() {
+    return $(
+        "<div class='batting-stats'> \
+            <div class='batting-stat'>&#160;</div> \
+            <div class='batting-stat-header'>hits</div> \
+            <div class='batting-stat-header'>avg</div> \
+            <div class='batting-stat-header'>2b</div> \
+            <div class='batting-stat-header'>3b</div> \
+            <div class='batting-stat-header'>hr</div> \
+            <div class='batting-stat-header'>rbi</div> \
+            <div class='batting-stat-header'>k</div> \
+            <div class='batting-stat-header'>ops</div> \
+        </div>"
+    );
+}
+
+function buildPitchingStatsHeader() {
+    return $(
+        "<div class='pitching-stats'> \
+            <div class='pitching-stat'>&#160;</div> \
+            <div class='pitching-stat-header'>ip</div> \
+            <div class='pitching-stat-header'>era</div> \
+            <div class='pitching-stat-header'>er</div> \
+            <div class='pitching-stat-header'>r</div> \
+            <div class='pitching-stat-header'>k</div> \
+            <div class='pitching-stat-header'>hits</div> \
+            <div class='pitching-stat-header'>hr</div> \
+            <div class='pitching-stat-header'>baa</div> \
+        </div>"
+    );
+}
+
+/*
+
+        "<div class='pitching-stats'>" +
+        "<div class='pitching-stat'>&#160;</div>" +
+        "<div class='pitching-stat-header'>ip</div>" +
+        "<div class='pitching-stat-header'>era</div>" +
+        "<div class='pitching-stat-header'>er</div>" +
+        "<div class='pitching-stat-header'>r</div>" +
+        "<div class='pitching-stat-header'>k</div>" +
+        "<div class='pitching-stat-header'>hits</div>" +
+        "<div class='pitching-stat-header'>hr</div>" +
+        "<div class='pitching-stat-header'>baa</div>" +
+        "</div>"
+ */
 
 function buildPlayerBattingStats(stats) {
 

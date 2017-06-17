@@ -269,6 +269,10 @@ div.batting-stats, div.pitching-stats {
     display: table-row;
 }
 
+div.pitching-stat, div.batting-stat {
+    border-bottom: 1px solid darkolivegreen;
+}
+
 div.batting-stat, div.batting-stat-header, div.pitching-stat, div.pitching-stat-header {
     display: table-cell;
     text-align: center;
@@ -296,4 +300,23 @@ div.stats-player {
 
 div.left, div.status-pane, div.summary-pane, div.summary, div.stats {
     vertical-align: top;
+}
+
+div.game-display {
+
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em;
+
+    background-color: blanchedalmond;
+    color: darkolivegreen;
+    border: 2px solid darkolivegreen;
+}
+
+div.game-title {
+    border: none;
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 4px;
 }
