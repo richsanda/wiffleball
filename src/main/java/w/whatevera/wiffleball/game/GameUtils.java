@@ -41,7 +41,7 @@ public class GameUtils {
     private GameStatus applyPlayToGame(IGameStatus gameStatus, GamePlayEvent event, Map<PlayerType, Player> players) {
 
         // is this the best way to do this ?
-        // gameStatus.getPlatedRuns().clear();
+        gameStatus.getPlatedRuns().clear();
 
         GamePlay gamePlay = new GamePlay(gameStatus, this);
 
@@ -403,7 +403,7 @@ public class GameUtils {
         }
 
         // is this the best place to do this ?
-        // pitchedInning.getGameStatus().getPlatedRuns().clear();
+        pitchedInning.getGameStatus().getPlatedRuns().clear();
 
         if (pitchedInning.getInitialGameStatus().isHomeHalf() != pitchedInning.getGameStatus().isHomeHalf()) pitchedInning.setClosed(true);
     }
