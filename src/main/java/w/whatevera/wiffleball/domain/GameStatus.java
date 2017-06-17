@@ -30,13 +30,13 @@ public class GameStatus implements IGameStatus {
     private Player homePitch;
 
     @OneToOne
-    private BaseRunner onFirst;
+    private BaseRunner first;
     @OneToOne
-    private BaseRunner onSecond;
+    private BaseRunner second;
     @OneToOne
-    private BaseRunner onThird;
+    private BaseRunner third;
     @ManyToMany
-    private List<BaseRunner> platedRuns;
+    private List<BaseRunner> plated;
 
     private int awayBatterIndex;
     private int homeBatterIndex;
@@ -63,10 +63,10 @@ public class GameStatus implements IGameStatus {
         awayPitch = status.getAwayPitcher();
         homePitch = status.getHomePitcher();
 
-        onFirst = status.getOnFirst();
-        onSecond = status.getOnSecond();
-        onThird = status.getOnThird();
-        platedRuns = Lists.newArrayList(status.getPlatedRuns());
+        first = status.getOnFirst();
+        second = status.getOnSecond();
+        third = status.getOnThird();
+        plated = Lists.newArrayList(status.getPlatedRuns());
 
         awayBatterIndex = status.getAwayBatterIndex();
         homeBatterIndex = status.getHomeBatterIndex();
@@ -127,19 +127,19 @@ public class GameStatus implements IGameStatus {
     }
 
     public BaseRunner getOnFirst() {
-        return onFirst;
+        return first;
     }
 
     public BaseRunner getOnSecond() {
-        return onSecond;
+        return second;
     }
 
     public BaseRunner getOnThird() {
-        return onThird;
+        return third;
     }
 
     public List<BaseRunner> getPlatedRuns() {
-        return platedRuns;
+        return plated;
     }
 
     public int getAwayScore() {

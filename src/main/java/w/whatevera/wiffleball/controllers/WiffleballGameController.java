@@ -29,8 +29,6 @@ public class WiffleballGameController {
 
     private final GameUtils gameUtils;
 
-    private static Map<String, Game> games = Maps.newHashMap();
-
     @Autowired
     public WiffleballGameController(PlayerRepository playerRepository, GameRepository gameRepository, GameSettingsRepository gameSettingsRepository, GameStatusRepository gameStatusRepository, BaseRunnerRepository baseRunnerRepository, GameLogEntryRepository gameLogEntryRepository, TeamRepository teamRepository, GameUtils gameUtils) {
         this.playerRepository = playerRepository;
@@ -114,13 +112,9 @@ public class WiffleballGameController {
     }
 
     @RequestMapping(value = "/w/games", method= RequestMethod.GET, produces = "application/json")
-    public List<String> allGames() {
+    public List<Game> allGames() {
 
-        List<String> result = Lists.newArrayList();
-
-        for (Map.Entry<String, Game> entry : games.entrySet()) {
-            result.add(String.format("%s: %s", entry.getKey(), entry.getValue()));
-        }
+        List<Game> result = gameRepository.findAll();
 
         return result;
     }
@@ -142,7 +136,7 @@ public class WiffleballGameController {
     @RequestMapping(value = "/w/game/{game}/stats", method= RequestMethod.GET, produces = "application/json")
     public GameStats gameStats(@PathVariable("game") String gameId) {
 
-        Game game = games.get(gameId);
+        Game game = gameRepository.findOne(new Long(gameId));
         return gameUtils.calculateStats(game);
     }
 
