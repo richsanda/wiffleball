@@ -19,10 +19,10 @@ public class GameStatus implements IGameStatus {
     @ManyToOne
     private GameSettings gameSettings;
 
-    @ManyToMany
-    private List<Player> away;
-    @ManyToMany
-    private List<Player> home;
+    @ManyToOne
+    private Team away;
+    @ManyToOne
+    private Team home;
 
     @ManyToOne
     private Player awayPitch;
@@ -35,7 +35,7 @@ public class GameStatus implements IGameStatus {
     private BaseRunner onSecond;
     @OneToOne
     private BaseRunner onThird;
-    @OneToMany
+    @ManyToMany
     private List<BaseRunner> platedRuns;
 
     private int awayBatterIndex;
@@ -66,7 +66,7 @@ public class GameStatus implements IGameStatus {
         onFirst = status.getOnFirst();
         onSecond = status.getOnSecond();
         onThird = status.getOnThird();
-        platedRuns = status.getPlatedRuns();
+        platedRuns = Lists.newArrayList(status.getPlatedRuns());
 
         awayBatterIndex = status.getAwayBatterIndex();
         homeBatterIndex = status.getHomeBatterIndex();
@@ -86,11 +86,11 @@ public class GameStatus implements IGameStatus {
         return gameSettings;
     }
 
-    public List<Player> getAwayTeam() {
+    public Team getAwayTeam() {
         return away;
     }
 
-    public List<Player> getHomeTeam() {
+    public Team getHomeTeam() {
         return home;
     }
 
@@ -99,11 +99,11 @@ public class GameStatus implements IGameStatus {
     }
 
     public Player getAwayBatter() {
-        return away.get(awayBatterIndex);
+        return away.getPlayers().get(awayBatterIndex);
     }
 
     public Player getHomeBatter() {
-        return home.get(homeBatterIndex);
+        return home.getPlayers().get(homeBatterIndex);
     }
 
     public int getAwayBatterIndex() {
@@ -172,15 +172,5 @@ public class GameStatus implements IGameStatus {
         boolean awayTeamWins = inning > numberOfInnings && !isHomeHalf && awayScore > homeScore;
 
         return homeTeamWins || awayTeamWins;
-    }
-
-    @Transient
-    public List<BaseRunner> allBaseRunners() {
-        List<BaseRunner> result = Lists.newArrayList();
-        if (null != onFirst) result.add(onFirst);
-        if (null != onSecond) result.add(onSecond);
-        if (null != onThird) result.add(onThird);
-        if (null != platedRuns) result.addAll(platedRuns);
-        return result;
     }
 }

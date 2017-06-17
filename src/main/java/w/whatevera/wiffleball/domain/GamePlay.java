@@ -1,44 +1,32 @@
 package w.whatevera.wiffleball.domain;
 
 import com.google.common.collect.Lists;
-import w.whatevera.wiffleball.game.*;
+import w.whatevera.wiffleball.game.GameOverException;
+import w.whatevera.wiffleball.game.GameUtils;
+import w.whatevera.wiffleball.game.IGameStatus;
 
-import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by rich on 9/1/16.
  */
-@Entity
 public class GamePlay implements IGameStatus {
 
-    @Id
-   	@GeneratedValue
-   	private Long id;
+    private GameUtils gameUtils;
 
-    @OneToOne
     private GameSettings gameSettings;
 
-    @ManyToMany
-    private List<Player> awayTeam;
-    @ManyToMany
-    private List<Player> homeTeam;
+    private Team awayTeam;
+    private Team homeTeam;
 
-    @ManyToOne
     private Player awayPitcher;
-    @ManyToOne
     private Player homePitcher;
 
-    @ManyToOne
     private Player batter;
 
-    @OneToOne
     private BaseRunner onFirst;
-    @OneToOne
     private BaseRunner onSecond;
-    @OneToOne
     private BaseRunner onThird;
-    @OneToMany
     private List<BaseRunner> platedRuns = Lists.newArrayList();
 
     private int awayBatterIndex = 0;
@@ -54,9 +42,7 @@ public class GamePlay implements IGameStatus {
     private int outs = 0;
     private int inning = 0;
 
-    public GamePlay() {}
-
-    public GamePlay(GameSettings gameSettings, List<Player> awayTeam, List<Player> homeTeam) {
+    public GamePlay(GameSettings gameSettings, Team awayTeam, Team homeTeam) {
 
         assert null != awayTeam;
         assert null != homeTeam;
@@ -65,15 +51,17 @@ public class GamePlay implements IGameStatus {
         this.awayTeam = awayTeam;
         this.homeTeam = homeTeam;
 
-        this.homePitcher = homeTeam.get(homeTeam.size() - 1);
-        this.awayPitcher = awayTeam.get(awayTeam.size() - 1);
+        this.homePitcher = homeTeam.getPlayers().get(homeTeam.getPlayers().size() - 1);
+        this.awayPitcher = awayTeam.getPlayers().get(awayTeam.getPlayers().size() - 1);
 
         this.numberOfInnings = gameSettings.getNumberOfInnings();
 
         nextHalfInning();
     }
 
-    public GamePlay(IGameStatus status) {
+    public GamePlay(IGameStatus status, GameUtils gameUtils) {
+
+        this.gameUtils = gameUtils;
 
         gameSettings = status.getGameSettings();
 
@@ -109,12 +97,12 @@ public class GamePlay implements IGameStatus {
     }
 
     @Override
-    public List<Player> getAwayTeam() {
+    public Team getAwayTeam() {
         return awayTeam;
     }
 
     @Override
-    public List<Player> getHomeTeam() {
+    public Team getHomeTeam() {
         return homeTeam;
     }
 
@@ -125,12 +113,12 @@ public class GamePlay implements IGameStatus {
 
     @Override
     public Player getAwayBatter() {
-        return awayTeam.get(awayBatterIndex);
+        return awayTeam.getPlayers().get(awayBatterIndex);
     }
 
     @Override
     public Player getHomeBatter() {
-        return homeTeam.get(homeBatterIndex);
+        return homeTeam.getPlayers().get(homeBatterIndex);
     }
 
     @Override
@@ -376,11 +364,11 @@ public class GamePlay implements IGameStatus {
     }
 
     private void nextHomeBatter() {
-        homeBatterIndex = nextBatterIndex(homeBatterIndex, homeTeam.size());
+        homeBatterIndex = nextBatterIndex(homeBatterIndex, homeTeam.getPlayers().size());
     }
 
     private void nextAwayBatter() {
-        awayBatterIndex = nextBatterIndex(awayBatterIndex, awayTeam.size());
+        awayBatterIndex = nextBatterIndex(awayBatterIndex, awayTeam.getPlayers().size());
     }
 
     private void run() {
@@ -432,7 +420,7 @@ public class GamePlay implements IGameStatus {
         }
 
         if (null != batter) {
-            onFirst = new BaseRunner(batter, getPitcher());
+            onFirst = newBaseRunner(batter, getPitcher());
             batter = null;
         }
     }
@@ -540,14 +528,35 @@ public class GamePlay implements IGameStatus {
     // for use in calculating earned run average
     public void clearPitchersOfResponsibility() {
         if (null != onFirst) {
-            onFirst = new BaseRunner(onFirst.getRunner(), null);
+            onFirst = newBaseRunner(onFirst.getRunner());
         }
         if (null != onSecond) {
-            onSecond = new BaseRunner(onSecond.getRunner(), null);
+            onSecond = newBaseRunner(onSecond.getRunner());
         }
         if (null != onThird) {
-            onThird = new BaseRunner(onThird.getRunner(), null);
+            onThird = newBaseRunner(onThird.getRunner());
         }
         platedRuns.clear();
+    }
+
+    public List<BaseRunner> allBaseRunners() {
+        List<BaseRunner> result = Lists.newArrayList();
+        if (null != onFirst) result.add(onFirst);
+        if (null != onSecond) result.add(onSecond);
+        if (null != onThird) result.add(onThird);
+        if (null != platedRuns) result.addAll(platedRuns);
+        return result;
+    }
+
+    public BaseRunner newBaseRunner(Player runner) {
+        BaseRunner baseRunner = new BaseRunner(runner, null);
+        if (null != gameUtils) gameUtils.baseRunnerRepository.save(baseRunner);
+        return baseRunner;
+    }
+
+    public BaseRunner newBaseRunner(Player runner, Player pitcher) {
+        BaseRunner baseRunner = new BaseRunner(runner, pitcher);
+        if (null != gameUtils) gameUtils.baseRunnerRepository.save(baseRunner);
+        return baseRunner;
     }
 }

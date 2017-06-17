@@ -20,6 +20,8 @@ public class BaseRunner {
     @ManyToOne
     private Player pitcher;
 
+    public BaseRunner() {}
+
     public BaseRunner(Player runner, Player pitcher) {
         this.runner = runner;
         this.pitcher = pitcher;

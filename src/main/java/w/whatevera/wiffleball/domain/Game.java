@@ -24,7 +24,7 @@ public class Game {
 
     public Game() {}
 
-    public Game(GameSettings gameSettings, List<Player> awayTeam, List<Player> homeTeam) {
+    public Game(GameSettings gameSettings, Team awayTeam, Team homeTeam) {
         currentGameStatus = new GameStatus(new GamePlay(gameSettings, awayTeam, homeTeam));
     }
 
@@ -45,12 +45,13 @@ public class Game {
         return gameLog;
     }
 
+    @Transient
     public List<GameLogSummaryEntry> getGameSummary() {
 
         List<GameLogSummaryEntry> result = Lists.newArrayList();
         ListIterator<GameLogEntry> gameLogIterator = gameLog.listIterator(gameLog.size());
         while (gameLogIterator.hasPrevious()) {
-            result.add(new GameLogSummaryEntry(gameLogIterator.next()));
+            result.add(new GameLogSummaryEntry(gameLogIterator.previous()));
         }
         return result;
     }
@@ -65,11 +66,11 @@ public class Game {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        for (Player player : currentGameStatus.getAwayTeam()) {
+        for (Player player : currentGameStatus.getAwayTeam().getPlayers()) {
             builder.append(player.getName());
         }
         builder.append(" vs ");
-        for (Player player : currentGameStatus.getHomeTeam()) {
+        for (Player player : currentGameStatus.getHomeTeam().getPlayers()) {
             builder.append(player.getName());
         }
         builder.append(currentGameStatus.isHomeHalf() ? " bot " : " top ");

@@ -19,33 +19,31 @@ import java.util.Set;
 @Component
 public class GameUtils {
 
-    private final PlayerRepository playerRepository;
-    private final GameRepository gameRepository;
-    private final GamePlayRepository gamePlayRepository;
-    private final GameSettingsRepository gameSettingsRepository;
-    private final GameStatusRepository gameStatusRepository;
-    private final BaseRunnerRepository baseRunnerRepository;
+    public final PlayerRepository playerRepository;
+    public final GameRepository gameRepository;
+    public final GameSettingsRepository gameSettingsRepository;
+    public final GameStatusRepository gameStatusRepository;
+    public final BaseRunnerRepository baseRunnerRepository;
 
     @Autowired
-    public GameUtils(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayRepository gamePlayRepository, GameSettingsRepository gameSettingsRepository, GameStatusRepository gameStatusRepository, BaseRunnerRepository baseRunnerRepository) {
+    public GameUtils(PlayerRepository playerRepository, GameRepository gameRepository, GameSettingsRepository gameSettingsRepository, GameStatusRepository gameStatusRepository, BaseRunnerRepository baseRunnerRepository) {
         this.playerRepository = playerRepository;
         this.gameRepository = gameRepository;
-        this.gamePlayRepository = gamePlayRepository;
         this.gameSettingsRepository = gameSettingsRepository;
         this.gameStatusRepository = gameStatusRepository;
         this.baseRunnerRepository = baseRunnerRepository;
     }
 
-    public static GameStatus applyPlayToGame(IGameStatus gameStatus, GamePlayEvent event, Player player1, Player player2) {
+    public GameStatus applyPlayToGame(IGameStatus gameStatus, GamePlayEvent event, Player player1, Player player2) {
         return applyPlayToGame(gameStatus, event, determinePlayerMap(event, player1, player2));
     }
 
-    public static GameStatus applyPlayToGame(IGameStatus gameStatus, GamePlayEvent event, Map<PlayerType, Player> players) {
+    private GameStatus applyPlayToGame(IGameStatus gameStatus, GamePlayEvent event, Map<PlayerType, Player> players) {
 
         // is this the best way to do this ?
-        gameStatus.getPlatedRuns().clear();
+        // gameStatus.getPlatedRuns().clear();
 
-        GamePlay gamePlay = new GamePlay(gameStatus);
+        GamePlay gamePlay = new GamePlay(gameStatus, this);
 
         Player pitcher = null;
         Player fielder = null;
@@ -221,7 +219,7 @@ public class GameUtils {
 
             Set<PitchedInning> pitchedInningsToClose = Sets.newHashSet();
             for (PitchedInning openPitchedInning : openPitchedInnings) {
-                openPitchedInning.apply(event, player1, player2);
+                apply(openPitchedInning, event, player1, player2);
                 if (openPitchedInning.isClosed()) {
                     pitchedInningsToClose.add(openPitchedInning);
                 }
@@ -365,12 +363,48 @@ public class GameUtils {
     }
 
     public static Player findPlayer(Game game, String playerName) {
-        for (Player player : game.getGameStatus().getAwayTeam()) {
+        for (Player player : game.getGameStatus().getAwayTeam().getPlayers()) {
             if (player.getName().equals(playerName)) return player;
         }
-        for (Player player : game.getGameStatus().getHomeTeam()) {
+        for (Player player : game.getGameStatus().getHomeTeam().getPlayers()) {
             if (player.getName().equals(playerName)) return player;
         }
         return null;
+    }
+
+
+    public void apply(PitchedInning pitchedInning, GamePlayEvent event, Player player1, Player player2) {
+
+        if (pitchedInning.isClosed()) return;
+
+        GamePlayEvent errorFree = event;
+
+        switch (event) {
+            case ERROR_REACH:
+                errorFree = GamePlayEvent.OUT;
+                break;
+            case ERROR_ADVANCE:
+                errorFree = null;
+                break;
+            case SET_PITCHER:
+                if (pitchedInning.isPitcherDone() || pitchedInning.getPitcher() != player1) {
+                    player1 = null; // pass null from now on once the pitcher is done
+                    pitchedInning.setPitcherDone(true);
+                }
+        }
+
+        if (null != errorFree) pitchedInning.setGameStatus(applyPlayToGame(pitchedInning.getGameStatus(), errorFree, player1, player2));
+
+        for (BaseRunner baseRunner : pitchedInning.getGameStatus().getPlatedRuns()) {
+            Player pitcher = baseRunner.getPitcher();
+            if (null != pitcher && pitcher.equals(pitchedInning.getPitcher())) {
+                pitchedInning.addEarnedRun();
+            }
+        }
+
+        // is this the best place to do this ?
+        // pitchedInning.getGameStatus().getPlatedRuns().clear();
+
+        if (pitchedInning.getInitialGameStatus().isHomeHalf() != pitchedInning.getGameStatus().isHomeHalf()) pitchedInning.setClosed(true);
     }
 }

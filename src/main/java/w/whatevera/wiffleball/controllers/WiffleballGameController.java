@@ -22,23 +22,23 @@ public class WiffleballGameController {
 
     private final PlayerRepository playerRepository;
     private final GameRepository gameRepository;
-    private final GamePlayRepository gamePlayRepository;
     private final GameSettingsRepository gameSettingsRepository;
     private final GameStatusRepository gameStatusRepository;
-    private final BaseRunnerRepository baseRunnerRepository;
+    private final GameLogEntryRepository gameLogEntryRepository;
+    private final TeamRepository teamRepository;
 
     private final GameUtils gameUtils;
 
     private static Map<String, Game> games = Maps.newHashMap();
 
     @Autowired
-    public WiffleballGameController(PlayerRepository playerRepository, GameRepository gameRepository, GamePlayRepository gamePlayRepository, GameSettingsRepository gameSettingsRepository, GameStatusRepository gameStatusRepository, BaseRunnerRepository baseRunnerRepository, GameUtils gameUtils) {
+    public WiffleballGameController(PlayerRepository playerRepository, GameRepository gameRepository, GameSettingsRepository gameSettingsRepository, GameStatusRepository gameStatusRepository, BaseRunnerRepository baseRunnerRepository, GameLogEntryRepository gameLogEntryRepository, TeamRepository teamRepository, GameUtils gameUtils) {
         this.playerRepository = playerRepository;
         this.gameRepository = gameRepository;
-        this.gamePlayRepository = gamePlayRepository;
         this.gameSettingsRepository = gameSettingsRepository;
         this.gameStatusRepository = gameStatusRepository;
-        this.baseRunnerRepository = baseRunnerRepository;
+        this.gameLogEntryRepository = gameLogEntryRepository;
+        this.teamRepository = teamRepository;
         this.gameUtils = gameUtils;
     }
 
@@ -46,23 +46,23 @@ public class WiffleballGameController {
     public Game newGame(@PathVariable("awayTeam")List<String> awayTeamPlayerNames,
                         @PathVariable("homeTeam")List<String> homeTeamPlayerNames) {
 
-        List<Player> awayTeam = Lists.newArrayList();
-        List<Player> homeTeam = Lists.newArrayList();
+        List<Player> awayTeamPlayers = Lists.newArrayList();
+        List<Player> homeTeamPlayers = Lists.newArrayList();
 
         for (String playerName : awayTeamPlayerNames) {
             Player player = findOrCreatePlayer(playerName);
-            awayTeam.add(player);
+            awayTeamPlayers.add(player);
         }
 
         for (String playerName : homeTeamPlayerNames) {
             Player player = findOrCreatePlayer(playerName);
-            homeTeam.add(player);
+            homeTeamPlayers .add(player);
         }
 
-        Player awayPitcher = awayTeam.get(awayTeam.size() - 1);
-        Player homePitcher = homeTeam.get(homeTeam.size() - 1);
+        Player awayPitcher = awayTeamPlayers.get(awayTeamPlayers.size() - 1);
+        Player homePitcher = homeTeamPlayers.get(homeTeamPlayers.size() - 1);
 
-        GameSettings gameSettings = new GameSettings(awayTeam.size(), 3, 3);
+        GameSettings gameSettings = new GameSettings(awayTeamPlayers.size(), 3, 3);
         gameSettingsRepository.save(gameSettings);
 //
 //        GamePlayImpl gamePlay = new GamePlayImpl(gameSettings, awayTeam, homeTeam);
@@ -83,11 +83,20 @@ public class WiffleballGameController {
 //        gameStatus.setNumberOfInnings(gameSettings.numberOfInnings());
 //        gameStatusRepository.save(gameStatus);
 
+        Team awayTeam = new Team(awayTeamPlayers);
+        Team homeTeam = new Team(homeTeamPlayers);
+        teamRepository.save(awayTeam);
+        teamRepository.save(homeTeam);
+
         Game game = new Game(gameSettings, awayTeam, homeTeam);
-        gameStatusRepository.save(game.getGameStatus());
-        gameRepository.save(game);
+        saveGame(game);
 
         return game;
+    }
+
+    private void saveGame(Game game) {
+        gameStatusRepository.save(game.getGameStatus());
+        gameRepository.save(game);
     }
 
     private Player findOrCreatePlayer(String name) {
@@ -125,9 +134,7 @@ public class WiffleballGameController {
         Game game = gameRepository.findOne(Long.valueOf(gameId));
         Player player1Player = GameUtils.findPlayer(game, player1);
         apply(game, event, player1Player);
-        gameStatusRepository.save(game.getGameStatus());
-        baseRunnerRepository.save(game.getGameStatus().allBaseRunners());
-        gameRepository.save(game);
+        saveGame(game);
 
         return game;
     }
@@ -169,9 +176,11 @@ public class WiffleballGameController {
         } else if (!game.getGameStatus().isOver()) {
 
             GameStatus gameStatus = game.getGameStatus();
-            GameStatus nextGameStatus = GameUtils.applyPlayToGame(gameStatus, event, player1, player2);
+            GameStatus nextGameStatus = gameUtils.applyPlayToGame(gameStatus, event, player1, player2);
+            gameStatusRepository.save(nextGameStatus);
             game.setGameStatus(nextGameStatus);
             GameLogEntry entry = new GameLogEntry(gameStatus, nextGameStatus, event, player1, player2);
+            gameLogEntryRepository.save(entry);
             game.getGameLog().add(entry);
         }
 

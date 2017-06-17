@@ -133,7 +133,7 @@ function buildAwayTeam(game) {
     teamDiv.append(pitcher);
     teamDiv.append(lineup);
 
-    $.each(game.awayTeam, function() {
+    $.each(game.awayTeam.players, function() {
         var player = $("<div class='player batter' id='" + this.name + "'>" + this.name + "</div>");
         if (!game.homeHalf) {
           if (game.batter.name == this.name) {
@@ -168,7 +168,7 @@ function buildHomeTeam(game) {
     teamDiv.append(pitcher);
     teamDiv.append(lineup);
 
-    $.each(game.homeTeam, function() {
+    $.each(game.homeTeam.players, function() {
         var player = $("<div class='player batter' id='" + this.name + "'>" + this.name + "</div>");
         if (game.homeHalf) {
           if (game.batter.name == this.name) {

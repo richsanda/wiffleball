@@ -7,6 +7,7 @@ import junit.framework.TestSuite;
 import w.whatevera.wiffleball.domain.GamePlay;
 import w.whatevera.wiffleball.domain.GameSettings;
 import w.whatevera.wiffleball.domain.Player;
+import w.whatevera.wiffleball.domain.Team;
 import w.whatevera.wiffleball.game.GameOverException;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class WiffleballApplicationTest
         List<Player> homeTeam = Lists.newArrayList(jim, shawn, rich);
 
         GameSettings gameSettings = new GameSettings(3, 3, 3);
-        GamePlay game = new GamePlay(gameSettings, awayTeam, homeTeam);
+        GamePlay game = new GamePlay(gameSettings, new Team(awayTeam), new Team(homeTeam));
 
         try {
 

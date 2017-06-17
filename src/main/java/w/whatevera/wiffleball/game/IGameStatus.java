@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import w.whatevera.wiffleball.domain.BaseRunner;
 import w.whatevera.wiffleball.domain.GameSettings;
 import w.whatevera.wiffleball.domain.Player;
+import w.whatevera.wiffleball.domain.Team;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ public interface IGameStatus {
 
     GameSettings getGameSettings();
 
-    List<Player> getAwayTeam();
+    Team getAwayTeam();
 
-    List<Player> getHomeTeam();
+    Team getHomeTeam();
 
     Player getBatter();
 

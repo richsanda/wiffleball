@@ -27,8 +27,8 @@ public class TeamStats {
     @ElementCollection
     private Map<Player, PitchingStats> pitchingStats = Maps.newHashMap();
 
-    public TeamStats(List<Player> players) {
-        this.players = players;
+    public TeamStats(Team team) {
+        this.players = Lists.newArrayList(team.getPlayers());
     }
 
     public TeamStats(List<Player> players, Map<Player, BattingStats> battingStats, Map<Player, PitchingStats> pitchingStats) {
