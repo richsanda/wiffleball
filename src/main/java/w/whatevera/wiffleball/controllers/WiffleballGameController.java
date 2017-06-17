@@ -1,7 +1,6 @@
 package w.whatevera.wiffleball.controllers;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import com.google.common.collect.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import w.whatevera.wiffleball.domain.*;
@@ -11,8 +10,11 @@ import w.whatevera.wiffleball.domain.repository.*;
 import w.whatevera.wiffleball.game.*;
 import w.whatevera.wiffleball.game.GamePlayEvent;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by rich on 9/21/16.
@@ -138,6 +140,70 @@ public class WiffleballGameController {
 
         Game game = gameRepository.findOne(new Long(gameId));
         return gameUtils.calculateStats(game);
+    }
+
+    @RequestMapping(value = "/w/players/stats", method= RequestMethod.GET, produces = "application/json")
+    public TeamStats playerStats() {
+
+        Set<Player> allPlayers = Sets.newHashSet();
+        Multimap<Player, PitchingStats> allPitchingStats = HashMultimap.create();
+        Multimap<Player, BattingStats> allBattingStats = HashMultimap.create();
+
+        List<Game> games = gameRepository.findAll();
+        List<GameStats> gameStats = games.stream().map(gameUtils::calculateStats).collect(Collectors.toList());
+
+        for (GameStats stats : gameStats) {
+            TeamStats awayStats = stats.getAwayTeamStats();
+            TeamStats homeStats = stats.getHomeTeamStats();
+            for (Player player : awayStats.getPlayers()) {
+
+                allPlayers.add(player);
+
+                PitchingStats pitchingStats = awayStats.getPitchingStats(player);
+                if (null != pitchingStats) allPitchingStats.put(player, pitchingStats);
+
+                BattingStats battingStats = awayStats.getBattingStats(player);
+                if (null != battingStats) allBattingStats.put(player, battingStats);
+            }
+            for (Player player : homeStats.getPlayers()) {
+
+                allPlayers.add(player);
+
+                PitchingStats pitchingStats = homeStats.getPitchingStats(player);
+                if (null != pitchingStats) allPitchingStats.put(player, pitchingStats);
+
+                BattingStats battingStats = homeStats.getBattingStats(player);
+                if (null != battingStats) allBattingStats.put(player, battingStats);
+            }
+        }
+
+        Map<Player, BattingStats> combinedBattingStats = new HashMap<>();
+        Map<Player, PitchingStats> combinedPitchingStats = new HashMap<>();
+
+        for (Player player : allBattingStats.keySet()) {
+            BattingStats playerBattingStats = null;
+            for (BattingStats battingStats : allBattingStats.get(player)) {
+                if (null == playerBattingStats) {
+                    playerBattingStats = battingStats;
+                } else {
+                    playerBattingStats = playerBattingStats.add(battingStats);
+                }
+            }
+            combinedBattingStats.put(player, playerBattingStats);
+        }
+        for (Player player : allPitchingStats.keySet()) {
+            PitchingStats playerPitchingStats = null;
+            for (PitchingStats pitchingStats : allPitchingStats.get(player)) {
+                if (null == playerPitchingStats) {
+                    playerPitchingStats = pitchingStats;
+                } else {
+                    playerPitchingStats = playerPitchingStats.add(pitchingStats);
+                }
+            }
+            combinedPitchingStats.put(player, playerPitchingStats);
+        }
+
+        return new TeamStats(Lists.newArrayList(allPlayers), combinedBattingStats, combinedPitchingStats);
     }
 
     @RequestMapping(value = "/w/player", method= RequestMethod.POST, produces = "application/json")
