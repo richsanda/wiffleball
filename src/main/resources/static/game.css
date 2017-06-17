@@ -19,14 +19,14 @@ div.left {
     display: inline-block;
 }
 
-#actions {
+div.actions-pane {
     display: inline-block;
     vertical-align: top;
     zoom: 1;
     text-align: center;
 }
 
-#status {
+div.status-pane {
     vertical-align: top;
     zoom: 1;
 }
@@ -294,6 +294,6 @@ div.stats-player {
     background-color: beige;
 }
 
-div.left, #status, #summary, div.summary, div.stats {
+div.left, div.status-pane, div.summary-pane, div.summary, div.stats {
     vertical-align: top;
 }

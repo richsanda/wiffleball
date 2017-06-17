@@ -1,4 +1,4 @@
-$(pageBehavior)
+$(pageBehavior);
 
 function pageBehavior () {
 
@@ -10,6 +10,8 @@ function pageBehavior () {
     var awayteam = getUrlParameter("awayteam");
     var hometeam = getUrlParameter("hometeam");
 
+    var method = (gameid) ? "get" : "post";
+
     if (gameid) {
         url += gameid
     } else if (awayteam && hometeam) {
@@ -18,16 +20,34 @@ function pageBehavior () {
 
     $.ajax({
         url: url,
-        type: "post",
+        type: method,
         dataType: "json"
     }).success(function (data) {
 
-        $('#actions').append(showGameActions(data.key));
-        $('#status').append(buildGameStatus(data.gameStatus));
-        $('#summary').append(buildGameSummary(data.gameSummary))
+        $('body').html(buildConsole(data));
 
         window.history.pushState("", "", "/game.html?gameid=" + data.key);
     });
+}
+
+function buildConsole(game) {
+
+    var console = $(
+        "<div class=\"console\"> \
+             <div class=\"left\"> \
+                 <div class=\"status-pane\"></div> \
+                 <div class=\"summary-pane\"></div> \
+              </div> \
+              <div class=\"actions-pane\"></div> \
+         </div>"
+    );
+
+    console.find('div.actions-pane').append(showGameActions(game.key));
+    console.find('div.actions-pane').find('div.get-summary').removeClass('get-summary').addClass('get-stats');
+    console.find('div.status-pane').append(buildGameStatus(game.gameStatus));
+    console.find('div.summary-pane').append(buildGameSummary(game.gameSummary));
+
+    return console;
 }
 
 function showGameActions(gameId) {
@@ -36,26 +56,26 @@ function showGameActions(gameId) {
 
     gameActionsDiv.append(
         "<div class='actions'>" +
-            "<div class='action button hit-action single' title='single'>" + "1B" + "</div>" +
-            "<div class='action button hit-action double' title='double'>" + "2B" + "</div>" +
-            "<div class='action button hit-action triple' title='triple'>" + "3B" + "</div>" +
-            "<div class='action button hit-action homerun' title='home run'>" + "HR" + "</div>" +
-            "<div class='action button walk' title='walk'>" + "BB" + "</div>" +
-            "<div class='action button error error-reach' title='reach on error'>" + "E" + "</div>" +
-            "<div class='action button error error-advance' title='advance on error'>" + "E+" + "</div>" +
-            "<div class='action button skip-batter' title='skip batter'>" + "s" + "</div>" +
-            "<div class='action button get-stats' title='stats / summary'>" + "s/s" + "</div>" +
+        "<div class='action button hit-action single' title='single'>" + "1B" + "</div>" +
+        "<div class='action button hit-action double' title='double'>" + "2B" + "</div>" +
+        "<div class='action button hit-action triple' title='triple'>" + "3B" + "</div>" +
+        "<div class='action button hit-action homerun' title='home run'>" + "HR" + "</div>" +
+        "<div class='action button walk' title='walk'>" + "BB" + "</div>" +
+        "<div class='action button error error-reach' title='reach on error'>" + "E" + "</div>" +
+        "<div class='action button error error-advance' title='advance on error'>" + "E+" + "</div>" +
+        "<div class='action button skip-batter' title='skip batter'>" + "s" + "</div>" +
+        "<div class='action button get-stats' title='stats / summary'>" + "s/s" + "</div>" +
         "</div>" +
         "<div class='actions'>" +
-            "<div class='action button out-action groundout' title='ground out'>" + "GO" + "</div>" +
-            "<div class='action button out-action lineout' title='line out'>" + "LO" + "</div>" +
-            "<div class='action button out-action flyout' title='fly out'>" + "FO" + "</div>" +
-            "<div class='action button doubleplay' title='double play'>" + "DP" + "</div>" +
-            "<div class='action button strikeout strikeout-swinging' title='strikeout swinging'>" + "K" + "</div>" +
-            "<div class='action button strikeout strikeout-looking' title='strikeout looking'>" + "z" + "</div>" +
-            "<div class='action button strikeout strikeout-both' title='strikeout swinging and looking'>" + "X" + "</div>" +
-            "<div class='action button finalize-game' title='confirm final'>" + "f" + "</div>" +
-            "<div class='action button undo' title='undo'>" + "u" + "</div>" +
+        "<div class='action button out-action groundout' title='ground out'>" + "GO" + "</div>" +
+        "<div class='action button out-action lineout' title='line out'>" + "LO" + "</div>" +
+        "<div class='action button out-action flyout' title='fly out'>" + "FO" + "</div>" +
+        "<div class='action button doubleplay' title='double play'>" + "DP" + "</div>" +
+        "<div class='action button strikeout strikeout-swinging' title='strikeout swinging'>" + "K" + "</div>" +
+        "<div class='action button strikeout strikeout-looking' title='strikeout looking'>" + "z" + "</div>" +
+        "<div class='action button strikeout strikeout-both' title='strikeout swinging and looking'>" + "X" + "</div>" +
+        "<div class='action button finalize-game' title='confirm final'>" + "f" + "</div>" +
+        "<div class='action button undo' title='undo'>" + "u" + "</div>" +
         "</div>"
     );
 
@@ -136,9 +156,9 @@ function buildAwayTeam(game) {
     $.each(game.awayTeam.players, function() {
         var player = $("<div class='player batter' id='" + this.name + "'>" + this.name + "</div>");
         if (!game.homeHalf) {
-          if (game.batter.name == this.name) {
-              player.addClass("current");
-          }
+            if (game.batter.name == this.name) {
+                player.addClass("current");
+            }
         } else if (pitcher.attr('id') != this.name) {
             player.addClass("button set-pitcher");
         }
@@ -171,9 +191,9 @@ function buildHomeTeam(game) {
     $.each(game.homeTeam.players, function() {
         var player = $("<div class='player batter' id='" + this.name + "'>" + this.name + "</div>");
         if (game.homeHalf) {
-          if (game.batter.name == this.name) {
-              player.addClass("current");
-          }
+            if (game.batter.name == this.name) {
+                player.addClass("current");
+            }
         } else if (pitcher.attr('id') != this.name) {
             player.addClass("button set-pitcher");
         }
@@ -190,15 +210,15 @@ function buildGameStats(stats) {
 
     statsDiv.append(
         "<div class='batting-stats'>" +
-            "<div class='batting-stat'>&#160;</div>" +
-            "<div class='batting-stat-header'>hits</div>" +
-            "<div class='batting-stat-header'>avg</div>" +
-            "<div class='batting-stat-header'>2b</div>" +
-            "<div class='batting-stat-header'>3b</div>" +
-            "<div class='batting-stat-header'>hr</div>" +
-            "<div class='batting-stat-header'>rbi</div>" +
-            "<div class='batting-stat-header'>k</div>" +
-            "<div class='batting-stat-header'>ops</div>" +
+        "<div class='batting-stat'>&#160;</div>" +
+        "<div class='batting-stat-header'>hits</div>" +
+        "<div class='batting-stat-header'>avg</div>" +
+        "<div class='batting-stat-header'>2b</div>" +
+        "<div class='batting-stat-header'>3b</div>" +
+        "<div class='batting-stat-header'>hr</div>" +
+        "<div class='batting-stat-header'>rbi</div>" +
+        "<div class='batting-stat-header'>k</div>" +
+        "<div class='batting-stat-header'>ops</div>" +
         "</div>");
 
     $.each(stats.awayTeamStats.playerBattingStats, function(k, v) {
@@ -215,15 +235,15 @@ function buildGameStats(stats) {
 
     statsDiv.append(
         "<div class='pitching-stats'>" +
-            "<div class='pitching-stat'>&#160;</div>" +
-            "<div class='pitching-stat-header'>ip</div>" +
-            "<div class='pitching-stat-header'>era</div>" +
-            "<div class='pitching-stat-header'>er</div>" +
-            "<div class='pitching-stat-header'>r</div>" +
-            "<div class='pitching-stat-header'>k</div>" +
-            "<div class='pitching-stat-header'>hits</div>" +
-            "<div class='pitching-stat-header'>hr</div>" +
-            "<div class='pitching-stat-header'>baa</div>" +
+        "<div class='pitching-stat'>&#160;</div>" +
+        "<div class='pitching-stat-header'>ip</div>" +
+        "<div class='pitching-stat-header'>era</div>" +
+        "<div class='pitching-stat-header'>er</div>" +
+        "<div class='pitching-stat-header'>r</div>" +
+        "<div class='pitching-stat-header'>k</div>" +
+        "<div class='pitching-stat-header'>hits</div>" +
+        "<div class='pitching-stat-header'>hr</div>" +
+        "<div class='pitching-stat-header'>baa</div>" +
         "</div>");
 
     $.each(stats.awayTeamStats.playerPitchingStats, function(k, v) {
@@ -323,35 +343,35 @@ function regionClick (e, behaviorMap) {
 
     var $$ = $(e.target);
     while ($$.length > 0) {
-	for (var key in behaviorMap) {
-	    if ($$.hasClass(key)) {
-		behaviorMap[key]($$)
-		return
-	    }
-	}
-	$$ = $$.parent();
+        for (var key in behaviorMap) {
+            if ($$.hasClass(key)) {
+                behaviorMap[key]($$)
+                return
+            }
+        }
+        $$ = $$.parent();
     }
 }
 
 function actionsClick(e) {
 
     /*
-        WALK,
-        SINGLE,
-        DOUBLE,
-        TRIPLE,
-        HOME_RUN,
-        ERROR_REACH,
-        ERROR_ADVANCE,
-        STRIKEOUT_SWINGING,
-        STRIKEOUT_LOOKING,
-        STRIKEOUT_BOTH,
-        FLY_OUT,
-        POP_OUT,
-        GROUND_OUT,
-        LINE_OUT,
-        DOUBLE_PLAY,
-        UNDO
+     WALK,
+     SINGLE,
+     DOUBLE,
+     TRIPLE,
+     HOME_RUN,
+     ERROR_REACH,
+     ERROR_ADVANCE,
+     STRIKEOUT_SWINGING,
+     STRIKEOUT_LOOKING,
+     STRIKEOUT_BOTH,
+     FLY_OUT,
+     POP_OUT,
+     GROUND_OUT,
+     LINE_OUT,
+     DOUBLE_PLAY,
+     UNDO
      */
 
     var $$ = $(e.target);
@@ -509,27 +529,27 @@ function setPitcher(gameId, newPitcher) {
 }
 
 /*
-    WALK,
-    SINGLE,
-    DOUBLE,
-    TRIPLE,
-    HOME_RUN,
-    ERROR_REACH,
-    ERROR_ADVANCE,
-    STRIKEOUT_SWINGING,
-    STRIKEOUT_LOOKING,
-    STRIKEOUT_BOTH,
-    FLY_OUT,
-    POP_OUT,
-    GROUND_OUT,
-    LINE_OUT,
-    DOUBLE_PLAY,
-    SKIP,
-    UNDO
+ WALK,
+ SINGLE,
+ DOUBLE,
+ TRIPLE,
+ HOME_RUN,
+ ERROR_REACH,
+ ERROR_ADVANCE,
+ STRIKEOUT_SWINGING,
+ STRIKEOUT_LOOKING,
+ STRIKEOUT_BOTH,
+ FLY_OUT,
+ POP_OUT,
+ GROUND_OUT,
+ LINE_OUT,
+ DOUBLE_PLAY,
+ SKIP,
+ UNDO
  */
 
 function updateGame(gameId, play, player1) {
-    
+
     var url = "/w/game/" + gameId + "/play/" + play;
 
     if (player1 != null) url += "?player1=" + player1
@@ -538,9 +558,7 @@ function updateGame(gameId, play, player1) {
         url: url,
         dataType: "json"
     }).success(function (data) {
-        $('#status').html(buildGameStatus(data.gameStatus));
-        $('#summary').html(buildGameSummary(data.gameSummary));
-        $('#actions').find('div.get-summary').removeClass('get-summary').addClass('get-stats');
+       $('body').html(buildConsole(data));
     });
 }
 
@@ -554,7 +572,7 @@ function getStats(gameId, $$) {
         url: url,
         dataType: "json"
     }).success(function (data) {
-        $('#summary').html(buildGameStats(data));
+        $$.closest('div.console').find('div.summary-pane').html(buildGameStats(data));
     });
 }
 
@@ -568,7 +586,7 @@ function getSummary(gameId, $$) {
         url: url,
         dataType: "json"
     }).success(function (data) {
-        $('#summary').html(buildGameSummary(data.gameSummary));
+        $$.closest('div.console').find('div.summary-pane').html(buildGameSummary(data.gameSummary));
     });
 }
 
@@ -577,8 +595,8 @@ function showSlowly (selector, bodyFunction, args) {
     var openSpeed = 100;
     var $$ = $(selector);
     $$.animate({'opacity': 0.0}, closeSpeed, function () {
-	bodyFunction.apply(null, args);
-  	$$.animate({'opacity': 1.0}, openSpeed);
+        bodyFunction.apply(null, args);
+        $$.animate({'opacity': 1.0}, openSpeed);
     })
 }
 
